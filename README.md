@@ -126,7 +126,7 @@ To run this project in a Docker container, you'll need to pass your API keys as 
 
 1. Build the Docker image
    ```bash
-   docker build -t pocketflow-app .
+   docker image build -t pocketflow-app .
    ```
 
 2. Run the container
@@ -135,7 +135,18 @@ To run this project in a Docker container, you'll need to pass your API keys as 
    
    Mount a local directory to `/app/output` inside the container to access the generated tutorials on your host machine.
    
-   **Example for analyzing a public GitHub repository:**
+   **Example using a `.env` file:**
+   
+   If you have already created a `.env` file (see step 4), you can use it with Docker using the `--env-file` flag:
+   
+   ```bash
+   docker run -it --rm \
+     --env-file .env \
+     -v "$(pwd)/output_tutorials":/app/output \
+     pocketflow-app --repo https://github.com/username/repo
+   ```
+
+   **Example using individual flags:**
    
    ```bash
    docker run -it --rm \
@@ -152,6 +163,27 @@ To run this project in a Docker container, you'll need to pass your API keys as 
      -v "/path/to/your/local_codebase":/app/code_to_analyze \
      -v "$(pwd)/output_tutorials":/app/output \
      pocketflow-app --dir /app/code_to_analyze
+   ```
+
+   **Example for analyzing a local directory with .env file:**
+   ```bash
+   docker container run -it --rm \
+     --env-file .env \
+     -v "$HOME/Documents/java_project/j2pfg_vscode":/app/code_to_analyze \
+     -v "$(pwd)/output_tutorials":/app/output \
+   pocketflow-app --dir /app/code_to_analyze
+   ```
+
+   **Passing arguments (e.g., Language):**
+   
+   You can pass any arguments supported by the script (like `--language`, `--include`, `--max-size`) by appending them to the end of the command:
+   
+   ```bash
+   docker run -it --rm \
+     --env-file .env \
+     -v "$HOME/Documents/java_project/j2pfg_vscode":/app/code_to_analyze \
+     -v "$(pwd)/output_tutorials":/app/output \
+     pocketflow-app --dir /app/code_to_analyze --language "Chinese" --exclude "WARpfg/*"
    ```
 </details>
 

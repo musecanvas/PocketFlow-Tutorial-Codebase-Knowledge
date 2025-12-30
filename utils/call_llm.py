@@ -61,7 +61,7 @@ def _call_llm_provider(prompt: str) -> str:
     - <provider>_API_KEY: API key (e.g., OLLAMA_API_KEY, XAI_API_KEY; optional for providers that don't require it)
     The endpoint /v1/chat/completions will be appended to the base URL.
     """
-    logger.info(f"PROMPT: {prompt}") # log the prompt
+    # logger.info(f"PROMPT: {prompt}") # log the prompt
 
     # Read the provider from environment variable
     provider = os.environ.get("LLM_PROVIDER")
@@ -97,11 +97,13 @@ def _call_llm_provider(prompt: str) -> str:
     payload = {
         "model": model,
         "messages": [{"role": "user", "content": prompt}],
-        "temperature": 0.7,
+        "temperature": 0.7,                            
+        # "reasoning": {"enabled": True}                 
     }
 
     try:
-        response = requests.post(url, headers=headers, json=payload)
+        # response = requests.post(url, headers=headers, json=payload)
+        response = requests.post(url, headers=headers, data= json.dumps(payload))
         response_json = response.json() # Log the response
         logger.info("RESPONSE:\n%s", json.dumps(response_json, indent=2))
         #logger.info(f"RESPONSE: {response.json()}")
@@ -177,7 +179,11 @@ def _call_llm_gemini(prompt: str) -> str:
     return response.text
 
 if __name__ == "__main__":
-    test_prompt = "Hello, how are you?"
+    import  dotenv
+    dotenv.load_dotenv()
+
+    # test_prompt = "Hello, how are you?"
+    test_prompt = "Who are you?"
 
     # First call - should hit the API
     print("Making call...")

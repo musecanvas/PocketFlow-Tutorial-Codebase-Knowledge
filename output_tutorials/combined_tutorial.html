@@ -1,0 +1,1307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>combined_tutorial.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tutorial-codetoanalyze">Tutorial: code_to_analyze</h1>
+<p>本專案是一個基於 <strong>Java 8</strong> 與 <strong>Monolithic</strong> 架構的企業級管理平台，核心採用了經典的 <em>Action-BO-DAO</em> <strong>分層模式</strong>。系統整合了 <strong>iBATIS</strong> 進行資料存取，並內建完整的 <strong>權限控管 (RBAC)</strong> 與 <strong>多語系支援</strong>。其特色在於提供了一套靈活的 <strong>資料存取抽象層</strong> (DataAccessor) 以簡化資料庫操作，並具備 <strong>暫存作業機制</strong> 處理資料草稿與發佈流程，同時透過 <strong>安全過濾器</strong> 確保系統免於跨站腳本攻擊。</p>
+<p><strong>Source Repository:</strong> <a href="None">None</a></p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A0["分層架構模式 (Layering Pattern: Action/BO/DAO)
+"]
+    A1["資料存取抽象 (DataAccessor & SKDataAccessor)
+"]
+    A2["權限管理系統 (Authority System)
+"]
+    A3["系統參數加載器 (System Parameter Loader)
+"]
+    A4["暫存作業機制 (TempWork / ObjTemp)
+"]
+    A5["核心工具模組 (FtcUtility)
+"]
+    A6["多語系區域管理 (LangZone)
+"]
+    A7["安全過濾器 (XSSRequestWrapper)
+"]
+    A0 -- "封裝與存取資料模型" --> A1
+    A0 -- "調用底層工具進行運算" --> A5
+    A2 -- "控管功能存取權限" --> A0
+    A3 -- "透過 DAO 載入全域設定" --> A0
+    A3 -- "初始化語系設定" --> A6
+    A4 -- "實作暫存業務邏輯" --> A0
+    A7 -- "過濾進入 Action 的請求" --> A0
+    A7 -- "使用字串工具進行轉義" --> A5
+</div></code></pre>
+<h2 id="chapters">Chapters</h2>
+<ol>
+<li><a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式 (Layering Pattern: Action/BO/DAO)
+</a></li>
+<li><a href="02_%E6%AC%8A%E9%99%90%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1__authority_system__.md">權限管理系統 (Authority System)
+</a></li>
+<li><a href="03_%E5%AE%89%E5%85%A8%E9%81%8E%E6%BF%BE%E5%99%A8__xssrequestwrapper__.md">安全過濾器 (XSSRequestWrapper)
+</a></li>
+<li><a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">資料存取抽象 (DataAccessor &amp; SKDataAccessor)
+</a></li>
+<li><a href="05_%E6%9A%AB%E5%AD%98%E4%BD%9C%E6%A5%AD%E6%A9%9F%E5%88%B6__tempwork___objtemp__.md">暫存作業機制 (TempWork / ObjTemp)
+</a></li>
+<li><a href="06_%E7%B3%BB%E7%B5%B1%E5%8F%83%E6%95%B8%E5%8A%A0%E8%BC%89%E5%99%A8__system_parameter_loader__.md">系統參數加載器 (System Parameter Loader)
+</a></li>
+<li><a href="07_%E5%A4%9A%E8%AA%9E%E7%B3%BB%E5%8D%80%E5%9F%9F%E7%AE%A1%E7%90%86__langzone__.md">多語系區域管理 (LangZone)
+</a></li>
+<li><a href="08_%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E6%A8%A1%E7%B5%84__ftcutility__.md">核心工具模組 (FtcUtility)
+</a></li>
+</ol>
+<hr>
+<h1 id="chapter-1-%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F-layering-pattern-actionbodao">Chapter 1: 分層架構模式 (Layering Pattern: Action/BO/DAO)</h1>
+<p>歡迎來到本專案的開發指南！作為開發者的第一站，我們必須先理解這個系統的核心骨架。本專案採用了一種非常經典且嚴謹的「分層架構」。</p>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E5%88%86%E5%B1%A4">為什麼需要分層？</h2>
+<p>想像一下，如果你去一家餐廳吃飯，發現服務生不僅要點餐，還要進廚房炒菜，甚至還要負責去倉庫搬運食材。這會發生什麼事？</p>
+<ol>
+<li><strong>混亂</strong>：服務生忙不過來，客人等太久。</li>
+<li><strong>難以維護</strong>：如果想換個廚師，可能連點餐流程都要跟著改。</li>
+</ol>
+<p>在軟體開發中，如果我們把所有程式碼（接收請求、運算邏輯、存取資料庫）全部寫在一起，這就是所謂的「義大利麵條式代碼」，非常難以維護。因此，我們將系統分為三層：<strong>Action</strong>、<strong>BO</strong> 與 <strong>DAO</strong>。</p>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E9%A4%90%E5%BB%B3%E9%A1%9E%E6%AF%94%E6%B3%95">核心概念：餐廳類比法</h2>
+<p>我們可以透過下表快速理解這三層的角色分配：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">層級</th>
+<th style="text-align:left">角色</th>
+<th style="text-align:left">對應技術</th>
+<th style="text-align:left">職責描述</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Action</strong></td>
+<td style="text-align:left">前台服務生</td>
+<td style="text-align:left">Struts2</td>
+<td style="text-align:left">負責接待使用者，轉換請求參數，並回傳結果頁面。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>BO</strong> (Business Object)</td>
+<td style="text-align:left">內場主廚</td>
+<td style="text-align:left">Spring (邏輯)</td>
+<td style="text-align:left"><strong>核心層</strong>。處理所有的業務邏輯、運算與事務控制。</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>DAO</strong> (Data Access Object)</td>
+<td style="text-align:left">倉庫管理員</td>
+<td style="text-align:left">iBATIS</td>
+<td style="text-align:left">專門負責與資料庫溝通，進行資料的增刪改查。</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="%E5%AF%A6%E9%9A%9B%E6%A1%88%E4%BE%8B%E6%9F%A5%E8%A9%A2%E5%AE%A2%E6%88%B6%E6%8F%90%E5%95%8F">實際案例：查詢客戶提問</h2>
+<p>假設我們要開發一個「查詢客戶提問筆數」的功能，看看這三層是如何分工合作的。</p>
+<h3 id="1-dao-%E5%B1%A4%E5%B0%88%E6%B3%A8%E6%96%BC%E8%B3%87%E6%96%99">1. DAO 層：專注於資料</h3>
+<p>倉庫管理員只管拿資料。在 <code>ParameterDAOImpl.java</code> 中，你會看到類似這樣的代碼：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// DAO 實作，繼承 SqlMapClientDaoSupport 來使用 iBATIS</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ParameterDAOImpl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SqlMapClientDaoSupport</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">ParameterDAO</span> </span>{
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Parameter <span class="hljs-title">selectByPrimaryKey</span><span class="hljs-params">(String paraid)</span> </span>{
+        <span class="hljs-comment">// 透過 iBATIS 設定檔執行 SQL 查詢</span>
+        <span class="hljs-keyword">return</span> (Parameter) getSqlMapClientTemplate()
+               .queryForObject(<span class="hljs-string">"TXD2PF00.selectByPrimaryKey"</span>, paraid);
+    }
+}
+</div></code></pre>
+<p><strong>解釋</strong>：DAO 不管這些資料要拿來做什麼，它只負責執行 SQL 並回傳結果。</p>
+<h3 id="2-bo-%E5%B1%A4%E5%B0%88%E6%B3%A8%E6%96%BC%E9%82%8F%E8%BC%AF%E8%88%87%E4%BA%8B%E5%8B%99">2. BO 層：專注於邏輯與事務</h3>
+<p>主廚（BO）會呼叫管理員（DAO）拿食材，然後進行烹飪。這層最重要的是<strong>事務管理 (Transaction)</strong>。參考 <code>ServiceBOImpl.java</code>：</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">getSerCaseCount</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ServiceSearchCondition cond)</span> </span>{
+    <span class="hljs-comment">// 使用 TransactionTemplate 確保資料一致性</span>
+    TransactionTemplate transactionTemplate = <span class="hljs-keyword">new</span> TransactionTemplate(transactionManager);
+    <span class="hljs-keyword">return</span> (Integer) transactionTemplate.execute(<span class="hljs-keyword">new</span> TransactionCallback() {
+        <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">doInTransaction</span><span class="hljs-params">(TransactionStatus status)</span> </span>{
+            <span class="hljs-comment">// 呼叫 DAO 取得資料</span>
+            <span class="hljs-keyword">return</span> getServiceUtilDAO().selectSerCaseCount(cond);
+        }
+    });
+}
+</div></code></pre>
+<p><strong>解釋</strong>：BO 層決定了什麼時候開始「處理事情」，並且確保如果中間出錯，資料可以安全地回滾。</p>
+<h3 id="3-action-%E5%B1%A4%E5%B0%88%E6%B3%A8%E6%96%BC%E6%BA%9D%E9%80%9A">3. Action 層：專注於溝通</h3>
+<p>服務生（Action）接收使用者的點餐（可能是網頁上的一個按鈕），然後轉告 BO。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 這是 Action 的偽代碼，展示其調用方式</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">execute</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// 1. 接收畫面參數</span>
+    <span class="hljs-comment">// 2. 呼叫 BO 取得結果</span>
+    <span class="hljs-keyword">int</span> count = serviceBO.getSerCaseCount(condition);
+    <span class="hljs-comment">// 3. 將結果交給 JSP 顯示</span>
+    <span class="hljs-keyword">return</span> <span class="hljs-string">"SUCCESS"</span>;
+}
+</div></code></pre>
+<hr>
+<h2 id="%E9%81%8B%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%9C%96">運作流程圖</h2>
+<p>當一個請求進來時，系統內部的呼叫順序如下：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant User as 使用者 (瀏覽器)
+    participant Action as Action (服務生)
+    participant BO as BO (主廚)
+    participant DAO as DAO (倉庫管理)
+    participant DB as Database (食材庫)
+
+    User->>Action: 提交查詢請求
+    Action->>BO: 呼叫業務邏輯 (如: getSerCaseCount)
+    Note over BO: 開始資料庫事務 (Transaction)
+    BO->>DAO: 請求特定資料
+    DAO->>DB: 執行 SQL 查詢
+    DB-->>DAO: 回傳原始資料
+    DAO-->>BO: 封裝成 Model 物件
+    Note over BO: 結束事務
+    BO-->>Action: 回傳運算結果
+    Action-->>User: 顯示 JSP 頁面
+</div></code></pre>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E5%9C%A8%E5%B0%88%E6%A1%88%E4%B8%AD%E6%89%BE%E5%88%B0%E5%AE%83%E5%80%91">如何在專案中找到它們？</h2>
+<p>在本專案中，這些檔案通常分布在不同的模組中（如 <code>System</code>、<code>Service</code>、<code>Authority</code>）。你可以根據以下命名慣例快速定位：</p>
+<ul>
+<li><strong>介面 (Interface)</strong>：定義了有哪些功能。例如 <code>TempWorkBO.java</code> 或 <code>ParameterDAO.java</code>。</li>
+<li><strong>實作 (Implementation)</strong>：真正的程式碼邏輯。檔名通常結尾為 <code>Impl</code>。例如 <code>TempWorkBOImpl.java</code>。</li>
+<li><strong>配置 (XML)</strong>：因為我們使用 Spring 2.5，物件之間的關聯是寫在 XML 裡的。請參考 <code>applicationContext_[模組名].xml</code>。</li>
+</ul>
+<blockquote>
+<p><strong>小撇步</strong>：如果你想了解資料庫是如何被存取的，請查看 <a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">資料存取抽象 (DataAccessor &amp; SKDataAccessor)</a>。</p>
+</blockquote>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>分層架構</strong>：將程式分為 Action、BO、DAO 三層。</li>
+<li><strong>職責分離</strong>：Action 負責外在溝通，BO 負責內在邏輯與事務，DAO 負責資料存取。</li>
+<li><strong>依賴關係</strong>：Action 呼叫 BO，BO 呼叫 DAO。</li>
+</ol>
+<p>這種結構雖然一開始看起來檔案很多，但當系統變大時，它能讓開發者更精確地找到問題所在。</p>
+<p>下一章，我們將深入探討系統的安全防護網：<a href="02_%E6%AC%8A%E9%99%90%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1__authority_system__.md">權限管理系統 (Authority System)</a>。</p>
+<hr>
+# Chapter 2: 權限管理系統 (Authority System)</p>
+<p>在上一章 <a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式 (Layering Pattern: Action/BO/DAO)</a> 中，我們學習了系統的骨架。現在，我們要為這個骨架穿上「盔甲」——也就是<strong>權限管理系統</strong>。</p>
+<hr>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E6%AC%8A%E9%99%90%E7%AE%A1%E7%90%86">為什麼需要權限管理？</h2>
+<p>想像你正在管理一間大型企業的辦公大樓。這棟大樓裡有：</p>
+<ol>
+<li><strong>清潔工</strong>：只能進入走廊和洗手間。</li>
+<li><strong>會計師</strong>：可以進入財務室。</li>
+<li><strong>執行長</strong>：可以進入所有房間，包括保險箱。</li>
+</ol>
+<p>如果沒有門禁系統，任何人都能隨意翻閱財務報表，公司就會陷入混亂。在軟體系統中，權限管理系統就是這套「門禁系統」。它負責定義：<strong>誰（Account）</strong> 擁有什麼 <strong>身份（Role）</strong>，進而決定能使用哪些 <strong>功能（Function）</strong>。</p>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E6%AC%8A%E9%99%90%E4%B8%89%E8%A6%81%E7%B4%A0">核心概念：權限三要素</h2>
+<p>權限系統由三個核心組件構成，我們可以簡單理解為：</p>
+<ol>
+<li><strong>帳號 (Account)</strong>：「你是誰？」
+<ul>
+<li>包含登入帳號、密碼、姓名等。</li>
+</ul>
+</li>
+<li><strong>角色 (Role)</strong>：「你的身份是什麼？」
+<ul>
+<li>例如：管理員、供應商、客服人員。一個帳號可以擁有多個角色。</li>
+</ul>
+</li>
+<li><strong>功能 (Function)</strong>：「你能做什麼？」
+<ul>
+<li>例如：新增產品、刪除訂單、查看報表。</li>
+</ul>
+</li>
+</ol>
+<h3 id="%E4%BB%A3%E7%90%86%E4%BA%BA%E6%A9%9F%E5%88%B6-agent">代理人機制 (Agent)</h3>
+<p>這是企業環境中的特殊功能。當主廚請假時，他可以授權「代理人」暫時獲得他的權限，確保餐廳（系統）運作不中斷。</p>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%AC%8A%E9%99%90%E7%B3%BB%E7%B5%B1">如何使用權限系統？</h2>
+<p>在程式碼中，我們通常會透過 <code>Account</code> 物件來判斷目前登入的使用者是否有權執行某個動作。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-1%E6%AA%A2%E6%9F%A5%E4%BD%BF%E7%94%A8%E8%80%85%E8%A7%92%E8%89%B2">範例 1：檢查使用者角色</h3>
+<p>這段代碼檢查目前使用者是否具備「管理者」身份。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檢查帳號是否為管理者 (Manager 或 Admin)</span>
+<span class="hljs-keyword">if</span> (account.isManager()) {
+    <span class="hljs-comment">// 執行管理者專屬邏輯，例如審核帳單</span>
+    showAdminPanel();
+}
+</div></code></pre>
+<p><strong>解釋</strong>：<code>isManager()</code> 封裝了複雜的邏輯判斷，讓開發者只需關心使用者的身份類型。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-2%E6%AA%A2%E6%9F%A5%E7%89%B9%E5%AE%9A%E5%8A%9F%E8%83%BD%E6%AC%8A%E9%99%90">範例 2：檢查特定功能權限</h3>
+<p>有時候我們不看身份，而是看使用者是否被賦予了「某項功能」的執行權。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檢查使用者是否擁有執行「客服維護」的功能權限</span>
+<span class="hljs-keyword">if</span> (account.canDoAction(<span class="hljs-string">"m_ser_mod"</span>)) {
+    <span class="hljs-comment">// 允許使用者進入客服管理頁面</span>
+    goToServiceModule();
+}
+</div></code></pre>
+<p><strong>解釋</strong>：<code>canDoAction</code> 會去比對該帳號所屬角色所對應的所有功能清單。</p>
+<hr>
+<h2 id="%E5%85%A7%E9%83%A8%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86">內部運作原理</h2>
+<p>當一個使用者嘗試登入時，系統會進行一系列的資料載入與比對。</p>
+<h3 id="%E6%AC%8A%E9%99%90%E8%BC%89%E5%85%A5%E6%B5%81%E7%A8%8B%E5%9C%96">權限載入流程圖</h3>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant User as 使用者
+    participant AS as AuthoritySearcher
+    participant DB as 資料庫
+    participant Acc as Account 物件
+
+    User->>AS: 輸入帳號密碼登入
+    AS->>DB: 驗證密碼並取得角色 (Role)
+    DB-->>AS: 回傳角色清單
+    AS->>DB: 根據角色查詢功能 (Function)
+    DB-->>AS: 回傳功能清單
+    AS->>Acc: 將角色與功能封裝進物件
+    Acc-->>User: 登入成功，持有「權限鑰匙串」
+</div></code></pre>
+<h3 id="%E9%97%9C%E9%8D%B5%E7%A8%8B%E5%BC%8F%E7%A2%BC%E5%AF%A6%E4%BD%9C">關鍵程式碼實作</h3>
+<p>在 <code>AuthoritySearcher.java</code> 介面中，定義了系統如何處理登入與權限查詢：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">AuthoritySearcher</span> </span>{
+    <span class="hljs-comment">// 核心功能：處理登入邏輯</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> Account <span class="hljs-title">logon</span><span class="hljs-params">(String iAcno, String iPswd)</span> <span class="hljs-keyword">throws</span> Exception</span>;
+    
+    <span class="hljs-comment">// 取得該角色清單對應的所有功能</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> FunctionList <span class="hljs-title">getFunctionList</span><span class="hljs-params">(RoleList i_roleList)</span></span>;
+    
+    <span class="hljs-comment">// 重建系統角色清單（通常用於快取更新）</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">rebuildSysRoleList</span><span class="hljs-params">()</span></span>;
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這是權限系統的總管，負責把分散在資料庫各處的權限資料整合在一起。</p>
+<p>在 <code>Account.java</code> 模型中，則儲存了這些動態載入的資訊：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Account</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SKDataAccessor</span> </span>{
+    <span class="hljs-comment">// 儲存該帳號擁有的角色清單</span>
+    <span class="hljs-keyword">private</span> AccRoleList roleList = <span class="hljs-keyword">new</span> AccRoleList();
+    <span class="hljs-comment">// 儲存該帳號可執行的功能清單 (Map 結構方便快速查找)</span>
+    <span class="hljs-keyword">private</span> HashMap actionsMap = <span class="hljs-keyword">new</span> HashMap();
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">canDoAction</span><span class="hljs-params">(String iActionName)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.actionsMap.containsKey(iActionName);
+    }
+}
+</div></code></pre>
+<p><strong>解釋</strong>：<code>Account</code> 繼承自 <a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">資料存取抽象 (DataAccessor &amp; SKDataAccessor)</a>，它不僅是資料容器，還提供了像 <code>canDoAction</code> 這樣的便利方法。</p>
+<hr>
+<h2 id="%E7%B3%BB%E7%B5%B1%E5%AE%89%E5%85%A8%E7%9A%84%E7%AC%AC%E4%B8%80%E9%81%93%E9%98%B2%E7%B7%9A">系統安全的第一道防線</h2>
+<p>權限系統不僅僅是判斷 <code>if...else</code>。在本專案中，它與 <a href="03_%E5%AE%89%E5%85%A8%E9%81%8E%E6%BF%BE%E5%99%A8__xssrequestwrapper__.md">安全過濾器 (XSSRequestWrapper)</a> 協同工作，確保未經授權的請求在到達業務邏輯層（BO）之前就被攔截。</p>
+<p>此外，系統透過 <code>AuthorityParameter</code> 對常用的權限設定進行快取，避免每次點擊網頁都要重新查詢資料庫，提升了企業級應用的效能。</p>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>權限三要素</strong>：帳號（誰）、角色（身份）、功能（許可）。</li>
+<li><strong>權限檢查</strong>：如何透過 <code>Account</code> 物件判斷使用者權限。</li>
+<li><strong>代理機制</strong>：企業環境中彈性的權限委託。</li>
+<li><strong>內部流程</strong>：登入時系統如何從資料庫拼湊出完整的權限地圖。</li>
+</ol>
+<p>掌握了權限管理後，下一章我們將探討如何防止惡意攻擊，保護系統資料的純淨：<a href="03_%E5%AE%89%E5%85%A8%E9%81%8E%E6%BF%BE%E5%99%A8__xssrequestwrapper__.md">安全過濾器 (XSSRequestWrapper)</a>。</p>
+<hr>
+# Chapter 3: 安全過濾器 (XSSRequestWrapper)</p>
+<p>在上一章 <a href="02_%E6%AC%8A%E9%99%90%E7%AE%A1%E7%90%86%E7%B3%BB%E7%B5%B1__authority_system__.md">權限管理系統 (Authority System)</a> 中，我們學習了如何辨識使用者的身份。然而，即便是一個有權限的使用者，有時也可能無意間（或惡意地）輸入一些會破壞系統的東西。</p>
+<p>這一章，我們要介紹系統的「安全守門員」—— <strong>XSSRequestWrapper</strong>。</p>
+<hr>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E5%AE%89%E5%85%A8%E9%81%8E%E6%BF%BE%E5%99%A8">為什麼需要安全過濾器？</h2>
+<p>想像你經營一家咖啡店，客人可以在點餐單的「備註」欄位寫字。</p>
+<ul>
+<li><strong>正常客人</strong>會寫：「去冰，半糖」。</li>
+<li><strong>惡作劇的客人</strong>卻寫了一行魔法咒語：「從現在起，所有客人的咖啡都免費！」</li>
+</ul>
+<p>如果你的店員（系統）不加思索地執行了這行字，店就會倒閉。在網頁世界中，這種「魔法咒語」就是 <strong>XSS (跨站脚本攻擊)</strong>。攻擊者會在輸入框輸入 <code>&lt;script&gt;alert('被駭了')&lt;/script&gt;</code>，試圖在其他人的瀏覽器上執行惡意程式碼。</p>
+<p><strong>安全過濾器</strong> 的工作，就是在這些資料交給後端邏輯處理之前，先把「危險字元」通通閹割掉。</p>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E5%AD%97%E5%85%83%E8%BD%89%E7%BE%A9-escaping">核心概念：字元轉義 (Escaping)</h2>
+<p>過濾器的核心原理非常簡單：<strong>把特殊符號變成普通文字</strong>。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">原始字元</th>
+<th style="text-align:left">轉義後 (變安全了)</th>
+<th style="text-align:left">說明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><code>&lt;</code></td>
+<td style="text-align:left"><code>&amp;lt;</code></td>
+<td style="text-align:left">瀏覽器不會把它當成標籤的開始</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>&gt;</code></td>
+<td style="text-align:left"><code>&amp;gt;</code></td>
+<td style="text-align:left">瀏覽器不會把它當成標籤的結束</td>
+</tr>
+<tr>
+<td style="text-align:left"><code>script</code></td>
+<td style="text-align:left"><code>ｓｃｒｉｐｔ</code></td>
+<td style="text-align:left">破壞關鍵字，使其無法執行</td>
+</tr>
+</tbody>
+</table>
+<p>透過這種方式，原本具備「攻擊性」的代碼，在系統眼中就只是一串平凡無奇的字串。</p>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E9%81%8B%E4%BD%9C%E5%8C%85%E8%A3%B9%E5%99%A8%E6%A8%A1%E5%BC%8F-wrapper-pattern">如何運作：包裹器模式 (Wrapper Pattern)</h2>
+<p>在 Java Web 開發中，所有的請求資料都放在 <code>HttpServletRequest</code> 物件裡。本系統使用了「包裹器模式」，就像給原始的 Request 套上一個自動過濾的「濾鏡」。</p>
+<h3 id="1-%E6%94%94%E6%88%AA%E8%AB%8B%E6%B1%82">1. 攔截請求</h3>
+<p>當使用者送出資料時，系統會先經過 <code>XSSRequestWrapper</code>。</p>
+<h3 id="2-%E8%87%AA%E5%8B%95%E9%81%8E%E6%BF%BE">2. 自動過濾</h3>
+<p>當你在 <a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式 (Action/BO/DAO)</a> 的 Action 層呼叫 <code>request.getParameter()</code> 時，包裹器會自動幫你過濾。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 在 Action 中拿取參數</span>
+String comment = request.getParameter(<span class="hljs-string">"comment"</span>);
+<span class="hljs-comment">// 如果原始輸入是 &lt;script&gt;，拿到的會是 &amp;lt;script&amp;gt;</span>
+</div></code></pre>
+<p><strong>解釋</strong>：開發者不需要手動寫過濾邏輯，只要從 Request 拿資料，拿到的就是已經「洗乾淨」的安全資料。</p>
+<hr>
+<h2 id="%E5%85%A7%E9%83%A8%E5%AF%A6%E4%BD%9C%E9%87%9D%E5%B0%8D%E4%B8%8D%E5%90%8C%E5%A0%B4%E6%99%AF%E7%9A%84%E9%81%8E%E6%BF%BE">內部實作：針對不同場景的過濾</h2>
+<p>在 <code>XSSRequestWrapper.java</code> 中，系統定義了不同的過濾策略：</p>
+<h3 id="%E7%AD%96%E7%95%A5-a%E4%B8%80%E8%88%AC-get-%E8%AB%8B%E6%B1%82%E6%9C%80%E5%9A%B4%E6%A0%BC">策略 A：一般 GET 請求（最嚴格）</h3>
+<p>針對網址列的參數，直接將所有特殊符號轉義。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：XSSRequestWrapper.java</span>
+addRegexpReplaceData(searchRegexpTextListForGet, <span class="hljs-string">"&amp;"</span>, <span class="hljs-string">"&amp;amp;"</span>);
+addRegexpReplaceData(searchRegexpTextListForGet, <span class="hljs-string">"&lt;"</span>, <span class="hljs-string">"&amp;lt;"</span>);
+addRegexpReplaceData(searchRegexpTextListForGet, <span class="hljs-string">"&gt;"</span>, <span class="hljs-string">"&amp;gt;"</span>);
+</div></code></pre>
+<p><strong>解釋</strong>：將 <code>&lt;</code> 變成 <code>&amp;lt;</code>，確保 HTML 標籤失效。</p>
+<h3 id="%E7%AD%96%E7%95%A5-b%E6%89%80%E8%A6%8B%E5%8D%B3%E6%89%80%E5%BE%97%E7%B7%A8%E8%BC%AF%E5%99%A8-wysiwyg">策略 B：所見即所得編輯器 (WYSIWYG)</h3>
+<p>有時候使用者需要輸入 HTML（例如編輯公告），這時不能把所有標籤都殺掉，但必須殺掉「具備執行能力」的標籤。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 針對 script 標籤進行不分大小寫的替換</span>
+addRegexpReplaceData(list, <span class="hljs-string">"(?i)&lt;script.*?&gt;"</span>, <span class="hljs-string">"&amp;lt;script&amp;gt;"</span>);
+<span class="hljs-comment">// 針對惡意 JavaScript 函數進行模糊化</span>
+addRegexpReplaceData(list, <span class="hljs-string">"(?i)alert\\s*?\\("</span>, <span class="hljs-string">"ａｌｅｒｔ &amp;#40;"</span>);
+</div></code></pre>
+<p><strong>解釋</strong>：<code>(?i)</code> 代表不分大小寫。系統會把 <code>alert(</code> 變成全型的 <code>ａｌｅｒｔ</code>，這樣它就只是一段文字，無法被執行。</p>
+<hr>
+<h2 id="%E9%81%8B%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%9C%96">運作流程圖</h2>
+<p>讓我們看看一個惡意請求是如何被「淨化」的：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant Hacker as 攻擊者
+    participant Filter as XSSRequestWrapper
+    participant Action as Action (後端程式)
+    participant DB as 資料庫
+
+    Hacker->>Filter: 送出 <script>alert(1)</script>
+    Note over Filter: 偵測到危險字元
+    Filter->>Filter: 執行替換 (Replace)
+    Filter-->>Action: 回傳 &lt;script&gt;ａｌｅｒｔ...
+    Action->>DB: 儲存安全的字串
+    Note right of DB: 資料庫裡存的是純文字，不再是程式碼
+</div></code></pre>
+<hr>
+<h2 id="%E8%BC%94%E5%8A%A9%E5%B7%A5%E5%85%B7htmltagremover">輔助工具：HtmlTagRemover</h2>
+<p>除了自動過濾，系統還提供了一個工具類 <code>HtmlTagRemover.java</code>。當你需要「徹底拔除」所有 HTML 標籤（而不僅僅是轉義）時，可以使用它。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：HtmlTagRemover.java</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">removeHTMLTag</span><span class="hljs-params">(String i_source)</span> <span class="hljs-keyword">throws</span> Exception </span>{
+    Parser parser = <span class="hljs-keyword">new</span> Parser();
+    TextExtractingVisitor visitor = <span class="hljs-keyword">new</span> TextExtractingVisitor();
+    <span class="hljs-comment">// 使用 htmlparser 套件來解析並提取純文字</span>
+    parser.setInputHTML(i_source);
+    parser.visitAllNodesWith(visitor); 
+    <span class="hljs-keyword">return</span> visitor.getExtractedText();
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這就像是用過濾網把碎石（標籤）全部濾掉，只留下純水（內容文字）。</p>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>XSS 攻擊</strong>：攻擊者試圖透過輸入框執行惡意程式碼。</li>
+<li><strong>自動過濾</strong>：<code>XSSRequestWrapper</code> 透過封裝 Request 物件，在資料進入業務邏輯前自動完成清理。</li>
+<li><strong>轉義與替換</strong>：將 <code>&lt;script&gt;</code> 等關鍵字轉換為無害的文字格式。</li>
+<li><strong>靈活策略</strong>：針對一般請求與編輯器請求，系統有不同強度的防護方案。</li>
+</ol>
+<p>有了這層安全防護，我們就能放心地處理資料了。下一章，我們將學習系統如何更有效率地存取資料庫：<a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">資料存取抽象 (DataAccessor &amp; SKDataAccessor)</a>。</p>
+<hr>
+# Chapter 4: 資料存取抽象 (DataAccessor &amp; SKDataAccessor)</p>
+<p>在上一章 <a href="03_%E5%AE%89%E5%85%A8%E9%81%8E%E6%BF%BE%E5%99%A8__xssrequestwrapper__.md">安全過濾器 (XSSRequestWrapper)</a> 中，我們學習了如何確保輸入資料的純淨。現在，我們要處理開發中最常見的任務：<strong>如何將這些資料存入資料庫，或者從資料庫拿出來使用？</strong></p>
+<hr>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1">為什麼需要資料存取抽象？</h2>
+<p>在傳統的 Java 開發中，如果你有一個「使用者」資料表，你通常需要寫一個類別，裡面塞滿了這樣的程式碼：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">User</span> </span>{
+    <span class="hljs-keyword">private</span> String name;
+    <span class="hljs-keyword">private</span> String email;
+    <span class="hljs-comment">// 還有另外 20 個欄位...</span>
+
+    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getName</span><span class="hljs-params">()</span> </span>{ <span class="hljs-keyword">return</span> name; }
+    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setName</span><span class="hljs-params">(String name)</span> </span>{ <span class="hljs-keyword">this</span>.name = name; }
+    <span class="hljs-comment">// 接下來是無窮無盡的 Getter 和 Setter...</span>
+}
+</div></code></pre>
+<p><strong>問題來了：</strong> 如果資料庫增加了一個欄位，你就得回來改 Java 程式碼。如果系統有 100 張表，你就要寫 100 個這樣的類別。這簡直是開發者的噩夢！</p>
+<p>本系統引入了 <strong>DataAccessor</strong>，它就像是一個**「萬用智慧容器」**。你不需要為每個欄位寫死程式碼，它能自動適應任何資料庫結構。</p>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E8%90%AC%E7%94%A8%E5%AE%B9%E5%99%A8">核心概念：萬用容器</h2>
+<p><code>DataAccessor</code> 的核心思想是利用 <code>Hashtable</code> (一種鍵值對結構) 來存放資料。</p>
+<ol>
+<li><strong>動態存放</strong>：欄位名是「鍵 (Key)」，資料是「值 (Value)」。</li>
+<li><strong>統一接口</strong>：不管你是存員工資料還是訂單資料，都用同樣的方法取值。</li>
+<li><strong>自動轉碼</strong>：它會在你讀取資料時，自動處理編碼問題（例如將特殊字元轉回 UTF-8）。</li>
+</ol>
+<h3 id="%E9%A1%9E%E6%AF%94%E6%99%BA%E6%85%A7%E6%94%B6%E7%B4%8D%E7%9B%92">類比：智慧收納盒</h3>
+<p>想像 <code>DataAccessor</code> 是一個貼有標籤的收納盒。你不需要為「襪子」訂製一個盒子，再為「內衣」訂製另一個。你只需要把東西丟進去，並在外面貼上標籤。想拿東西時，說出標籤名字（如 <code>getValue(&quot;socks&quot;)</code>）就可以了。</p>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-dataaccessor">如何使用 DataAccessor？</h2>
+<p>在專案中，你會看到許多實體類別（Model）都繼承自 <code>SKDataAccessor</code>（Single Key 版本的 DataAccessor）。</p>
+<h3 id="%E7%AF%84%E4%BE%8B%E6%93%8D%E4%BD%9C%E8%AA%9E%E7%B3%BB%E8%B3%87%E6%96%99">範例：操作語系資料</h3>
+<p>參考 <code>LangZone.java</code>，雖然它定義了一些常用的 Getter/Setter 以方便開發，但底層全是透過 <code>getValue</code> 和 <code>setValue</code> 運作的。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 取得語系代碼</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getLangid</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-keyword">return</span> getValue(<span class="hljs-string">"langid"</span>); <span class="hljs-comment">// 從內部的 Hashtable 拿資料</span>
+}
+
+<span class="hljs-comment">// 設定語系名稱</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setLangnm</span><span class="hljs-params">(String i_val)</span> </span>{
+    setValue(<span class="hljs-string">"langnm"</span>, i_val); <span class="hljs-comment">// 將資料存入 Hashtable</span>
+}
+</div></code></pre>
+<p><strong>解釋</strong>：開發者呼叫 <code>getLangid()</code> 時，系統會自動去尋找資料庫中對應 <code>langid</code> 欄位的值。</p>
+<hr>
+<h2 id="%E5%85%A7%E9%83%A8%E7%9A%84%E9%81%8B%E4%BD%9C%E6%B5%81%E7%A8%8B">內部的運作流程</h2>
+<p>當你呼叫 <code>getValue(&quot;name&quot;)</code> 時，系統內部發生了什麼？</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant App as 你的程式碼
+    participant DA as DataAccessor
+    participant DC as DataCar (內部儲存器)
+    participant Util as StringUtil (轉碼工具)
+
+    App->>DA: getValue("name")
+    DA->>DC: 提取原始字串
+    DC-->>DA: 回傳 "張三"
+    Note over DA: 檢查是否需要轉碼?
+    DA->>Util: 執行 Unicode 轉換
+    Util-->>DA: 回傳安全且正確的字串
+    DA-->>App: 回傳最終結果
+</div></code></pre>
+<hr>
+<h2 id="%E6%B7%B1%E5%85%A5%E5%BA%95%E5%B1%A4%E5%AF%A6%E4%BD%9C">深入底層實作</h2>
+<p>讓我們看看 <code>DataAccessor.java</code> 是如何處理這些邏輯的：</p>
+<h3 id="1-%E7%B5%B1%E4%B8%80%E7%9A%84%E5%8F%96%E5%80%BC%E9%82%8F%E8%BC%AF">1. 統一的取值邏輯</h3>
+<p>這是最核心的方法，它處理了空值判斷與編碼轉換。</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">getValue</span><span class="hljs-params">(String i_fn)</span> </span>{
+    <span class="hljs-comment">// 1. 從內部的 DataCar 取得原始資料</span>
+    String strReturn = dcData.getValue(i_fn, <span class="hljs-string">"0"</span>);
+    
+    <span class="hljs-comment">// 2. 自動處理編碼轉換 (例如 UTF-8)</span>
+    <span class="hljs-keyword">if</span> (isForceTransformUTF8()) {
+        strReturn = <span class="hljs-keyword">new</span> StringUtil().convertUnicodeField(strReturn);
+    }
+    <span class="hljs-keyword">return</span> strReturn;
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這段代碼確保了無論資料庫存的是什麼格式，你拿到的都會是正確的 Java 字串。</p>
+<h3 id="2-%E9%9D%88%E6%B4%BB%E7%9A%84%E7%A9%BA%E5%80%BC%E6%8E%A7%E5%88%B6">2. 靈活的空值控制</h3>
+<p>有時候資料庫需要 <code>null</code> 而不是空字串，<code>DataAccessor</code> 提供了開關：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 如果欄位不存在，是否回傳 null？</span>
+<span class="hljs-keyword">private</span> <span class="hljs-keyword">boolean</span> isReturnNullNoThisField = <span class="hljs-keyword">false</span>;
+
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setReturnNullNoThisField</span><span class="hljs-params">(<span class="hljs-keyword">boolean</span> val)</span> </span>{
+    <span class="hljs-keyword">this</span>.isReturnNullNoThisField = val;
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這讓 DAO 層（參考 <a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式</a>）在產生 SQL 指令時，能精確判斷哪些欄位不應該出現在 <code>UPDATE</code> 語句中。</p>
+<hr>
+<h2 id="%E6%89%B9%E6%AC%A1%E8%99%95%E7%90%86skdataaccessorlist">批次處理：SKDataAccessorList</h2>
+<p>當我們從資料庫查出一整群資料（例如 10 筆訂單）時，我們會使用 <code>SKDataAccessorList</code>。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：SystemPicList.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SystemPicList</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SKDataAccessorList</span> </span>{
+    <span class="hljs-comment">// 產生清單中的個別物件</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> DataAccessor <span class="hljs-title">genObj</span><span class="hljs-params">(Hashtable i_data)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> SystemPic(i_data);
+    }
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這是一個容器的容器。它能幫你管理一整組的 <code>DataAccessor</code> 物件，讓你像操作陣列一樣方便。</p>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>資料抽象化</strong>：為什麼我們不再寫死 Getter/Setter。</li>
+<li><strong>DataAccessor</strong>：一個基於 <code>Hashtable</code> 的萬用物件，能自動處理欄位存取與轉碼。</li>
+<li><strong>簡化開發</strong>：透過 <code>getValue</code> 和 <code>setValue</code> 統一了所有資料庫實體的操作。</li>
+</ol>
+<p>這種設計與 <a href="08_%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E6%A8%A1%E7%B5%84__ftcutility__.md">核心工具模組 (FtcUtility)</a> 緊密結合，極大地提高了系統的擴充性。</p>
+<p>下一章，我們將學習如何處理「填到一半的表單」——也就是系統的緩存機制：<a href="05_%E6%9A%AB%E5%AD%98%E4%BD%9C%E6%A5%AD%E6%A9%9F%E5%88%B6__tempwork___objtemp__.md">暫存作業機制 (TempWork / ObjTemp)</a>。</p>
+<hr>
+# Chapter 5: 暫存作業機制 (TempWork / ObjTemp)</p>
+<p>在上一章 <a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">資料存取抽象 (DataAccessor &amp; SKDataAccessor)</a> 中，我們學習了如何讓 Java 物件與資料庫欄位進行靈活的對接。現在，我們要處理一個更貼近使用者需求的場景：<strong>「如果內容還沒寫完，或者需要主管審核後才能發佈，該怎麼辦？」</strong></p>
+<p>這就是 <strong>暫存作業機制 (TempWork)</strong> 發揮作用的地方。</p>
+<hr>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E6%9A%AB%E5%AD%98%E6%A9%9F%E5%88%B6">為什麼需要暫存機制？</h2>
+<p>想像你正在維護一個電商網站的後台。管理員要新增一個非常複雜的產品資訊，包含規格、圖片、價格等。</p>
+<ul>
+<li><strong>情境 A</strong>：管理員寫到一半，電腦突然當機或斷網，如果不先存起來，剛才花一小時寫的東西就全沒了。</li>
+<li><strong>情境 B</strong>：公司規定，所有產品資訊必須經過經理審核後才能正式上架（即發佈到正式表）。</li>
+</ul>
+<p><strong>暫存機制</strong> 就像是辦公室裡的「待辦公文夾」。在文件正式歸檔（存入正式表）之前，我們先把它放在這個夾子裡。它支援：</p>
+<ol>
+<li><strong>草稿保存</strong>：隨時存檔，下次繼續。</li>
+<li><strong>版本控制</strong>：保留多次修改的紀錄（版號）。</li>
+<li><strong>格式彈性</strong>：可以存成 JSON 字串或 BLOB 二進制檔案。</li>
+</ol>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5objtemp-%E7%89%A9%E4%BB%B6">核心概念：ObjTemp 物件</h2>
+<p>系統中使用 <code>ObjTemp</code> 作為暫存資料的容器。它繼承自 <a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">SKDataAccessor</a>，因此具備自動處理欄位的功能。</p>
+<h3 id="%E9%97%9C%E9%8D%B5%E6%AC%84%E4%BD%8D%E8%AA%AA%E6%98%8E">關鍵欄位說明：</h3>
+<ul>
+<li><strong>Tblnm (表名)</strong>：這筆資料原本屬於哪張正式表（例如：產品表）。</li>
+<li><strong>Objxuid (物件主鍵)</strong>：這筆資料在正式表中的 ID。</li>
+<li><strong>Ver (版號)</strong>：這是第幾次的暫存版本。</li>
+<li><strong>Type (類型)</strong>：<code>J</code> 代表 JSON（適合簡單文字），<code>B</code> 代表 BLOB（適合複雜物件）。</li>
+</ul>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E6%9A%AB%E5%AD%98%E6%A9%9F%E5%88%B6">如何使用暫存機制？</h2>
+<p>開發者通常透過 <code>TempWorkBO</code> 來操作暫存功能。我們來看幾個常見的範例。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-1%E5%B0%87%E8%B3%87%E6%96%99%E5%AD%98%E7%82%BA-json-%E8%8D%89%E7%A8%BF">範例 1：將資料存為 JSON 草稿</h3>
+<p>如果你有一組簡單的資料（存放於 Hashtable），想把它暫存起來：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 將資料存為 JSON 格式的暫存檔</span>
+<span class="hljs-comment">// 參數：資料內容, 正式表名, 資料ID, 類別路徑, 使用者ID</span>
+tempWorkBO.saveObjTempWithJson(dataMap, <span class="hljs-string">"PRODUCT_TABLE"</span>, <span class="hljs-string">"P001"</span>, 
+                               <span class="hljs-string">"com.model.Product"</span>, <span class="hljs-string">"USER_001"</span>);
+</div></code></pre>
+<p><strong>效果</strong>：系統會自動將 <code>dataMap</code> 轉成 JSON 字串，存入 <code>WXD2PFT0</code> 暫存表中，並自動生成新的版號。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-2%E5%8F%96%E5%BE%97%E6%9C%80%E6%96%B0%E7%9A%84%E8%8D%89%E7%A8%BF">範例 2：取得最新的草稿</h3>
+<p>當使用者重新打開頁面，想要載入上次沒寫完的內容：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 取得 PRODUCT_TABLE 中 P001 物件最新的一筆暫存紀錄</span>
+ObjTemp lastDraft = tempWorkBO.getTheNewObjTemp(<span class="hljs-string">"PRODUCT_TABLE"</span>, <span class="hljs-string">"P001"</span>);
+
+<span class="hljs-comment">// 取得存放在裡面的 JSON 內容</span>
+String jsonContent = lastDraft.getJson();
+</div></code></pre>
+<p><strong>解釋</strong>：這讓你能夠輕鬆實現「自動回復草稿」的功能。</p>
+<hr>
+<h2 id="%E5%85%A7%E9%83%A8%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86">內部運作原理</h2>
+<p>當你呼叫 <code>saveObjTempWithJson</code> 時，系統內部的運作流程如下：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant Action as Action (前端)
+    participant BO as TempWorkBO
+    participant DAO as TempWorkDAO
+    participant DB as 資料庫 (WXD2PFT0)
+
+    Action->>BO: 請求儲存草稿 (Json模式)
+    BO->>DAO: 查詢目前最大版號 (getNextVer)
+    DAO-->>BO: 回傳目前版號 (例如: 2)
+    Note over BO: 將版號更新為 3 <br/> 並將 Map 轉為 JSON 字串
+    BO->>DB: 執行 Insert (存入新版本)
+    DB-->>Action: 儲存成功
+</div></code></pre>
+<hr>
+<h2 id="%E6%B7%B1%E5%85%A5%E5%BA%95%E5%B1%A4%E5%AF%A6%E4%BD%9C">深入底層實作</h2>
+<p>讓我們看看 <code>TempWorkBOImpl.java</code> 是如何處理儲存邏輯的：</p>
+<h3 id="1-%E8%87%AA%E5%8B%95%E7%89%88%E8%99%9F%E7%AE%A1%E7%90%86">1. 自動版號管理</h3>
+<p>每次儲存時，系統都會自動計算下一個版號，這是在 <code>getNextVer</code> 私有方法中完成的：</p>
+<pre class="hljs"><code><div><span class="hljs-function"><span class="hljs-keyword">private</span> String <span class="hljs-title">getNextVer</span><span class="hljs-params">(<span class="hljs-keyword">final</span> ObjTemp i_obj)</span> </span>{
+    <span class="hljs-comment">// 透過 DAO 去資料庫找該物件目前最大的版號</span>
+    String strNextVer = getTempWorkDAO().selectObjTempNextVersion(i_obj);
+    <span class="hljs-comment">// 如果是空的就回傳 "0"，否則回傳下一個數字</span>
+    <span class="hljs-keyword">return</span> strNextVer;
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這確保了使用者的每一次「儲存」都不會覆蓋掉舊的紀錄，實現了簡單的版本控制。</p>
+<h3 id="2-%E5%A4%9A%E6%A8%A3%E5%8C%96%E7%9A%84%E5%84%B2%E5%AD%98%E6%96%B9%E5%BC%8F-json-vs-blob">2. 多樣化的儲存方式 (JSON vs BLOB)</h3>
+<p>系統提供了兩套方案。JSON 適合跨平台閱讀，而 BLOB 適合直接序列化 Java 物件：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// JSON 模式：將 Map 轉為字串</span>
+JSONObject i_json = <span class="hljs-keyword">new</span> JSONObject();
+i_json.putAll(i_hashtable); 
+i_obj.setJson(i_json.toJSONString());
+i_obj.setType(<span class="hljs-string">"J"</span>);
+
+<span class="hljs-comment">// BLOB 模式：直接存入二進制位元組 (byte[])</span>
+i_obj.setObjcont(i_objval);
+i_obj.setType(<span class="hljs-string">"B"</span>);
+</div></code></pre>
+<p><strong>解釋</strong>：這讓暫存機制變得非常通用，無論是簡單的表單還是複雜的二進制檔案（如圖片暫存）都能處理。</p>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>草稿系統</strong>：利用 <code>ObjTemp</code> 機制實作內容的預存與審核準備。</li>
+<li><strong>版本控制</strong>：系統自動管理版號，保留修改軌跡。</li>
+<li><strong>格式彈性</strong>：支援 JSON 與 BLOB 兩種暫存方式。</li>
+<li><strong>解耦設計</strong>：暫存表獨立於正式表，確保正式資料的純淨。</li>
+</ol>
+<p>這種機制與 <a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式 (Action/BO/DAO)</a> 完美結合，讓業務邏輯在處理「發佈」流程時更加穩健。</p>
+<p>下一章，我們將學習系統如何管理那些全域通用的設定值：<a href="06_%E7%B3%BB%E7%B5%B1%E5%8F%83%E6%95%B8%E5%8A%A0%E8%BC%89%E5%99%A8__system_parameter_loader__.md">系統參數加載器 (System Parameter Loader)</a>。</p>
+<hr>
+# Chapter 6: 系統參數加載器 (System Parameter Loader)</p>
+<p>在上一章 <a href="05_%E6%9A%AB%E5%AD%98%E4%BD%9C%E6%A5%AD%E6%A9%9F%E5%88%B6__tempwork___objtemp__.md">暫存作業機制 (TempWork / ObjTemp)</a> 中，我們學習了如何處理使用者的草稿資料。現在，我們要切換到系統的「大腦」，學習它如何管理所有模組共用的全域設定值。</p>
+<hr>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E7%B3%BB%E7%B5%B1%E5%8F%83%E6%95%B8%E5%8A%A0%E8%BC%89%E5%99%A8">為什麼需要系統參數加載器？</h2>
+<p>想像你正在開發一個大型商城系統。系統中有很多資訊是每個頁面都會用到的：</p>
+<ul>
+<li><strong>檔案路徑</strong>：圖片要存放在哪個資料夾？</li>
+<li><strong>郵件設定</strong>：系統寄信時要連哪一台伺服器？</li>
+<li><strong>語系預設值</strong>：預設是繁體中文還是英文？</li>
+</ul>
+<p><strong>如果不使用加載器：</strong> 你可能得在每個程式檔裡寫死（Hard-code）路徑。一旦伺服器搬家，你就要修改幾百個檔案，這簡直是災難。</p>
+<p><strong>使用加載器後：</strong> 系統啟動時，會自動從資料庫讀取這些設定，並將它們「快取」在記憶體中。這就像是系統的**「設定中心」**，任何模組想知道路徑或設定，只要問它就行了。</p>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5systemparameter-%E8%88%87-loader">核心概念：SystemParameter 與 Loader</h2>
+<p>這個機制由兩個主要部分組成：</p>
+<ol>
+<li><strong>SystemParameter (參數容器)</strong>：這是一個靜態物件（Static Object），像是一個巨大的置物櫃，專門用來存放讀取進來的參數。</li>
+<li><strong>SystemParameterLoader (加載器)</strong>：這是搬運工，負責在系統啟動的一瞬間，把資料庫裡的參數搬進「置物櫃」裡。</li>
+</ol>
+<h3 id="%E7%94%9F%E6%B4%BB%E9%A1%9E%E6%AF%94%E9%A3%AF%E5%BA%97%E6%AB%83%E6%AA%AF">生活類比：飯店櫃檯</h3>
+<p><code>SystemParameter</code> 就像是飯店櫃檯的「資訊手冊」，上面記載了早餐時間、泳池位置和接駁車班次。<code>Loader</code> 則是負責在飯店開門前，把這些資訊更新好並放在櫃檯的人。客人（其他模組）不需要去翻倉庫（資料庫），直接問櫃檯（SystemParameter）最快。</p>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E7%B3%BB%E7%B5%B1%E5%8F%83%E6%95%B8">如何使用系統參數？</h2>
+<p>在程式碼中，你不需要實例化（New）它，直接透過靜態方法就能取得全域設定。</p>
+<h3 id="%E7%AF%84%E4%BE%8B%E5%8F%96%E5%BE%97%E5%9C%96%E7%89%87%E5%AD%98%E5%8F%96%E8%B7%AF%E5%BE%91">範例：取得圖片存取路徑</h3>
+<p>當你需要顯示產品圖片時，可以這樣寫：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 取得產品圖片的實體儲存路徑</span>
+String path = SystemParameter.getProductPicRealPath();
+
+<span class="hljs-comment">// 取得產品圖片的網頁參照路徑 (URL)</span>
+String url = SystemParameter.getProductPicRefPath();
+</div></code></pre>
+<p><strong>輸出結果</strong>：<code>path</code> 可能會得到 <code>/nas/images/product/</code>，而你完全不需要知道這個路徑是從哪張資料表讀出來的。</p>
+<hr>
+<h2 id="%E5%85%A7%E9%83%A8%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86">內部運作原理</h2>
+<p>加載器是在系統啟動時（通常透過 Spring 容器初始化）執行的。</p>
+<h3 id="%E5%88%9D%E5%A7%8B%E5%8C%96%E6%B5%81%E7%A8%8B%E5%9C%96">初始化流程圖</h3>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant Web as Web 伺服器啟動
+    participant Loader as SystemParameterLoader
+    participant DAO as ParameterDAO
+    participant DB as 資料庫 (TXD2PF00)
+    participant SP as SystemParameter (記憶體)
+
+    Web->>Loader: 呼叫 init() 方法
+    Loader->>DAO: 請求所有參數 (selectList)
+    DAO->>DB: 執行 SQL 查詢
+    DB-->>DAO: 回傳參數清單 (Key-Value)
+    DAO-->>Loader: 封裝為 ParameterList
+    Loader->>SP: 呼叫 setAllParameter() 寫入
+    Note over SP: 參數現在常駐在記憶體中
+</div></code></pre>
+<hr>
+<h2 id="%E6%B7%B1%E5%85%A5%E5%BA%95%E5%B1%A4%E5%AF%A6%E4%BD%9C">深入底層實作</h2>
+<p>讓我們看看 <code>SystemParameterLoaderImpl.java</code> 是如何完成這項任務的：</p>
+<h3 id="1-%E5%95%9F%E5%8B%95%E8%88%87%E5%9F%BA%E7%A4%8E%E8%A8%AD%E5%AE%9A">1. 啟動與基礎設定</h3>
+<p>在 <code>init()</code> 方法中，系統會先設定一些最基礎的環境變數。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：SystemParameterLoaderImpl.java</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{
+    <span class="hljs-comment">// 1. 設定 LOG 存放路徑</span>
+    Log.setLogPath(getServletContext().getRealPath(<span class="hljs-string">"/log"</span>));
+    
+    <span class="hljs-comment">// 2. 取得 Servlet 的真實路徑</span>
+    SystemParameter.setServletRealPath(getServletContext().getRealPath(<span class="hljs-string">"/"</span>));
+    
+    <span class="hljs-comment">// 3. 準備從資料庫讀取參數 (接續下一步)</span>
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這裡利用了 <code>ServletContext</code> 來取得網頁程式在伺服器上的實際位置。</p>
+<h3 id="2-%E5%BE%9E%E8%B3%87%E6%96%99%E5%BA%AB%E6%90%AC%E9%81%8B%E5%8F%83%E6%95%B8">2. 從資料庫搬運參數</h3>
+<p>接下來，加載器會利用 <a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式</a> 中提到的 DAO 層來抓取資料。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 取得資料庫中全部的參數清單</span>
+Parameter key = <span class="hljs-keyword">new</span> Parameter();
+List list = getParameterDAO().selectListBySelective(key);
+
+<span class="hljs-comment">// 將 List 轉為專用的 ParameterList 格式</span>
+ParameterList parameterList = <span class="hljs-keyword">new</span> ParameterList();
+parameterList.addAll(list);
+
+<span class="hljs-comment">// 一口氣塞進 SystemParameter 容器中</span>
+SystemParameter.setAllParameter(parameterList);
+</div></code></pre>
+<p><strong>解釋</strong>：這段代碼體現了「一次讀取，多次使用」的原則。讀取後，就不再頻繁存取資料庫。</p>
+<h3 id="3-%E5%88%86%E9%A1%9E%E5%AD%98%E6%94%BE%E8%88%87%E8%BD%89%E6%8F%9B">3. 分類存放與轉換</h3>
+<p>在 <code>SystemParameter.java</code> 內部，這些資料會被分門別類地存放在對應的變數中：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：SystemParameter.java</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setAllParameter</span><span class="hljs-params">(ParameterList parameterList)</span> </span>{
+    <span class="hljs-comment">// 從清單中找出名為 "mail_server" 的參數並存入變數</span>
+    mailServer = parameterList.getParameter(<span class="hljs-string">"mail_server"</span>).getParaval();
+    
+    <span class="hljs-comment">// 自動處理特殊邏輯：將 http 轉為 https</span>
+    mallDomainHttps = getMallDomain().replaceAll(<span class="hljs-string">"http:"</span>, <span class="hljs-string">"https:"</span>);
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這讓開發者在調用 <code>getMailServer()</code> 時，拿到的是乾淨的字串，而不是複雜的 <a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">DataAccessor</a> 物件。</p>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>全域設定中心</strong>：為什麼不應該在程式碼中寫死路徑與設定。</li>
+<li><strong>SystemParameter</strong>：作為參數的靜態容器，提供快速存取。</li>
+<li><strong>自動化載入</strong>：系統啟動時自動同步資料庫與記憶體的設定。</li>
+<li><strong>環境適應</strong>：加載器會根據不同的伺服器環境自動調整路徑。</li>
+</ol>
+<p>掌握了系統參數後，我們就能確保系統在不同環境下都能正確運行。下一章，我們將探討如何讓系統支援多國語言：<a href="07_%E5%A4%9A%E8%AA%9E%E7%B3%BB%E5%8D%80%E5%9F%9F%E7%AE%A1%E7%90%86__langzone__.md">多語系區域管理 (LangZone)</a>。</p>
+<hr>
+# Chapter 7: 多語系區域管理 (LangZone)</p>
+<p>在上一章 <a href="06_%E7%B3%BB%E7%B5%B1%E5%8F%83%E6%95%B8%E5%8A%A0%E8%BC%89%E5%99%A8__system_parameter_loader__.md">系統參數加載器 (System Parameter Loader)</a> 中，我們學習了如何管理全域的系統設定。現在，我們要讓系統具備「國際化」的視野，學習如何透過 <strong>LangZone (多語系區域管理)</strong> 讓應用程式服務全球不同地區的使用者。</p>
+<hr>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E5%A4%9A%E8%AA%9E%E7%B3%BB%E5%8D%80%E5%9F%9F%E7%AE%A1%E7%90%86">為什麼需要多語系區域管理？</h2>
+<p>想像你經營一家跨國電商。</p>
+<ul>
+<li><strong>台灣使用者</strong>進來，他希望看到繁體中文，且商品價格以台幣 (TWD) 顯示。</li>
+<li><strong>美國使用者</strong>進來，他希望看到英文，且價格以美金 (USD) 顯示。</li>
+</ul>
+<p>如果你的系統只寫死了一種語言或貨幣，你將失去全球市場。<strong>LangZone</strong> 的作用就是定義一個「區域（Zone）」，這個區域綁定了特定的<strong>語系代碼</strong>與<strong>貨幣資訊</strong>。它是系統切換顯示邏輯、過濾特定地區資料的核心基礎。</p>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5langzone-%E7%89%A9%E4%BB%B6">核心概念：LangZone 物件</h2>
+<p>在專案中，<code>LangZone</code> 物件就像是一張「地區身分證」，記錄了該區域的所有特徵。</p>
+<h3 id="%E9%97%9C%E9%8D%B5%E5%B1%AC%E6%80%A7%E8%AA%AA%E6%98%8E">關鍵屬性說明：</h3>
+<ol>
+<li><strong>Langid (語系代號)</strong>：例如 <code>zhtw</code> (繁中)、<code>enus</code> (美英)。</li>
+<li><strong>Cucyid (貨幣代碼)</strong>：例如 <code>TWD</code>、<code>USD</code>。</li>
+<li><strong>Zone (區域代碼)</strong>：定義該資料屬於哪個特定的地理或業務區域。</li>
+<li><strong>Url / Sslurl</strong>：該語系對應的專屬網址。</li>
+</ol>
+<h3 id="%E7%94%9F%E6%B4%BB%E9%A1%9E%E6%AF%94%E9%9B%BB%E8%A6%96%E9%A0%BB%E9%81%93%E7%9A%84%E8%AA%9E%E8%A8%80%E5%88%87%E6%8F%9B">生活類比：電視頻道的語言切換</h3>
+<p>當你切換電視頻道時，遙控器（LangZone 機制）會告訴電視：</p>
+<ul>
+<li>現在是「台灣台」：請載入中文字幕，顯示台灣時間。</li>
+<li>現在是「美國台」：請載入英文字幕，顯示紐約時間。</li>
+</ul>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8-langzone">如何使用 LangZone？</h2>
+<p><code>LangZone</code> 繼承自 <a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">資料存取抽象 (DataAccessor &amp; SKDataAccessor)</a>，因此你可以輕鬆地存取其屬性。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-1%E5%AE%9A%E7%BE%A9%E5%B8%B8%E7%94%A8%E8%AA%9E%E7%B3%BB%E5%B8%B8%E6%95%B8">範例 1：定義常用語系常數</h3>
+<p>在 <code>LangZone.java</code> 中，系統預定義了幾種標準語系，方便程式碼中直接引用：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：LangZone.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String LANG_ENUS = <span class="hljs-string">"enus"</span>; <span class="hljs-comment">// 美國英文</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String LANG_ZHTW = <span class="hljs-string">"zhtw"</span>; <span class="hljs-comment">// 繁體中文</span>
+<span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String LANG_ZHCN = <span class="hljs-string">"zhcn"</span>; <span class="hljs-comment">// 簡體中文</span>
+</div></code></pre>
+<p><strong>解釋</strong>：使用常數可以避免在程式碼中到處寫死字串，減少打錯字的風險。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-2%E7%8D%B2%E5%8F%96%E5%8D%80%E5%9F%9F%E8%B3%87%E8%A8%8A">範例 2：獲取區域資訊</h3>
+<p>當你從資料庫取得一個 <code>LangZone</code> 物件後，可以這樣讀取資訊：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 取得語系名稱（例如：繁體中文）</span>
+String name = langZone.getLangnm();
+
+<span class="hljs-comment">// 取得該區域使用的貨幣（例如：TWD）</span>
+String currency = langZone.getCucyid();
+</div></code></pre>
+<p><strong>解釋</strong>：這些資訊會影響前端頁面顯示哪種語言的標籤，以及商品價格後面的貨幣單位。</p>
+<hr>
+<h2 id="%E5%85%A7%E9%83%A8%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86">內部運作原理</h2>
+<p>系統通常會在使用者登入或切換語系時，從資料庫查詢對應的 <code>LangZone</code> 資訊。</p>
+<h3 id="%E8%AA%9E%E7%B3%BB%E5%88%87%E6%8F%9B%E6%B5%81%E7%A8%8B%E5%9C%96">語系切換流程圖</h3>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant User as 使用者 (瀏覽器)
+    participant Action as Action (控制器)
+    participant DAO as LangZoneDAO
+    participant DB as 資料庫 (語系表)
+
+    User->>Action: 點擊「切換至英文」
+    Action->>DAO: 查詢 langid='enus' 的設定
+    DAO->>DB: 執行 SQL 查詢
+    DB-->>DAO: 回傳區域設定資料
+    DAO-->>Action: 封裝成 LangZone 物件
+    Note over Action: 將物件存入 Session <br/> 影響後續所有頁面顯示
+</div></code></pre>
+<hr>
+<h2 id="%E6%B7%B1%E5%85%A5%E5%BA%95%E5%B1%A4%E5%AF%A6%E4%BD%9C">深入底層實作</h2>
+<h3 id="1-%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E4%BB%8B%E9%9D%A2-dao">1. 資料存取介面 (DAO)</h3>
+<p>系統透過 <code>LangZoneDAO.java</code> 來與資料庫溝通。這是一個典型的 DAO 介面（參考 <a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式</a>）。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：LangZoneDAO.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">LangZoneDAO</span> </span>{
+    <span class="hljs-comment">// 根據主鍵 (xuid) 取得特定的語系區域設定</span>
+    <span class="hljs-function">LangZone <span class="hljs-title">selectByPrimaryKey</span><span class="hljs-params">(String xuid)</span></span>;
+
+    <span class="hljs-comment">// 根據條件（如 langid）查詢符合的語系清單</span>
+    <span class="hljs-function">List <span class="hljs-title">selectListBySelective</span><span class="hljs-params">(LangZone key)</span></span>;
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這讓系統可以靈活地根據使用者的瀏覽器設定或手動選擇，找到對應的配置。</p>
+<h3 id="2-%E6%89%B9%E9%87%8F%E7%AE%A1%E7%90%86langzonelist">2. 批量管理：LangZoneList</h3>
+<p>當系統需要顯示「語言切換選單」時，會用到 <code>LangZoneList.java</code>。</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：LangZoneList.java</span>
+<span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LangZoneList</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">SKDataAccessorList</span> </span>{
+    <span class="hljs-comment">// 將資料庫回傳的每一筆資料轉換為 LangZone 物件</span>
+    <span class="hljs-function"><span class="hljs-keyword">public</span> DataAccessor <span class="hljs-title">genObj</span><span class="hljs-params">(Hashtable i_data)</span> </span>{
+        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> LangZone(i_data);
+    }
+}
+</div></code></pre>
+<p><strong>解釋</strong>：<code>LangZoneList</code> 繼承自 <code>SKDataAccessorList</code>，它能將多筆語系資料整合成一個方便操作的清單。</p>
+<hr>
+<h2 id="%E5%B0%8D%E7%B3%BB%E7%B5%B1%E7%9A%84%E5%85%B6%E4%BB%96%E5%BD%B1%E9%9F%BF">對系統的其他影響</h2>
+<p>LangZone 不僅僅是改變文字，它還會影響：</p>
+<ul>
+<li><strong>資料過濾</strong>：在查詢商品時，系統會自動帶入 <code>Zone</code> 參數，確保台灣使用者不會看到僅限美國販售的商品。</li>
+<li><strong>URL 跳轉</strong>：根據 <code>LangZone</code> 中的 <code>url</code> 設定，將使用者引導至正確的語系分站。</li>
+<li><strong>日期與數字格式</strong>：雖然基礎邏輯在 <a href="08_%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E6%A8%A1%E7%B5%84__ftcutility__.md">核心工具模組 (FtcUtility)</a>，但格式的選擇往往依賴於目前的 <code>LangZone</code>。</li>
+</ul>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>LangZone 的重要性</strong>：它是系統達成全球化（i18n）與在地化（L10n）的基礎。</li>
+<li><strong>區域綁定</strong>：一個 Zone 同時包含了語系、貨幣與專屬網址。</li>
+<li><strong>自動化物件</strong>：透過 <code>LangZone</code> 物件，開發者可以輕鬆獲取目前環境的語系資訊。</li>
+<li><strong>連動效能</strong>：語系設定會影響資料查詢的過濾條件。</li>
+</ol>
+<p>掌握了多語系管理後，你已經具備開發國際化應用的能力。下一章，也是本系列教程的最後一章，我們將介紹系統中最強大的瑞士刀：<a href="08_%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E6%A8%A1%E7%B5%84__ftcutility__.md">核心工具模組 (FtcUtility)</a>。</p>
+<hr>
+# Chapter 8: 核心工具模組 (FtcUtility)</p>
+<p>在上一章 <a href="07_%E5%A4%9A%E8%AA%9E%E7%B3%BB%E5%8D%80%E5%9F%9F%E7%AE%A1%E7%90%86__langzone__.md">多語系區域管理 (LangZone)</a> 中，我們學習了如何讓系統具備國際化的視野。現在，我們要進入本教程的最後一站，介紹開發者的「瑞士刀」—— <strong>核心工具模組 (FtcUtility)</strong>。</p>
+<hr>
+<h2 id="%E7%82%BA%E4%BB%80%E9%BA%BC%E9%9C%80%E8%A6%81%E6%A0%B8%E5%BF%83%E5%B7%A5%E5%85%B7%E6%A8%A1%E7%B5%84">為什麼需要核心工具模組？</h2>
+<p>想像你正在修理一台腳踏車，你需要螺絲起子；隔天你要組裝家具，你也需要螺絲起子。如果你每次都要從頭打造一把螺絲起子，那效率實在太低了。</p>
+<p>在軟體開發中，有些動作會重複出現成千上萬次，例如：</p>
+<ul>
+<li>把「20231225」變成「2023/12/25」。</li>
+<li>檢查一個字串是不是空的。</li>
+<li>把一封電子郵件寄給客戶。</li>
+</ul>
+<p><strong>核心工具模組 (FtcUtility)</strong> 就是系統的「工具箱」。它把這些高頻率使用的邏輯封裝成簡單的「靜態方法」。你不需要知道內部複雜的演算法，只需要呼叫它，就能得到結果。這不僅減少了重複代碼，也確保了全系統處理邏輯的一致性。</p>
+<hr>
+<h2 id="%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E5%9B%9B%E5%A4%A7%E5%B7%A5%E5%85%B7%E9%87%91%E5%89%9B">核心概念：四大工具金剛</h2>
+<p>這個模組主要由四個核心類別組成，每個類別負責一類特定的任務：</p>
+<ol>
+<li><strong>Ystd (日期大師)</strong>：處理所有與時間、日期相關的運算與檢查。</li>
+<li><strong>StringUtil (字串專家)</strong>：負責字串處理、加密、遮罩與格式轉換。</li>
+<li><strong>FileUtil (檔案管家)</strong>：處理檔案讀寫、內容替換。</li>
+<li><strong>Mailer (郵件信使)</strong>：負責將系統訊息發送到使用者的電子信箱。</li>
+</ol>
+<hr>
+<h2 id="%E5%A6%82%E4%BD%95%E4%BD%BF%E7%94%A8%E9%80%99%E4%BA%9B%E5%B7%A5%E5%85%B7">如何使用這些工具？</h2>
+<p>這些工具最棒的地方在於：<strong>你不需要 <code>new</code> 它們</strong>（大部分情況下）。它們就像是路邊的公用電話，拿起就能用。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-1%E6%97%A5%E6%9C%9F%E9%81%8B%E7%AE%97-ystd">範例 1：日期運算 (Ystd)</h3>
+<p>假設你想知道「今天加 10 天」是哪一天：</p>
+<pre class="hljs"><code><div>Ystd ystd = <span class="hljs-keyword">new</span> Ystd();
+<span class="hljs-comment">// 取得今天日期 (格式 YYYYMMDD)</span>
+String today = ystd.udate(); 
+<span class="hljs-comment">// 加上 10 天</span>
+String futureDate = ystd.add_days(today, <span class="hljs-number">10</span>);
+</div></code></pre>
+<p><strong>輸出結果</strong>：如果今天是 <code>20231001</code>，<code>futureDate</code> 就會是 <code>20231011</code>。它會自動幫你處理閏年和大、小月的問題。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-2%E5%AD%97%E4%B8%B2%E9%81%AE%E7%BD%A9-stringutil">範例 2：字串遮罩 (StringUtil)</h3>
+<p>為了保護個資，我們常需要把名字中間變星號：</p>
+<pre class="hljs"><code><div>StringUtil sUtil = <span class="hljs-keyword">new</span> StringUtil();
+<span class="hljs-comment">// 將 "張三豐" 的第 2 個字變成 "*"</span>
+String masked = sUtil.getMaskString(<span class="hljs-string">"張三豐"</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-string">"*"</span>);
+</div></code></pre>
+<p><strong>輸出結果</strong>：<code>masked</code> 會變成 <code>張*豐</code>。這在處理信用卡號或手機號碼時非常有用。</p>
+<h3 id="%E7%AF%84%E4%BE%8B-3%E7%99%BC%E9%80%81%E9%83%B5%E4%BB%B6-mailer">範例 3：發送郵件 (Mailer)</h3>
+<p>當系統發生異常需要通知管理員時：</p>
+<pre class="hljs"><code><div>Mailer mailer = <span class="hljs-keyword">new</span> Mailer();
+<span class="hljs-comment">// 參數：主機, 寄件者, 收件者, 主旨, 內容</span>
+mailer.sendMail(<span class="hljs-string">"smtp.fpg.com"</span>, <span class="hljs-string">"sys@fpg.com"</span>, <span class="hljs-string">"admin@fpg.com"</span>, 
+                <span class="hljs-string">"系統告警"</span>, <span class="hljs-string">"資料庫連線超時！"</span>);
+</div></code></pre>
+<p><strong>效果</strong>：系統會自動透過 SMTP 伺服器將告警郵件送出。</p>
+<hr>
+<h2 id="%E5%85%A7%E9%83%A8%E9%81%8B%E4%BD%9C%E5%8E%9F%E7%90%86">內部運作原理</h2>
+<p>這些工具類別通常是「無狀態」的，它們接收輸入，處理後立即回傳。以 <code>Ystd</code> 的日期檢查為例：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant App as 你的程式碼
+    participant Ystd as Ystd 工具
+    participant GC as GregorianCalendar
+    
+    App->>Ystd: chk_date("20230229")
+    Note over Ystd: 拆解年、月、日
+    Ystd->>GC: isLeapYear(2023)?
+    GC-->>Ystd: 回傳 false (非閏年)
+    Note over Ystd: 判定 2 月沒有 29 日
+    Ystd-->>App: 回傳 "*" (代表錯誤)
+</div></code></pre>
+<hr>
+<h2 id="%E6%B7%B1%E5%85%A5%E5%BA%95%E5%B1%A4%E5%AF%A6%E4%BD%9Cstringutil-%E7%9A%84%E6%99%BA%E6%85%A7">深入底層實作：StringUtil 的智慧</h2>
+<p>讓我們看看 <code>StringUtil.java</code> 是如何處理常見的「金額格式化」的。它結合了 Java 的 <code>BigDecimal</code> 與 <code>DecimalFormat</code>：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：StringUtil.java (簡化版)</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">rpad</span><span class="hljs-params">(String i_source, <span class="hljs-keyword">int</span> i_len, <span class="hljs-keyword">char</span> i_char)</span> </span>{
+    StringBuffer strbTmp = <span class="hljs-keyword">new</span> StringBuffer(i_source);
+    <span class="hljs-comment">// 計算還差多少長度，並用指定字元補齊</span>
+    <span class="hljs-keyword">int</span> intOffset = i_len - i_source.length();
+    <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; intOffset; i++) {
+        strbTmp.append(i_char);
+    }
+    <span class="hljs-keyword">return</span> strbTmp.toString();
+}
+</div></code></pre>
+<p><strong>解釋</strong>：<code>rpad</code> 代表 Right Pad。如果你需要把「123」補足成 5 位數，變成「12300」，呼叫 <code>rpad(&quot;123&quot;, 5, '0')</code> 即可。</p>
+<p>再看看它如何產生系統唯一 ID (XUID)，這在 <a href="05_%E6%9A%AB%E5%AD%98%E4%BD%9C%E6%A5%AD%E6%A9%9F%E5%88%B6__tempwork___objtemp__.md">暫存作業機制 (TempWork / ObjTemp)</a> 中被廣泛使用：</p>
+<pre class="hljs"><code><div><span class="hljs-comment">// 檔案：StringUtil.java</span>
+<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title">genXUID</span><span class="hljs-params">()</span> </span>{
+    <span class="hljs-comment">// 1. 取得目前精確到毫秒的時間字串</span>
+    String strNow = Ystd.utime4(); 
+    <span class="hljs-keyword">long</span> longNow = Long.parseLong(strNow);
+    <span class="hljs-comment">// 2. 轉換為 36 進位字串，縮短長度並保持唯一性</span>
+    <span class="hljs-keyword">return</span> to36CarryString(longNow);
+}
+</div></code></pre>
+<p><strong>解釋</strong>：這確保了即便在一秒內產生多筆資料，它們的 ID 也不會重複。</p>
+<hr>
+<h2 id="%E5%B7%A5%E5%85%B7%E7%AE%B1%E8%88%87%E5%85%B6%E4%BB%96%E6%A8%A1%E7%B5%84%E7%9A%84%E9%97%9C%E4%BF%82">工具箱與其他模組的關係</h2>
+<p><code>FtcUtility</code> 是整個專案的底層基石：</p>
+<ul>
+<li><strong>DAO 層</strong>：使用 <code>StringUtil</code> 處理 SQL 語句中的特殊字元。</li>
+<li><strong>BO 層</strong>：使用 <code>Ystd</code> 計算業務邏輯中的到期日或排程。</li>
+<li><strong>Action 層</strong>：使用 <code>Mailer</code> 發送通知給使用者。</li>
+<li><strong>系統核心</strong>：<a href="04_%E8%B3%87%E6%96%99%E5%AD%98%E5%8F%96%E6%8A%BD%E8%B1%A1__dataaccessor___skdataaccessor__.md">資料存取抽象 (DataAccessor &amp; SKDataAccessor)</a> 依賴 <code>StringUtil</code> 進行自動轉碼。</li>
+</ul>
+<hr>
+<h2 id="%E6%9C%AC%E7%AB%A0%E5%B0%8F%E7%B5%90">本章小結</h2>
+<p>在本章中，我們學習了：</p>
+<ol>
+<li><strong>工具模組的價值</strong>：封裝常用邏輯，提高開發效率。</li>
+<li><strong>Ystd</strong>：日期處理的專家。</li>
+<li><strong>StringUtil</strong>：字串處理與簡單加密的利器。</li>
+<li><strong>Mailer &amp; FileUtil</strong>：處理外部通訊與檔案操作。</li>
+<li><strong>靜態呼叫</strong>：大多數工具方法可以直接呼叫，不需要複雜的初始化。</li>
+</ol>
+<p>恭喜你！你已經完成了《code_to_analyze 開發指南》的所有章節。從最底層的 <a href="01_%E5%88%86%E5%B1%A4%E6%9E%B6%E6%A7%8B%E6%A8%A1%E5%BC%8F__layering_pattern__action_bo_dao__.md">分層架構模式 (Action/BO/DAO)</a> 到現在的核心工具箱，你已經掌握了開發與維護本系統所需的全部核心知識。</p>
+<p>現在，你可以放心地打開程式碼，開始你的開發旅程了！加油！</p>
+<hr>
+</p>
+
+</body>
+</html>

@@ -1,0 +1,7 @@
+[project]
+name = "pocketflow-tutorial-codebase-knowledge"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = []

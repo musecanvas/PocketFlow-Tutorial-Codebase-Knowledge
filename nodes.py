@@ -89,21 +89,42 @@ class IdentifyAbstractions(Node):
         use_cache = shared.get("use_cache", True)  # Get use_cache flag, default to True
         max_abstraction_num = shared.get("max_abstraction_num", 10)  # Get max_abstraction_num, default to 10
 
-        # Helper to create context from files, respecting limits (basic example)
-        def create_llm_context(files_data):
-            context = ""
-            file_info = []  # Store tuples of (index, path)
-            for i, (path, content) in enumerate(files_data):
-                entry = f"--- File Index {i}: {path} ---\n{content}\n\n"
-                context += entry
-                file_info.append((i, path))
+        # Build a bounded context for the LLM.
+        # Without limits, concatenating every file can exceed provider limits and fail (e.g. 400 INVALID_ARGUMENT).
+        max_context_chars = int(os.getenv("MAX_LLM_CONTEXT_CHARS", "200000"))
+        max_file_snippet_chars = int(os.getenv("MAX_FILE_SNIPPET_CHARS", "2000"))
 
-            return context, file_info  # file_info is list of (index, path)
+        context_parts = []
+        context_chars = 0
+        shown_files = 0
+        for i, (path, content) in enumerate(files_data):
+            snippet = content[:max_file_snippet_chars]
+            truncated = len(content) > max_file_snippet_chars
+            truncation_suffix = "\n... [truncated]" if truncated else ""
+            entry = (
+                f"--- File Index {i}: {path} ---\n"
+                f"{snippet}{truncation_suffix}\n\n"
+            )
 
-        context, file_info = create_llm_context(files_data)
-        # Format file info for the prompt (comment is just a hint for LLM)
+            if context_chars + len(entry) > max_context_chars:
+                break
+
+            context_parts.append(entry)
+            context_chars += len(entry)
+            shown_files += 1
+
+        if shown_files < len(files_data):
+            context_parts.append(
+                f"--- Context Truncated ---\n"
+                f"Only the first {shown_files} files are included as snippets due to context limits.\n"
+                f"Use the full file index list below to reference other files.\n\n"
+            )
+
+        context = "".join(context_parts)
+
+        # Provide a full index-to-path list (cheap tokens, useful for referencing files not shown in snippets).
         file_listing_for_prompt = "\n".join(
-            [f"- {idx} # {path}" for idx, path in file_info]
+            [f"- {idx} # {path}" for idx, (path, _content) in enumerate(files_data)]
         )
         return (
             context,
@@ -142,6 +163,8 @@ For the project `{project_name}`:
 
 Codebase Context:
 {context}
+
+Note: The code snippets above may be truncated and may not include every file.
 
 {language_instruction}Analyze the codebase context.
 Identify the top 5-{max_abstraction_num} core most important abstractions to help those new to the codebase.
