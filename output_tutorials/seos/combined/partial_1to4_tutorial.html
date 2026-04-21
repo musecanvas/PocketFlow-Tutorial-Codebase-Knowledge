@@ -1,0 +1,3201 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>partial_1to4_tutorial.md</title>
+<meta http-equiv="Content-type" content="text/html;charset=UTF-8">
+
+<style>
+/* https://github.com/microsoft/vscode/blob/master/extensions/markdown-language-features/media/markdown.css */
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Microsoft Corporation. All rights reserved.
+ *  Licensed under the MIT License. See License.txt in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+
+body {
+	font-family: var(--vscode-markdown-font-family, -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif);
+	font-size: var(--vscode-markdown-font-size, 14px);
+	padding: 0 26px;
+	line-height: var(--vscode-markdown-line-height, 22px);
+	word-wrap: break-word;
+}
+
+#code-csp-warning {
+	position: fixed;
+	top: 0;
+	right: 0;
+	color: white;
+	margin: 16px;
+	text-align: center;
+	font-size: 12px;
+	font-family: sans-serif;
+	background-color:#444444;
+	cursor: pointer;
+	padding: 6px;
+	box-shadow: 1px 1px 1px rgba(0,0,0,.25);
+}
+
+#code-csp-warning:hover {
+	text-decoration: none;
+	background-color:#007acc;
+	box-shadow: 2px 2px 2px rgba(0,0,0,.25);
+}
+
+body.scrollBeyondLastLine {
+	margin-bottom: calc(100vh - 22px);
+}
+
+body.showEditorSelection .code-line {
+	position: relative;
+}
+
+body.showEditorSelection .code-active-line:before,
+body.showEditorSelection .code-line:hover:before {
+	content: "";
+	display: block;
+	position: absolute;
+	top: 0;
+	left: -12px;
+	height: 100%;
+}
+
+body.showEditorSelection li.code-active-line:before,
+body.showEditorSelection li.code-line:hover:before {
+	left: -30px;
+}
+
+.vscode-light.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.15);
+}
+
+.vscode-light.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(0, 0, 0, 0.40);
+}
+
+.vscode-light.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-dark.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.4);
+}
+
+.vscode-dark.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 255, 255, 0.60);
+}
+
+.vscode-dark.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+.vscode-high-contrast.showEditorSelection .code-active-line:before {
+	border-left: 3px solid rgba(255, 160, 0, 0.7);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line:hover:before {
+	border-left: 3px solid rgba(255, 160, 0, 1);
+}
+
+.vscode-high-contrast.showEditorSelection .code-line .code-line:hover:before {
+	border-left: none;
+}
+
+img {
+	max-width: 100%;
+	max-height: 100%;
+}
+
+a {
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:focus,
+input:focus,
+select:focus,
+textarea:focus {
+	outline: 1px solid -webkit-focus-ring-color;
+	outline-offset: -1px;
+}
+
+hr {
+	border: 0;
+	height: 2px;
+	border-bottom: 2px solid;
+}
+
+h1 {
+	padding-bottom: 0.3em;
+	line-height: 1.2;
+	border-bottom-width: 1px;
+	border-bottom-style: solid;
+}
+
+h1, h2, h3 {
+	font-weight: normal;
+}
+
+table {
+	border-collapse: collapse;
+}
+
+table > thead > tr > th {
+	text-align: left;
+	border-bottom: 1px solid;
+}
+
+table > thead > tr > th,
+table > thead > tr > td,
+table > tbody > tr > th,
+table > tbody > tr > td {
+	padding: 5px 10px;
+}
+
+table > tbody > tr + tr > td {
+	border-top: 1px solid;
+}
+
+blockquote {
+	margin: 0 7px 0 5px;
+	padding: 0 16px 0 10px;
+	border-left-width: 5px;
+	border-left-style: solid;
+}
+
+code {
+	font-family: Menlo, Monaco, Consolas, "Droid Sans Mono", "Courier New", monospace, "Droid Sans Fallback";
+	font-size: 1em;
+	line-height: 1.357em;
+}
+
+body.wordWrap pre {
+	white-space: pre-wrap;
+}
+
+pre:not(.hljs),
+pre.hljs code > div {
+	padding: 16px;
+	border-radius: 3px;
+	overflow: auto;
+}
+
+pre code {
+	color: var(--vscode-editor-foreground);
+	tab-size: 4;
+}
+
+/** Theming */
+
+.vscode-light pre {
+	background-color: rgba(220, 220, 220, 0.4);
+}
+
+.vscode-dark pre {
+	background-color: rgba(10, 10, 10, 0.4);
+}
+
+.vscode-high-contrast pre {
+	background-color: rgb(0, 0, 0);
+}
+
+.vscode-high-contrast h1 {
+	border-color: rgb(0, 0, 0);
+}
+
+.vscode-light table > thead > tr > th {
+	border-color: rgba(0, 0, 0, 0.69);
+}
+
+.vscode-dark table > thead > tr > th {
+	border-color: rgba(255, 255, 255, 0.69);
+}
+
+.vscode-light h1,
+.vscode-light hr,
+.vscode-light table > tbody > tr + tr > td {
+	border-color: rgba(0, 0, 0, 0.18);
+}
+
+.vscode-dark h1,
+.vscode-dark hr,
+.vscode-dark table > tbody > tr + tr > td {
+	border-color: rgba(255, 255, 255, 0.18);
+}
+
+</style>
+
+<style>
+/* Tomorrow Theme */
+/* http://jmblog.github.com/color-themes-for-google-code-highlightjs */
+/* Original theme - https://github.com/chriskempson/tomorrow-theme */
+
+/* Tomorrow Comment */
+.hljs-comment,
+.hljs-quote {
+	color: #8e908c;
+}
+
+/* Tomorrow Red */
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag,
+.hljs-name,
+.hljs-selector-id,
+.hljs-selector-class,
+.hljs-regexp,
+.hljs-deletion {
+	color: #c82829;
+}
+
+/* Tomorrow Orange */
+.hljs-number,
+.hljs-built_in,
+.hljs-builtin-name,
+.hljs-literal,
+.hljs-type,
+.hljs-params,
+.hljs-meta,
+.hljs-link {
+	color: #f5871f;
+}
+
+/* Tomorrow Yellow */
+.hljs-attribute {
+	color: #eab700;
+}
+
+/* Tomorrow Green */
+.hljs-string,
+.hljs-symbol,
+.hljs-bullet,
+.hljs-addition {
+	color: #718c00;
+}
+
+/* Tomorrow Blue */
+.hljs-title,
+.hljs-section {
+	color: #4271ae;
+}
+
+/* Tomorrow Purple */
+.hljs-keyword,
+.hljs-selector-tag {
+	color: #8959a8;
+}
+
+.hljs {
+	display: block;
+	overflow-x: auto;
+	color: #4d4d4c;
+	padding: 0.5em;
+}
+
+.hljs-emphasis {
+	font-style: italic;
+}
+
+.hljs-strong {
+	font-weight: bold;
+}
+</style>
+
+<style>
+/*
+ * Markdown PDF CSS
+ */
+
+ body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe WPC", "Segoe UI", "Ubuntu", "Droid Sans", sans-serif, "Meiryo";
+	padding: 0 12px;
+}
+
+pre {
+	background-color: #f8f8f8;
+	border: 1px solid #cccccc;
+	border-radius: 3px;
+	overflow-x: auto;
+	white-space: pre-wrap;
+	overflow-wrap: break-word;
+}
+
+pre:not(.hljs) {
+	padding: 23px;
+	line-height: 19px;
+}
+
+blockquote {
+	background: rgba(127, 127, 127, 0.1);
+	border-color: rgba(0, 122, 204, 0.5);
+}
+
+.emoji {
+	height: 1.4em;
+}
+
+code {
+	font-size: 14px;
+	line-height: 19px;
+}
+
+/* for inline code */
+:not(pre):not(.hljs) > code {
+	color: #C9AE75; /* Change the old color so it seems less like an error */
+	font-size: inherit;
+}
+
+/* Page Break : use <div class="page"/> or <div class="page"></div> to insert page break
+-------------------------------------------------------- */
+.page {
+	page-break-after: always;
+}
+
+</style>
+
+<script src="https://unpkg.com/mermaid/dist/mermaid.min.js"></script>
+</head>
+<body>
+  <script>
+    mermaid.initialize({
+      startOnLoad: true,
+      theme: document.body.classList.contains('vscode-dark') || document.body.classList.contains('vscode-high-contrast')
+          ? 'dark'
+          : 'default'
+    });
+  </script>
+<h1 id="tutorial-code_to_analyze">Tutorial: code_to_analyze</h1>
+<p>這個專案是用來做 <strong>配電盤智慧立案與逾期效獎減發管理</strong> 的系統，核心目標是把原本靠人工追蹤的案件流程，改成由系統自動判斷、通知與簽核。
+它會先依照 <em>單據規則、假日、寬限天數</em> 計算案件是否逾期，再把逾期案件送進經辦、課長、廠長的分層確認流程，最後視結果決定是否要減發獎金或拋轉到外部系統。
+同時系統也提供 <strong>基礎資料維護</strong>、<strong>參考欄位對照</strong>、<strong>多語係管理</strong> 與 <strong>前端 API 串接</strong>，讓整體功能可以穩定運作並方便使用者操作。</p>
+<p><strong>Source Repository:</strong> <a href="None">None</a></p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A0["智慧立案與逾期效獎業務核心
+"]
+    A1["逾期效獎減發確認流程
+"]
+    A2["單據參數建檔主資料
+"]
+    A3["假日與寬限設定管理
+"]
+    A4["通知名單與收件部門設定
+"]
+    A5["參考資料與欄位對照平台
+"]
+    A6["多語係與關鍵字字典管理
+"]
+    A7["廠商與報到資料維護
+"]
+    A8["基礎平台與共用服務
+"]
+    A9["前端介面與 API 對接
+"]
+    A0 -- "引用規則" --> A2
+    A0 -- "計算天數" --> A3
+    A0 -- "發送通知" --> A4
+    A0 -- "送審案件" --> A1
+    A1 -- "回寫狀態" --> A0
+    A2 -- "查字典" --> A6
+    A3 -- "套用單別" --> A2
+    A4 -- "權限查驗" --> A8
+    A5 -- "提供欄位" --> A9
+    A6 -- "翻譯顯示" --> A9
+    A7 -- "通知對象" --> A4
+    A7 -- "檔案上傳" --> A8
+    A8 -- "支援登入" --> A9
+    A9 -- "呼叫案件" --> A0
+    A9 -- "提交簽核" --> A1
+    A9 -- "維護參數" --> A2
+    A9 -- "維護假日" --> A3
+    A9 -- "維護通知" --> A4
+    A9 -- "查詢欄位" --> A5
+    A9 -- "切換語言" --> A6
+    A9 -- "查看廠商" --> A7
+    A9 -- "登入驗證" --> A8
+</div></code></pre>
+<h1 id="chapter-1基礎平台與共用服務">Chapter 1：基礎平台與共用服務</h1>
+<p>在進入真正的業務功能之前，先來認識整個專案最底層、但也最重要的「地基」。</p>
+<p>你可以把它想成一棟大樓的水電、電梯、消防、門禁系統：<br>
+平常大家不會一直提到它，但只要少了其中一個，整棟樓就很難正常運作。</p>
+<p>這一章的中心情境是：</p>
+<blockquote>
+<p><strong>當使用者登入系統、送出表單、查詢資料、匯出 Excel、或遇到錯誤時，系統是怎麼穩穩地把事情處理好？</strong></p>
+</blockquote>
+<p>如果你是新手，這一章不用死背每個類別。<br>
+你只要先建立一個概念：</p>
+<ul>
+<li>前台畫面負責「輸入」</li>
+<li>業務模組負責「規則」</li>
+<li><strong>基礎平台與共用服務</strong>負責「安全、流程、共用能力、錯誤處理、資料工具」</li>
+</ul>
+<hr>
+<h2 id="這一層到底在做什麼">這一層到底在做什麼？</h2>
+<p>這一層不是直接處理「申請單」、「通知」、「廠商」這些業務，而是提供所有模組都會用到的共通能力，例如：</p>
+<ul>
+<li>登入與權限驗證</li>
+<li>JWT 令牌驗證</li>
+<li>全域例外處理</li>
+<li>多資料來源切換</li>
+<li>防止重複提交</li>
+<li>Redis 快取</li>
+<li>排程與背景工作</li>
+<li>Excel 匯入匯出</li>
+<li>通用字串、日期、ID、回應物件等工具</li>
+</ul>
+<p>你可以把它理解成：</p>
+<blockquote>
+<p><strong>業務模組像是店員，基礎平台像是櫃檯、保全、收銀系統、倉儲系統。</strong></p>
+</blockquote>
+<p>店員負責賣東西，<br>
+但如果沒有這些共用系統，店根本無法正常營運。</p>
+<hr>
+<h2 id="先用一個最常見的使用情境理解它">先用一個最常見的使用情境理解它</h2>
+<p>假設你做了一個「新增資料」的功能：</p>
+<ol>
+<li>使用者登入系統</li>
+<li>前端送出新增表單</li>
+<li>系統先確認使用者有沒有登入</li>
+<li>檢查這次提交是不是重複送出</li>
+<li>若資料格式錯誤，就回傳友善的錯誤訊息</li>
+<li>若資料要寫入主庫或從庫，就切換資料來源</li>
+<li>若新增成功，就記錄操作日誌</li>
+<li>若要匯出資料，就交給 Excel 工具處理</li>
+</ol>
+<p>你會發現：<br>
+<strong>真正的業務只佔一小部分，很多事情都在共用層先幫你準備好了。</strong></p>
+<hr>
+<h2 id="本章你要先認識的幾個核心概念">本章你要先認識的幾個核心概念</h2>
+<p>我們用最簡單的方式一個一個看。</p>
+<h3 id="1-登入與權限驗證">1. 登入與權限驗證</h3>
+<p>使用者進來系統，不是直接就能做所有事。<br>
+系統要先知道：</p>
+<ul>
+<li>你是誰</li>
+<li>你有沒有登入</li>
+<li>你能不能看這個功能</li>
+</ul>
+<p>這部分主要靠：</p>
+<ul>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/security/filter/JwtAuthenticationTokenFilter.java"><code>JwtAuthenticationTokenFilter</code></a></li>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/config/SecurityConfig.java"><code>SecurityConfig</code></a></li>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/web/service/SysLoginService.java"><code>SysLoginService</code></a></li>
+</ul>
+<p>你可以把它想像成門口保全：</p>
+<ul>
+<li>沒帶證件：不能進</li>
+<li>證件過期：要重新辦</li>
+<li>證件有效：才能進入辦公區</li>
+</ul>
+<hr>
+<h3 id="2-全域例外處理">2. 全域例外處理</h3>
+<p>如果系統中某個地方出錯，不希望每個頁面都自己寫一套錯誤畫面。<br>
+所以會有一個統一的地方負責接住錯誤，轉成一致的回應格式。</p>
+<p>這個角色是：</p>
+<ul>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/web/exception/GlobalExceptionHandler.java"><code>GlobalExceptionHandler</code></a></li>
+</ul>
+<p>它像是大樓的總機：</p>
+<ul>
+<li>收到不同類型的問題</li>
+<li>再用統一方式回答使用者</li>
+<li>讓前端比較好處理</li>
+</ul>
+<hr>
+<h3 id="3-多資料來源切換">3. 多資料來源切換</h3>
+<p>有些查詢要走主資料庫，有些要走從資料庫。<br>
+有時候同一個系統裡還可能有不同資料庫。</p>
+<p>這時候就需要「切換資料來源」。</p>
+<p>相關類別：</p>
+<ul>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/config/DruidConfig.java"><code>DruidConfig</code></a></li>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/aspectj/DataSourceAspect.java"><code>DataSourceAspect</code></a></li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>同一張會員卡，可以決定你今天要走哪個入口。</p>
+</blockquote>
+<hr>
+<h3 id="4-防止重複提交">4. 防止重複提交</h3>
+<p>使用者可能因為網路慢、連點按鈕、重整頁面，導致同一筆資料被送出兩次。<br>
+這很容易造成重複新增、重複審核、重複匯款等問題。</p>
+<p>相關類別：</p>
+<ul>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/interceptor/RepeatSubmitInterceptor.java"><code>RepeatSubmitInterceptor</code></a></li>
+</ul>
+<p>像是超商收銀：<br>
+你不能同一個商品掃兩次卻以為是不同商品。</p>
+<hr>
+<h3 id="5-redis-與快取">5. Redis 與快取</h3>
+<p>有些資料很常查，但不需要每次都去資料庫。<br>
+例如驗證碼、登入資訊、常用設定、限流資訊。</p>
+<p>相關類別：</p>
+<ul>
+<li><a href="fpg-framework/src/main/java/com/fpg/framework/config/RedisConfig.java"><code>RedisConfig</code></a></li>
+</ul>
+<p>你可以把 Redis 想成：</p>
+<blockquote>
+<p>放在櫃台旁邊的快速抽屜，拿東西比去倉庫快很多。</p>
+</blockquote>
+<hr>
+<h3 id="6-excel-匯入匯出">6. Excel 匯入匯出</h3>
+<p>很多系統都需要把資料匯出成 Excel，或從 Excel 匯入資料。</p>
+<p>相關類別：</p>
+<ul>
+<li><a href="fpg-common/src/main/java/com/fpg/common/utils/poi/ExcelUtil.java"><code>ExcelUtil</code></a></li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>你把資料整理成表格交給別人，或從別人整理好的表格再讀回來。</p>
+</blockquote>
+<hr>
+<h3 id="7-通用工具類">7. 通用工具類</h3>
+<p>專案中有很多很常用的小工具：</p>
+<ul>
+<li><a href="fpg-common/src/main/java/com/fpg/common/utils/StringUtils.java"><code>StringUtils</code></a></li>
+<li><a href="fpg-common/src/main/java/com/fpg/common/utils/DateUtils.java"><code>DateUtils</code></a></li>
+<li><a href="fpg-common/src/main/java/com/fpg/common/utils/uuid/IdUtils.java"><code>IdUtils</code></a></li>
+<li><a href="fpg-common/src/main/java/com/fpg/common/core/controller/BaseController.java"><code>BaseController</code></a></li>
+<li><a href="fpg-common/src/main/java/com/fpg/common/core/domain/AjaxResult.java"><code>AjaxResult</code></a></li>
+<li><a href="fpg-common/src/main/java/com/fpg/common/core/domain/BaseEntity.java"><code>BaseEntity</code></a></li>
+</ul>
+<p>它們像是工具箱裡的螺絲起子、尺、剪刀、標籤紙。<br>
+單獨看很小，但到處都會用到。</p>
+<hr>
+<h2 id="先看一個最簡單的回傳格式">先看一個最簡單的回傳格式</h2>
+<p>很多介面最後都會回傳一種統一結果，像這樣：</p>
+<pre class="hljs"><code><div><span class="hljs-type">AjaxResult</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> AjaxResult.success(<span class="hljs-string">&quot;新增成功&quot;</span>);
+<span class="hljs-keyword">return</span> result;
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>系統回傳一個成功結果</li>
+<li>訊息是「新增成功」</li>
+</ul>
+<p>如果失敗，也可以這樣：</p>
+<pre class="hljs"><code><div><span class="hljs-type">AjaxResult</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> AjaxResult.error(<span class="hljs-string">&quot;資料格式錯誤&quot;</span>);
+<span class="hljs-keyword">return</span> result;
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>系統回傳一個失敗結果</li>
+<li>訊息是「資料格式錯誤」</li>
+</ul>
+<p>這種設計很適合前端，因為前端只要看：</p>
+<ul>
+<li><code>code</code>：成功還是失敗</li>
+<li><code>msg</code>：顯示什麼訊息</li>
+<li><code>data</code>：有沒有資料</li>
+</ul>
+<hr>
+<h2 id="ajaxresult統一的回應包裝"><code>AjaxResult</code>：統一的回應包裝</h2>
+<p><a href="fpg-common/src/main/java/com/fpg/common/core/domain/AjaxResult.java"><code>AjaxResult</code></a> 是很常見的共用回傳格式。</p>
+<p>你可以把它想成一個「包裹盒」：</p>
+<ul>
+<li>外面貼標籤：成功、失敗、警告</li>
+<li>裡面放訊息與資料</li>
+</ul>
+<p>它的優點是：</p>
+<ul>
+<li>所有 API 回傳格式一致</li>
+<li>前端容易判斷</li>
+<li>錯誤處理更整齊</li>
+</ul>
+<hr>
+<h2 id="baseentity資料表共同欄位的基底"><code>BaseEntity</code>：資料表共同欄位的基底</h2>
+<p>很多資料表都會有這些欄位：</p>
+<ul>
+<li>建立者</li>
+<li>建立時間</li>
+<li>更新者</li>
+<li>更新時間</li>
+<li>備註</li>
+</ul>
+<p><a href="fpg-common/src/main/java/com/fpg/common/core/domain/BaseEntity.java"><code>BaseEntity</code></a> 就是把這些共用欄位整理起來。</p>
+<p>你可以把它看成：</p>
+<blockquote>
+<p>每個資料物件都會繼承的「基本身分證」。</p>
+</blockquote>
+<p>這樣每個業務資料類別就不用重複寫一樣的欄位。</p>
+<hr>
+<h2 id="basecontroller控制器的共用功能"><code>BaseController</code>：控制器的共用功能</h2>
+<p><a href="fpg-common/src/main/java/com/fpg/common/core/controller/BaseController.java"><code>BaseController</code></a> 是很多控制器都會繼承的基底。</p>
+<p>它幫你做幾件常見事：</p>
+<ul>
+<li>自動處理日期格式</li>
+<li>分頁</li>
+<li>排序</li>
+<li>回傳成功或失敗結果</li>
+<li>取得目前登入使用者資訊</li>
+</ul>
+<p>例如：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">protected</span> AjaxResult <span class="hljs-title function_">toAjax</span><span class="hljs-params">(<span class="hljs-type">int</span> rows)</span>
+{
+    <span class="hljs-keyword">return</span> rows &gt; <span class="hljs-number">0</span> ? AjaxResult.success() : AjaxResult.error();
+}
+</div></code></pre>
+<p>意思很簡單：</p>
+<ul>
+<li>如果受影響筆數大於 0，就回傳成功</li>
+<li>否則回傳失敗</li>
+</ul>
+<p>這可以讓你少寫很多重複判斷。</p>
+<hr>
+<h2 id="登入流程系統怎麼知道你是誰">登入流程：系統怎麼知道你是誰？</h2>
+<p>登入是整個平台最重要的入口之一。<br>
+我們看 <a href="fpg-framework/src/main/java/com/fpg/framework/web/service/SysLoginService.java"><code>SysLoginService</code></a> 的概念。</p>
+<p>它大致做這些事：</p>
+<ol>
+<li>檢查驗證碼</li>
+<li>檢查帳密是否符合基本規則</li>
+<li>檢查黑名單 IP</li>
+<li>驗證密碼或 AD 網域</li>
+<li>成功後產生 token</li>
+<li>把登入資訊寫回系統</li>
+</ol>
+<p>可以用這個流程理解：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant U as 使用者
+    participant F as 前端
+    participant L as 登入服務
+    participant R as Redis
+    participant T as 令牌服務
+
+    U->>F: 輸入帳號密碼與驗證碼
+    F->>L: 送出登入請求
+    L->>R: 檢查驗證碼
+    L->>L: 檢查帳密與黑名單
+    L->>T: 產生令牌
+    T-->>F: 回傳登入成功與令牌
+</div></code></pre>
+<p>你只要先記住：</p>
+<blockquote>
+<p><strong>登入不是只有驗密碼，還包含驗證碼、風險檢查、令牌發放。</strong></p>
+</blockquote>
+<hr>
+<h2 id="jwtauthenticationtokenfilter每次請求先驗證令牌"><code>JwtAuthenticationTokenFilter</code>：每次請求先驗證令牌</h2>
+<p>登入成功後，前端通常會帶著 token 呼叫其他 API。<br>
+這時候 <a href="fpg-framework/src/main/java/com/fpg/framework/security/filter/JwtAuthenticationTokenFilter.java"><code>JwtAuthenticationTokenFilter</code></a> 會先檢查 token。</p>
+<p>它的流程很像：</p>
+<ul>
+<li>從請求中拿 token</li>
+<li>找到對應的登入使用者</li>
+<li>檢查 token 是否有效</li>
+<li>若有效，就把使用者資訊放進安全上下文</li>
+<li>後面程式就知道「你已登入」</li>
+</ul>
+<p>最簡單的理解是：</p>
+<blockquote>
+<p>每次進門都要再刷一次卡，確定你還在有效身分內。</p>
+</blockquote>
+<hr>
+<h2 id="securityconfig哪些路可以不用登入哪些一定要登入"><code>SecurityConfig</code>：哪些路可以不用登入，哪些一定要登入？</h2>
+<p><a href="fpg-framework/src/main/java/com/fpg/framework/config/SecurityConfig.java"><code>SecurityConfig</code></a> 負責設定整個安全規則。</p>
+<p>它會定義：</p>
+<ul>
+<li>哪些網址可以匿名訪問</li>
+<li>哪些網址必須登入</li>
+<li>失敗時怎麼回應</li>
+<li>登出怎麼處理</li>
+<li>token 過濾器何時執行</li>
+</ul>
+<p>例如，登入頁、驗證碼、靜態資源通常可以匿名訪問；<br>
+其他業務 API 則通常必須登入。</p>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>大樓的門禁規則表。</p>
+</blockquote>
+<hr>
+<h2 id="globalexceptionhandler錯誤不要亂飛統一接住"><code>GlobalExceptionHandler</code>：錯誤不要亂飛，統一接住</h2>
+<p>當系統發生錯誤時，如果沒有統一處理，前端可能看到一堆不規則的訊息。<br>
+<a href="fpg-framework/src/main/java/com/fpg/framework/web/exception/GlobalExceptionHandler.java"><code>GlobalExceptionHandler</code></a> 就是負責把不同錯誤整理成一致格式。</p>
+<p>例如它會分別處理：</p>
+<ul>
+<li>權限不足</li>
+<li>請求方式不對</li>
+<li>參數格式錯誤</li>
+<li>服務層自訂錯誤</li>
+<li>系統錯誤</li>
+<li>驗證失敗</li>
+</ul>
+<p>你可以把它看成：</p>
+<blockquote>
+<p>接線生把不同房間打來的故障電話，統一整理後再回報。</p>
+</blockquote>
+<hr>
+<h2 id="datasourceaspect方法一進來就切換資料來源"><code>DataSourceAspect</code>：方法一進來就切換資料來源</h2>
+<p>有些方法執行前，系統要先決定要連哪個資料庫。<br>
+<a href="fpg-framework/src/main/java/com/fpg/framework/aspectj/DataSourceAspect.java"><code>DataSourceAspect</code></a> 就是做這件事。</p>
+<p>流程很簡單：</p>
+<ol>
+<li>檢查方法上有沒有資料來源註解</li>
+<li>如果有，就把當前資料來源設成指定值</li>
+<li>執行方法</li>
+<li>方法結束後清掉資料來源設定</li>
+</ol>
+<p>它像什麼？</p>
+<blockquote>
+<p>像是在進不同倉庫前，先告訴門禁系統你今天要去的是主倉庫還是分倉庫。</p>
+</blockquote>
+<hr>
+<h2 id="druidconfig主庫從庫多資料源的設定入口"><code>DruidConfig</code>：主庫、從庫、多資料源的設定入口</h2>
+<p><a href="fpg-framework/src/main/java/com/fpg/framework/config/DruidConfig.java"><code>DruidConfig</code></a> 負責建立資料庫連線與多資料來源。</p>
+<p>它主要做三件事：</p>
+<ul>
+<li>建立主資料來源</li>
+<li>建立從資料來源</li>
+<li>把它們交給動態資料來源管理</li>
+</ul>
+<p>你可以簡單理解成：</p>
+<blockquote>
+<p>先準備好幾條水管，再由系統決定現在要打開哪一條。</p>
+</blockquote>
+<hr>
+<h2 id="repeatsubmitinterceptor避免同一筆資料被送兩次"><code>RepeatSubmitInterceptor</code>：避免同一筆資料被送兩次</h2>
+<p>有些操作最怕重複按鈕，例如：</p>
+<ul>
+<li>新增資料</li>
+<li>送出審核</li>
+<li>匯款</li>
+<li>申請流程</li>
+</ul>
+<p><a href="fpg-framework/src/main/java/com/fpg/framework/interceptor/RepeatSubmitInterceptor.java"><code>RepeatSubmitInterceptor</code></a> 會在請求到達前先檢查：</p>
+<ul>
+<li>這個方法有沒有標記「防重複提交」</li>
+<li>如果有，就判斷是不是重複送出</li>
+<li>若重複，直接回錯誤，不讓它進業務邏輯</li>
+</ul>
+<p>簡單說：</p>
+<blockquote>
+<p>按鈕雖然按下去了，但保全會先幫你擋住第二次。</p>
+</blockquote>
+<hr>
+<h2 id="logaspect操作日誌自動記錄"><code>LogAspect</code>：操作日誌自動記錄</h2>
+<p>業務系統通常要知道：</p>
+<ul>
+<li>是誰操作的</li>
+<li>什麼時間操作的</li>
+<li>對哪個 URL 操作</li>
+<li>內容是什麼</li>
+<li>成功還是失敗</li>
+</ul>
+<p><a href="fpg-framework/src/main/java/com/fpg/framework/aspectj/LogAspect.java"><code>LogAspect</code></a> 就是幫你自動記錄這些資料。</p>
+<p>你不需要每個方法都手動寫「記錄日誌」；<br>
+只要標上註解，它就會在方法前後自動收集資訊。</p>
+<p>這非常像：</p>
+<blockquote>
+<p>監視器自動錄影，不需要每個人自己拿手機拍。</p>
+</blockquote>
+<hr>
+<h2 id="redisconfig快取與限流的基礎"><code>RedisConfig</code>：快取與限流的基礎</h2>
+<p><a href="fpg-framework/src/main/java/com/fpg/framework/config/RedisConfig.java"><code>RedisConfig</code></a> 的核心任務是建立 Redis 操作模板，讓系統可以：</p>
+<ul>
+<li>存取快取</li>
+<li>保存暫時資料</li>
+<li>做限流控制</li>
+</ul>
+<p>例如驗證碼就很適合放 Redis：</p>
+<ul>
+<li>產生後先存起來</li>
+<li>使用者登入時拿來比對</li>
+<li>用完即刪</li>
+</ul>
+<p>這種資料不適合一直寫資料庫。<br>
+Redis 速度快，很適合做這件事。</p>
+<hr>
+<h2 id="stringutilsdateutilsidutils小工具大幫手"><code>StringUtils</code>、<code>DateUtils</code>、<code>IdUtils</code>：小工具，大幫手</h2>
+<h3 id="stringutils"><code>StringUtils</code></h3>
+<p><a href="fpg-common/src/main/java/com/fpg/common/utils/StringUtils.java"><code>StringUtils</code></a> 提供很多字串處理方法，例如：</p>
+<ul>
+<li>判斷空值</li>
+<li>擷取子字串</li>
+<li>轉駝峰</li>
+<li>分隔字串</li>
+<li>比對路徑</li>
+</ul>
+<p>你可以把它當成「字串專用小工具包」。</p>
+<hr>
+<h3 id="dateutils"><code>DateUtils</code></h3>
+<p><a href="fpg-common/src/main/java/com/fpg/common/utils/DateUtils.java"><code>DateUtils</code></a> 負責日期處理，例如：</p>
+<ul>
+<li>取得現在時間</li>
+<li>格式化日期</li>
+<li>解析字串成日期</li>
+<li>計算時間差</li>
+</ul>
+<p>例如：</p>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">now</span> <span class="hljs-operator">=</span> DateUtils.getTime();
+</div></code></pre>
+<p>這會取得目前時間字串，像 <code>2026-04-21 10:30:00</code> 這樣的格式。</p>
+<hr>
+<h3 id="idutils"><code>IdUtils</code></h3>
+<p><a href="fpg-common/src/main/java/com/fpg/common/utils/uuid/IdUtils.java"><code>IdUtils</code></a> 用來產生 UUID。</p>
+<p>例如：</p>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">id</span> <span class="hljs-operator">=</span> IdUtils.simpleUUID();
+</div></code></pre>
+<p>這會得到一組沒有連字號的唯一識別碼。</p>
+<p>你可以把它想像成：</p>
+<blockquote>
+<p>幫每個資料打上一個幾乎不會重複的編號。</p>
+</blockquote>
+<hr>
+<h2 id="excelutil匯入匯出的重頭戲"><code>ExcelUtil</code>：匯入匯出的重頭戲</h2>
+<p><a href="fpg-common/src/main/java/com/fpg/common/utils/poi/ExcelUtil.java"><code>ExcelUtil</code></a> 是很大的工具類，但新手先抓住重點就好：</p>
+<p>它主要負責：</p>
+<ul>
+<li>匯出 Excel</li>
+<li>匯入 Excel</li>
+<li>標題樣式</li>
+<li>欄位對應</li>
+<li>下拉選單</li>
+<li>日期與數字格式</li>
+<li>圖片欄位</li>
+<li>合計列</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>一台很強的表格工廠，輸入資料後，幫你變成 Excel；<br>
+或者把 Excel 資料拆回 Java 物件。</p>
+</blockquote>
+<hr>
+<h2 id="一個很小的匯出例子">一個很小的匯出例子</h2>
+<p>假設你有一批資料，要匯出成 Excel：</p>
+<pre class="hljs"><code><div>ExcelUtil&lt;User&gt; excelUtil = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ExcelUtil</span>&lt;&gt;(User.class);
+<span class="hljs-type">AjaxResult</span> <span class="hljs-variable">result</span> <span class="hljs-operator">=</span> excelUtil.exportExcel(userList, <span class="hljs-string">&quot;使用者資料&quot;</span>);
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>建立一個對應 <code>User</code> 類別的 Excel 工具</li>
+<li>把 <code>userList</code> 匯出成名為「使用者資料」的 Excel</li>
+</ul>
+<p>如果成功，系統會產生檔案。<br>
+前端通常可以拿到下載連結或檔案名稱。</p>
+<hr>
+<h2 id="一個很小的匯入例子">一個很小的匯入例子</h2>
+<p>如果你要把 Excel 檔讀回來：</p>
+<pre class="hljs"><code><div>ExcelUtil&lt;User&gt; excelUtil = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ExcelUtil</span>&lt;&gt;(User.class);
+List&lt;User&gt; users = excelUtil.importExcel(inputStream);
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>用 <code>User</code> 類別作為對照</li>
+<li>把 Excel 每一列轉成一個 <code>User</code> 物件</li>
+<li>最後得到 <code>users</code> 清單</li>
+</ul>
+<p>這就是「表格和物件互轉」的概念。</p>
+<hr>
+<h2 id="背後是怎麼運作的先看整體流程">背後是怎麼運作的？先看整體流程</h2>
+<p>如果把整個基礎平台想像成一個自動處理系統，大致會長這樣：</p>
+<ol>
+<li>使用者送出請求</li>
+<li>安全過濾器先檢查 token</li>
+<li>若方法有防重複註解，攔截器先檢查是否重送</li>
+<li>若方法有資料來源註解，切面先切換資料庫</li>
+<li>進入控制器與業務邏輯</li>
+<li>若出錯，統一交給全域例外處理器</li>
+<li>成功或失敗都回傳 <code>AjaxResult</code></li>
+<li>若有標註日誌註解，操作資料會被自動記錄</li>
+</ol>
+<p>可以用這張圖來理解：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A[使用者請求] --> B[令牌驗證]
+    B --> C[防重複提交]
+    C --> D[資料來源切換]
+    D --> E[業務邏輯]
+    E --> F{是否發生錯誤}
+    F -- 否 --> G[回傳 AjaxResult 成功]
+    F -- 是 --> H[全域例外處理]
+    H --> I[回傳 AjaxResult 失敗]
+</div></code></pre>
+<hr>
+<h2 id="進一步看幾個核心實作">進一步看幾個核心實作</h2>
+<p>下面挑幾個最代表性的類別，用非常簡單的方式看它們怎麼做。</p>
+<hr>
+<h3 id="1-令牌驗證是怎麼被放進每次請求的">1. 令牌驗證是怎麼被放進每次請求的？</h3>
+<p>看 <a href="fpg-framework/src/main/java/com/fpg/framework/security/filter/JwtAuthenticationTokenFilter.java"><code>JwtAuthenticationTokenFilter</code></a>。</p>
+<p>它的核心概念是：</p>
+<ul>
+<li>先從請求中找登入使用者</li>
+<li>如果使用者存在，而且目前尚未建立驗證資訊</li>
+<li>就把登入資訊放進安全上下文</li>
+<li>後面的程式就能直接取得使用者身分</li>
+</ul>
+<p>簡化後可以理解成：</p>
+<pre class="hljs"><code><div><span class="hljs-type">LoginUser</span> <span class="hljs-variable">loginUser</span> <span class="hljs-operator">=</span> tokenService.getLoginUser(request);
+<span class="hljs-keyword">if</span> (loginUser != <span class="hljs-literal">null</span>) {
+    tokenService.verifyToken(loginUser);
+    SecurityContextHolder.getContext().setAuthentication(authenticationToken);
+}
+</div></code></pre>
+<p>這表示：</p>
+<ul>
+<li>token 能找到人</li>
+<li>token 還有效</li>
+<li>系統就承認這個人已登入</li>
+</ul>
+<hr>
+<h3 id="2-登入時為什麼先驗證驗證碼">2. 登入時為什麼先驗證驗證碼？</h3>
+<p>看 <a href="fpg-framework/src/main/java/com/fpg/framework/web/service/SysLoginService.java"><code>SysLoginService</code></a>。</p>
+<p>它在登入流程中先做驗證碼檢查，因為：</p>
+<ul>
+<li>防止機器人亂試密碼</li>
+<li>防止大量暴力登入</li>
+<li>保護系統安全</li>
+</ul>
+<p>簡化概念如下：</p>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">captcha</span> <span class="hljs-operator">=</span> redisCache.getCacheObject(verifyKey);
+<span class="hljs-keyword">if</span> (captcha == <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">CaptchaExpireException</span>();
+}
+<span class="hljs-keyword">if</span> (!code.equalsIgnoreCase(captcha)) {
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">CaptchaException</span>();
+}
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>Redis 裡找不到驗證碼，代表過期</li>
+<li>找得到但不一樣，代表輸入錯誤</li>
+</ul>
+<hr>
+<h3 id="3-全域例外怎麼統一處理">3. 全域例外怎麼統一處理？</h3>
+<p>看 <a href="fpg-framework/src/main/java/com/fpg/framework/web/exception/GlobalExceptionHandler.java"><code>GlobalExceptionHandler</code></a>。</p>
+<p>它用很多個 <code>@ExceptionHandler</code> 分別接不同錯誤。<br>
+例如權限不足時：</p>
+<pre class="hljs"><code><div><span class="hljs-meta">@ExceptionHandler(AccessDeniedException.class)</span>
+<span class="hljs-keyword">public</span> AjaxResult <span class="hljs-title function_">handleAccessDeniedException</span><span class="hljs-params">(AccessDeniedException e, HttpServletRequest request)</span>
+</div></code></pre>
+<p>這表示：</p>
+<ul>
+<li>只要丟出 <code>AccessDeniedException</code></li>
+<li>就會進這個方法</li>
+<li>然後回傳固定格式的錯誤訊息</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>不管哪裡報錯，最後都交給同一個客服窗口。</p>
+</blockquote>
+<hr>
+<h3 id="4-多資料來源怎麼自動切換">4. 多資料來源怎麼自動切換？</h3>
+<p>看 <a href="fpg-framework/src/main/java/com/fpg/framework/aspectj/DataSourceAspect.java"><code>DataSourceAspect</code></a>。</p>
+<p>它在方法執行前先找註解，再決定資料來源：</p>
+<pre class="hljs"><code><div><span class="hljs-type">DataSource</span> <span class="hljs-variable">dataSource</span> <span class="hljs-operator">=</span> getDataSource(point);
+DynamicDataSourceContextHolder.setDataSourceType(dataSource.value().name());
+<span class="hljs-keyword">return</span> point.proceed();
+</div></code></pre>
+<p>你可以這樣理解：</p>
+<ul>
+<li>先看這次工作要用哪個資料庫</li>
+<li>設定好之後再執行</li>
+<li>執行完記得清掉設定</li>
+</ul>
+<p>這樣下一個方法才不會沿用錯誤的資料來源。</p>
+<hr>
+<h3 id="5-excel-匯出為什麼能自動對欄位">5. Excel 匯出為什麼能自動對欄位？</h3>
+<p>看 <a href="fpg-common/src/main/java/com/fpg/common/utils/poi/ExcelUtil.java"><code>ExcelUtil</code></a>。</p>
+<p>它會：</p>
+<ol>
+<li>掃描類別欄位</li>
+<li>找出有 Excel 註解的欄位</li>
+<li>根據註解決定欄位名稱、格式、寬度</li>
+<li>將每筆資料寫進表格</li>
+</ol>
+<p>簡化理解：</p>
+<pre class="hljs"><code><div>List&lt;Object[]&gt; fields = getFields();
+<span class="hljs-keyword">for</span> (Object[] os : fields) {
+    <span class="hljs-type">Excel</span> <span class="hljs-variable">excel</span> <span class="hljs-operator">=</span> (Excel) os[<span class="hljs-number">1</span>];
+    createHeadCell(excel, row, column++);
+}
+</div></code></pre>
+<p>這代表：</p>
+<ul>
+<li>不是手動一欄欄寫死</li>
+<li>而是靠註解驅動</li>
+<li>所以同一套工具可重複用在很多資料類別上</li>
+</ul>
+<hr>
+<h2 id="這一層和後面業務章節的關係">這一層和後面業務章節的關係</h2>
+<p>之後你會看到很多業務功能，例如：</p>
+<ul>
+<li><a href="02_%E5%89%8D%E7%AB%AF%E4%BB%8B%E9%9D%A2%E8%88%87_api_%E5%B0%8D%E6%8E%A5_.md">前端介面與 API 對接</a></li>
+<li><a href="03_%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E6%AC%84%E4%BD%8D%E5%B0%8D%E7%85%A7%E5%B9%B3%E5%8F%B0_.md">參考資料與欄位對照平台</a></li>
+<li><a href="04_%E5%A4%9A%E8%AA%9E%E4%BF%82%E8%88%87%E9%97%9C%E9%8D%B5%E5%AD%97%E5%AD%97%E5%85%B8%E7%AE%A1%E7%90%86_.md">多語係與關鍵字字典管理</a></li>
+</ul>
+<p>這些章節講的是「業務怎麼做」。<br>
+但它們都建立在今天這些共用能力上：</p>
+<ul>
+<li>登入與權限</li>
+<li>回傳格式</li>
+<li>錯誤處理</li>
+<li>資料來源</li>
+<li>Redis</li>
+<li>Excel</li>
+<li>通用工具</li>
+</ul>
+<p>所以你可以把今天這章當成：</p>
+<blockquote>
+<p>之後所有章節的地基。</p>
+</blockquote>
+<hr>
+<h2 id="新手最容易混淆的地方">新手最容易混淆的地方</h2>
+<h3 id="1-ajaxresult-不是業務資料本身">1. <code>AjaxResult</code> 不是業務資料本身</h3>
+<p>它只是回傳格式，不是某個實體資料。<br>
+例如：</p>
+<ul>
+<li>成功</li>
+<li>失敗</li>
+<li>提示</li>
+<li>帶資料的成功結果</li>
+</ul>
+<hr>
+<h3 id="2-baseentity-是共用欄位不是完整業務模型">2. <code>BaseEntity</code> 是共用欄位，不是完整業務模型</h3>
+<p>它只是每個資料物件的底層共通欄位。<br>
+真正的業務欄位要看各模組自己的資料類別。</p>
+<hr>
+<h3 id="3-securityconfig-和-jwtauthenticationtokenfilter-分工不同">3. <code>SecurityConfig</code> 和 <code>JwtAuthenticationTokenFilter</code> 分工不同</h3>
+<ul>
+<li><code>SecurityConfig</code>：定規則，哪些路能走</li>
+<li><code>JwtAuthenticationTokenFilter</code>：每次請求都先驗證你是不是合法登入者</li>
+</ul>
+<hr>
+<h3 id="4-datasourceaspect-不負責資料庫本身只負責切換時機">4. <code>DataSourceAspect</code> 不負責資料庫本身，只負責切換時機</h3>
+<p>它不是建立資料庫，而是告訴系統這次用哪個資料來源。</p>
+<hr>
+<h2 id="你可以怎麼記住這一章">你可以怎麼記住這一章？</h2>
+<p>如果你現在只想記住一句話：</p>
+<blockquote>
+<p><strong>基礎平台與共用服務，就是把登入、權限、錯誤、資料庫、快取、Excel、工具這些共通能力先做好，讓後面的業務模組專心處理自己的事情。</strong></p>
+</blockquote>
+<p>這樣就夠了。</p>
+<hr>
+<h2 id="本章小結">本章小結</h2>
+<p>這一章我們先建立了整個專案的「底層概念」：</p>
+<ul>
+<li>使用者怎麼登入、怎麼驗證 token</li>
+<li>系統怎麼統一處理錯誤</li>
+<li>怎麼切換資料來源</li>
+<li>怎麼防止重複提交</li>
+<li>怎麼使用 Redis、Excel 與共用工具</li>
+<li>為什麼 <code>AjaxResult</code>、<code>BaseEntity</code>、<code>BaseController</code> 這些基礎類別很重要</li>
+</ul>
+<p>你現在不需要把每個類別背下來，<br>
+但你應該知道：<strong>它們是所有業務模組背後的支撐系統。</strong></p>
+<p>下一章我們會開始看真正的前端互動流程，也就是如何把畫面與後端 API 接起來。<br>
+請繼續閱讀：<a href="02_%E5%89%8D%E7%AB%AF%E4%BB%8B%E9%9D%A2%E8%88%87_api_%E5%B0%8D%E6%8E%A5_.md">前端介面與 API 對接</a></p>
+<h1 id="chapter-2-前端介面與-api-對接">Chapter 2: 前端介面與 API 對接</h1>
+<p>接續上一章的 <a href="01_%E5%9F%BA%E7%A4%8E%E5%B9%B3%E5%8F%B0%E8%88%87%E5%85%B1%E7%94%A8%E6%9C%8D%E5%8B%99_.md">基礎平台與共用服務</a>，我們已經知道系統底層會幫你處理登入、權限、錯誤、快取、共用工具等事情。<br>
+這一章要往上一層，看「使用者真正看得到的畫面」是怎麼和後端 API 接起來的。</p>
+<p>你可以先把這一章想成：</p>
+<blockquote>
+<p><strong>前端是櫃台，API 是送餐通道，後端是廚房。</strong><br>
+使用者先在畫面上點按鈕、填表單、查列表，前端再把需求送到後端，拿到資料後再顯示回來。</p>
+</blockquote>
+<hr>
+<h2 id="本章先回答一個最重要的問題">本章先回答一個最重要的問題</h2>
+<p>當你在畫面上按下「查詢」、「新增」、「送出」、「核准」時，系統到底發生了什麼事？</p>
+<p>舉一個最常見的例子：</p>
+<ol>
+<li>使用者打開一個列表頁</li>
+<li>前端顯示查詢條件與表格</li>
+<li>使用者輸入條件後按下「查詢」</li>
+<li>前端呼叫某個 API</li>
+<li>後端回傳資料</li>
+<li>前端把資料畫到表格上</li>
+</ol>
+<p>如果你是新手，你先不要急著背所有元件。<br>
+你只要先建立一個核心觀念：</p>
+<blockquote>
+<p><strong>畫面上的每個動作，通常都會對應到一支 API。</strong></p>
+</blockquote>
+<p>這就是本章最重要的學習目標。</p>
+<hr>
+<h2 id="這一章你會學到什麼">這一章你會學到什麼？</h2>
+<p>你會先認識前端專案如何啟動，接著看：</p>
+<ul>
+<li>Vue 3 專案怎麼組起來</li>
+<li>路由怎麼控制頁面跳轉</li>
+<li>權限怎麼決定你能不能進某個頁面</li>
+<li><code>src/api</code> 裡的檔案怎麼對應後端 API</li>
+<li>按鈕、表單、列表如何把資料送到後端</li>
+<li>為什麼登入後要先載入使用者資訊與選單</li>
+</ul>
+<hr>
+<h2 id="一先從整體流程看起">一、先從整體流程看起</h2>
+<p>如果把整個前端想成一間店，流程大概像這樣：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A[使用者打開瀏覽器] --> B[Vue 3 前端啟動]
+    B --> C[檢查是否有登入狀態]
+    C --> D{可以進頁面嗎}
+    D -- 可以 --> E[載入畫面與選單]
+    D -- 不可以 --> F[跳去登入頁]
+    E --> G[使用者點按鈕或送表單]
+    G --> H[前端呼叫 API]
+    H --> I[後端回傳資料]
+    I --> J[前端更新畫面]
+</div></code></pre>
+<p>你可以先記住這句話：</p>
+<blockquote>
+<p><strong>前端的責任，是把使用者動作翻譯成 API 請求。</strong></p>
+</blockquote>
+<hr>
+<h2 id="二前端專案是怎麼啟動的">二、前端專案是怎麼啟動的？</h2>
+<p>前端專案不是一打開就有畫面，通常會先經過一個入口檔案。<br>
+在這個專案裡，最核心的入口是 <a href="fpg-v3/src/main.js"><code>src/main.js</code></a>。</p>
+<p>它做的事情很像「把店開門前的準備工作做完」：</p>
+<ul>
+<li>建立 Vue 應用</li>
+<li>載入路由</li>
+<li>載入狀態管理</li>
+<li>載入國際化</li>
+<li>載入元件</li>
+<li>設定全域方法與全域元件</li>
+<li>掛上權限控制</li>
+<li>最後把畫面掛到頁面上</li>
+</ul>
+<p>你可以用一句話理解它：</p>
+<blockquote>
+<p><strong><code>main.js</code> 是前端的總開關。</strong></p>
+</blockquote>
+<hr>
+<h3 id="1-建立-vue-應用">1. 建立 Vue 應用</h3>
+<p>先看最基本的部分：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { createApp } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;vue&#x27;</span>
+<span class="hljs-keyword">import</span> <span class="hljs-title class_">App</span> <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;./App&#x27;</span>
+
+<span class="hljs-keyword">const</span> app = <span class="hljs-title function_">createApp</span>(<span class="hljs-title class_">App</span>)
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>從 Vue 建立一個應用</li>
+<li>以 <code>App</code> 作為整個網站的根元件</li>
+</ul>
+<p>你可以把 <code>App</code> 想成整棟房子的主結構，其他頁面和元件都會圍繞它展開。</p>
+<hr>
+<h3 id="2-掛上路由與狀態">2. 掛上路由與狀態</h3>
+<p>再看這種寫法：</p>
+<pre class="hljs"><code><div>app.<span class="hljs-title function_">use</span>(router)
+app.<span class="hljs-title function_">use</span>(store)
+app.<span class="hljs-title function_">use</span>(i18n)
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li><code>router</code> 負責頁面切換</li>
+<li><code>store</code> 負責共用狀態</li>
+<li><code>i18n</code> 負責多語系</li>
+</ul>
+<p>這就像是：</p>
+<ul>
+<li>路由＝樓層導覽圖</li>
+<li>狀態管理＝全店共用資訊板</li>
+<li>多語系＝不同語言版本的菜單</li>
+</ul>
+<hr>
+<h3 id="3-掛上全域方法與元件">3. 掛上全域方法與元件</h3>
+<p>你會看到類似這樣的設定：</p>
+<pre class="hljs"><code><div>app.<span class="hljs-property">config</span>.<span class="hljs-property">globalProperties</span>.<span class="hljs-property">parseTime</span> = parseTime
+app.<span class="hljs-title function_">component</span>(<span class="hljs-string">&#x27;Pagination&#x27;</span>, <span class="hljs-title class_">Pagination</span>)
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li><code>parseTime</code> 這種工具可以全站共用</li>
+<li><code>Pagination</code> 這種分頁元件也能全站重複使用</li>
+</ul>
+<p>這樣做的好處是：</p>
+<ul>
+<li>少寫重複程式</li>
+<li>每個頁面都能用同一套工具</li>
+<li>畫面風格比較一致</li>
+</ul>
+<hr>
+<h2 id="三開發時怎麼跑起來">三、開發時怎麼跑起來？</h2>
+<p>前端專案的開發設定在 <a href="fpg-v3/vite.config.js"><code>fpg-v3/vite.config.js</code></a> 與 <a href="fpg-v3/playwright.config.ts"><code>fpg-v3/playwright.config.ts</code></a>。</p>
+<p>你現在不需要死背設定，只要知道它們主要在做三件事：</p>
+<ol>
+<li>設定開發伺服器</li>
+<li>設定前端的基底路徑</li>
+<li>設定 API 代理轉發</li>
+</ol>
+<hr>
+<h3 id="1-開發伺服器與基底路徑">1. 開發伺服器與基底路徑</h3>
+<p>在 <a href="fpg-v3/vite.config.js"><code>vite.config.js</code></a> 裡，有一段很重要的概念：</p>
+<pre class="hljs"><code><div><span class="hljs-attr">base</span>: <span class="hljs-variable constant_">VITE_APP_ENV</span> === <span class="hljs-string">&#x27;production&#x27;</span> ? <span class="hljs-string">&#x27;/vcpseos/&#x27;</span> : <span class="hljs-string">&#x27;/vcpseosTest/&#x27;</span>
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>正式環境和測試環境使用不同的網站根路徑</li>
+<li>這樣部署時不容易混淆</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>正式店面和試營運店面，門牌不一樣。</p>
+</blockquote>
+<hr>
+<h3 id="2-api-代理轉發">2. API 代理轉發</h3>
+<p>同一個設定檔裡，還有這段概念：</p>
+<pre class="hljs"><code><div><span class="hljs-attr">proxy</span>: {
+  <span class="hljs-string">&#x27;/dev-api&#x27;</span>: {
+    <span class="hljs-attr">target</span>: <span class="hljs-string">&#x27;http://localhost:8090&#x27;</span>,
+    <span class="hljs-attr">rewrite</span>: <span class="hljs-function">(<span class="hljs-params">p</span>) =&gt;</span> p.<span class="hljs-title function_">replace</span>(<span class="hljs-regexp">/^\/dev-api/</span>, <span class="hljs-string">&#x27;&#x27;</span>)
+  }
+}
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>前端先呼叫 <code>/dev-api</code></li>
+<li>開發伺服器幫你轉送到後端 <code>8090</code></li>
+<li>讓前端看起來像是在同網域呼叫</li>
+</ul>
+<p>這樣的好處是：</p>
+<ul>
+<li>開發時不用一直處理跨域問題</li>
+<li>前後端分開開發更方便</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>前台先把單子交給內部轉接員，再由轉接員送到廚房。</p>
+</blockquote>
+<hr>
+<h2 id="四路由是怎麼控制頁面的">四、路由是怎麼控制頁面的？</h2>
+<p>路由就是「網址對應到哪個畫面」。<br>
+這個專案在 <a href="fpg-v3/src/permission.js"><code>src/permission.js</code></a> 裡做了很重要的權限與路由控制。</p>
+<p>你可以把路由理解成：</p>
+<blockquote>
+<p><strong>每個網址都像一扇門，路由決定你能不能進。</strong></p>
+</blockquote>
+<hr>
+<h3 id="1-沒有登入時先去登入頁">1. 沒有登入時，先去登入頁</h3>
+<p>當使用者沒有 token 時，系統會先檢查目前要去的頁面是不是白名單。<br>
+如果不是，就會導去登入頁。</p>
+<p>概念像這樣：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (<span class="hljs-title function_">getToken</span>()) {
+  <span class="hljs-title function_">next</span>()
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-title function_">next</span>(<span class="hljs-string">&#x27;/login&#x27;</span>)
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>有登入憑證就可以繼續</li>
+<li>沒有登入憑證就先去登入頁</li>
+</ul>
+<p>你可以把 token 想成：</p>
+<blockquote>
+<p>進門的會員卡。</p>
+</blockquote>
+<hr>
+<h3 id="2-有登入時還要看權限">2. 有登入時，還要看權限</h3>
+<p>有 token 不代表你能看所有頁面。<br>
+系統還會載入你的角色與可訪問路由。</p>
+<p><code>src/permission.js</code> 裡的流程大致是：</p>
+<ul>
+<li>先抓使用者資訊</li>
+<li>再根據角色產生可用路由</li>
+<li>動態把可進入的頁面加到路由表</li>
+</ul>
+<p>這樣做的好處是：</p>
+<ul>
+<li>不同角色看到的功能不同</li>
+<li>不能亂進別人的功能頁</li>
+</ul>
+<p>這很像公司門禁：</p>
+<blockquote>
+<p>你有工牌，不代表你能進每一層樓；<br>
+你還要看部門與權限。</p>
+</blockquote>
+<hr>
+<h3 id="3-動態加入路由">3. 動態加入路由</h3>
+<p>這段概念很重要：</p>
+<pre class="hljs"><code><div>router.<span class="hljs-title function_">addRoute</span>(route)
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>系統不是一開始就把所有功能頁都放好</li>
+<li>而是登入後，根據權限再把能看的頁面加進來</li>
+</ul>
+<p>這樣的設計更安全，也更靈活。</p>
+<hr>
+<h2 id="五前端怎麼呼叫後端-api">五、前端怎麼呼叫後端 API？</h2>
+<p>前端的 API 都放在 <code>src/api</code> 底下。<br>
+這是整個章節最重要的地方。</p>
+<p>你可以先把 <code>src/api</code> 想成：</p>
+<blockquote>
+<p><strong>前端和後端之間的「聯絡簿」。</strong></p>
+</blockquote>
+<p>每一個檔案通常對應一個功能模組，例如：</p>
+<ul>
+<li><code>src/api/login.js</code>：登入相關</li>
+<li><code>src/api/menu.js</code>：路由與選單相關</li>
+<li><code>src/api/f/faa3.js</code>：假日建檔</li>
+<li><code>src/api/f/fab2.js</code>：經辦確認</li>
+<li><code>src/api/a/eoa1.js</code>：承攬廠商</li>
+<li><code>src/api/q/qaa1.js</code>：欄位對照</li>
+<li><code>src/api/sd/sdaa.js</code>：關鍵字建檔</li>
+</ul>
+<hr>
+<h2 id="六最基本的-api-寫法長什麼樣">六、最基本的 API 寫法長什麼樣？</h2>
+<p>幾乎每一個 API 檔都長得很像。<br>
+先看一個很簡單的例子：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> request <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/utils/request&#x27;</span>
+
+<span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getRouters</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({ <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/getRouters&#x27;</span>, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;get&#x27;</span> })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>使用共用的 <code>request</code></li>
+<li>發送 <code>GET /getRouters</code></li>
+<li>把結果回傳給呼叫者</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>前端先寫好「這個功能要去哪裡送單」，<br>
+真正送出的動作交給共用的請求工具處理。</p>
+</blockquote>
+<hr>
+<h2 id="七登入頁怎麼對接">七、登入頁怎麼對接？</h2>
+<p>登入相關的 API 在 <a href="fpg-v3/src/api/login.js"><code>src/api/login.js</code></a>。</p>
+<p>這個檔案有幾個常見功能：</p>
+<ul>
+<li>登入</li>
+<li>登出</li>
+<li>取得使用者資訊</li>
+<li>取得驗證碼</li>
+<li>變更語系</li>
+<li>取得公告</li>
+</ul>
+<hr>
+<h3 id="1-登入-api">1. 登入 API</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">login</span>(<span class="hljs-params">username, password, code, uuid</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({
+    <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/login&#x27;</span>,
+    <span class="hljs-attr">headers</span>: { <span class="hljs-attr">isToken</span>: <span class="hljs-literal">false</span> },
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;post&#x27;</span>,
+    <span class="hljs-attr">data</span>: { username, password, code, uuid }
+  })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>把帳號、密碼、驗證碼、驗證碼編號一起送給後端</li>
+<li>因為還沒登入，所以這支 API 不需要 token</li>
+</ul>
+<p>如果使用者輸入：</p>
+<ul>
+<li>帳號：<code>demo</code></li>
+<li>密碼：<code>123456</code></li>
+<li>驗證碼：<code>abcd</code></li>
+<li><code>uuid</code>：驗證碼識別碼</li>
+</ul>
+<p>後端就會檢查這些資料是否正確。<br>
+如果成功，就回傳登入成功與 token。</p>
+<hr>
+<h3 id="2-取得驗證碼">2. 取得驗證碼</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getCodeImg</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({
+    <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/captchaImage&#x27;</span>,
+    <span class="hljs-attr">headers</span>: { <span class="hljs-attr">isToken</span>: <span class="hljs-literal">false</span> },
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;get&#x27;</span>
+  })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>登入頁需要先抓驗證碼圖片</li>
+<li>因為還沒登入，所以也不需要 token</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>先拿一張「進門前的小考題」，確認不是機器人。</p>
+</blockquote>
+<hr>
+<h3 id="3-取得使用者資訊">3. 取得使用者資訊</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getInfo</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({
+    <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/getInfo&#x27;</span>,
+    <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;get&#x27;</span>
+  })
+}
+</div></code></pre>
+<p>這支 API 會在登入後使用。<br>
+它的用途是：</p>
+<ul>
+<li>取得你的角色</li>
+<li>取得你的權限</li>
+<li>取得你的基本資訊</li>
+</ul>
+<p>這些資訊會影響你能看到哪些選單與頁面。</p>
+<hr>
+<h2 id="八列表頁怎麼對接">八、列表頁怎麼對接？</h2>
+<p>列表頁是最常見的畫面類型。<br>
+例如假日建檔、欄位對照、廠商資料，很多都會有「查詢列表」、「新增」、「修改」、「刪除」。</p>
+<p>這種 API 通常都長得很像。<br>
+以 <a href="fpg-v3/src/api/f/faa3.js"><code>src/api/f/faa3.js</code></a> 為例：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">listFaa3</span>(<span class="hljs-params">query</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({ <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/f/faa3/list&#x27;</span>, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;get&#x27;</span>, <span class="hljs-attr">params</span>: query })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>從 <code>/f/faa3/list</code> 查詢資料</li>
+<li>查詢條件放在 <code>query</code></li>
+<li>後端回傳一批列表資料</li>
+</ul>
+<p>如果 <code>query</code> 裡有：</p>
+<ul>
+<li>年份</li>
+<li>月份</li>
+<li>假日名稱</li>
+</ul>
+<p>那前端就會把這些條件送出去，後端再回傳符合條件的資料。</p>
+<hr>
+<h3 id="1-查單筆資料">1. 查單筆資料</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">getFaa3</span>(<span class="hljs-params">xuid</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({ <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/f/faa3/&#x27;</span> + xuid, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;get&#x27;</span> })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>用某筆資料的識別碼查詳細內容</li>
+<li>常用在「編輯前先打開資料」或「看明細」</li>
+</ul>
+<hr>
+<h3 id="2-新增資料">2. 新增資料</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">addFaa3</span>(<span class="hljs-params">data</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({ <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/f/faa3&#x27;</span>, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;post&#x27;</span>, <span class="hljs-attr">data</span>: data })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>把表單資料送到後端</li>
+<li>請後端新增一筆假日資料</li>
+</ul>
+<hr>
+<h3 id="3-修改資料">3. 修改資料</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">updateFaa3</span>(<span class="hljs-params">data</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({ <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/f/faa3&#x27;</span>, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;put&#x27;</span>, <span class="hljs-attr">data</span>: data })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>編輯完後把新的資料送回去</li>
+<li>請後端更新原本那筆資料</li>
+</ul>
+<hr>
+<h3 id="4-刪除資料">4. 刪除資料</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">export</span> <span class="hljs-keyword">function</span> <span class="hljs-title function_">delFaa3</span>(<span class="hljs-params">xuid</span>) {
+  <span class="hljs-keyword">return</span> <span class="hljs-title function_">request</span>({ <span class="hljs-attr">url</span>: <span class="hljs-string">&#x27;/f/faa3/&#x27;</span> + xuid, <span class="hljs-attr">method</span>: <span class="hljs-string">&#x27;delete&#x27;</span> })
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>用識別碼刪掉某筆資料</li>
+<li>通常會搭配刪除確認視窗</li>
+</ul>
+<hr>
+<h2 id="九前端頁面通常怎麼用這些-api">九、前端頁面通常怎麼用這些 API？</h2>
+<p>你可以把一個頁面想成這樣的流程：</p>
+<ol>
+<li>進入頁面時先載入列表</li>
+<li>使用者輸入查詢條件</li>
+<li>按下查詢後重新抓資料</li>
+<li>按下新增打開表單</li>
+<li>送出表單時呼叫新增或修改 API</li>
+<li>按下刪除時呼叫刪除 API</li>
+</ol>
+<p>下面用一個非常簡單的範例看概念：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { listFaa3 } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/api/f/faa3&#x27;</span>
+
+<span class="hljs-title function_">listFaa3</span>({ <span class="hljs-attr">year</span>: <span class="hljs-number">2026</span> }).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+  <span class="hljs-variable language_">console</span>.<span class="hljs-title function_">log</span>(res)
+})
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>呼叫假日列表 API</li>
+<li>查詢條件是年份 2026</li>
+<li>拿到結果後印出來</li>
+</ul>
+<p>在實際畫面中，通常不會只是 <code>console.log</code>，而是會把資料放進表格。</p>
+<hr>
+<h2 id="十表單送出時的概念是什麼">十、表單送出時的概念是什麼？</h2>
+<p>表單通常會先做兩件事：</p>
+<ol>
+<li>驗證資料有沒有填對</li>
+<li>決定要呼叫新增還是修改 API</li>
+</ol>
+<p>例如：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (form.<span class="hljs-property">id</span>) {
+  <span class="hljs-title function_">updateFaa3</span>(form)
+} <span class="hljs-keyword">else</span> {
+  <span class="hljs-title function_">addFaa3</span>(form)
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>如果有 <code>id</code>，表示這是一筆已存在資料的修改</li>
+<li>如果沒有 <code>id</code>，表示這是新增</li>
+</ul>
+<p>這個判斷在很多頁面都會出現。</p>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>有訂單編號＝改舊單；沒有訂單編號＝開新單。</p>
+</blockquote>
+<hr>
+<h2 id="十一這個專案裡有哪些常見功能模組">十一、這個專案裡有哪些常見功能模組？</h2>
+<p>下面挑幾個來看，幫你建立整體印象。</p>
+<hr>
+<h3 id="1-參考資料與欄位對照">1. 參考資料與欄位對照</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-v3/src/api/q/qaa1.js"><code>src/api/q/qaa1.js</code></a></li>
+<li><a href="fpg-v3/src/api/q/qaa2.js"><code>src/api/q/qaa2.js</code></a></li>
+</ul>
+<p>這類頁面通常是：</p>
+<ul>
+<li>管理欄位對照資料</li>
+<li>管理畫面顯示欄位</li>
+<li>支援查詢、新增、修改、刪除、匯出</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>系統字典表，讓前端知道每個欄位要怎麼顯示。</p>
+</blockquote>
+<hr>
+<h3 id="2-多語係與關鍵字">2. 多語係與關鍵字</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-v3/src/api/sd/sdaa.js"><code>src/api/sd/sdaa.js</code></a></li>
+<li><a href="fpg-v3/src/api/sd/sdab.js"><code>src/api/sd/sdab.js</code></a></li>
+<li><a href="fpg-v3/src/api/sd/sdad.js"><code>src/api/sd/sdad.js</code></a></li>
+</ul>
+<p>這類頁面通常是：</p>
+<ul>
+<li>管理顯示文字</li>
+<li>管理翻譯內容</li>
+<li>管理關鍵字對照</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>同一句話，在不同語言中有不同版本。</p>
+</blockquote>
+<hr>
+<h3 id="3-單據參數與假日設定">3. 單據參數與假日設定</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-v3/src/api/f/faa1.js"><code>src/api/f/faa1.js</code></a></li>
+<li><a href="fpg-v3/src/api/f/faa2.js"><code>src/api/f/faa2.js</code></a></li>
+<li><a href="fpg-v3/src/api/f/faa3.js"><code>src/api/f/faa3.js</code></a></li>
+<li><a href="fpg-v3/src/api/f/faa4.js"><code>src/api/f/faa4.js</code></a></li>
+</ul>
+<p>這些通常是主資料維護類型的頁面。<br>
+例如：</p>
+<ul>
+<li>單據金額</li>
+<li>寬限天數</li>
+<li>假日資料</li>
+<li>通知名單</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>先把規則和名單建好，後面的業務流程才有東西可用。</p>
+</blockquote>
+<hr>
+<h3 id="4-廠商與報到資料">4. 廠商與報到資料</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-v3/src/api/a/eoa1.js"><code>src/api/a/eoa1.js</code></a></li>
+<li><a href="fpg-v3/src/api/a/eoa3.js"><code>src/api/a/eoa3.js</code></a></li>
+<li><a href="fpg-v3/src/api/a/eoa4.js"><code>src/api/a/eoa4.js</code></a></li>
+</ul>
+<p>這類頁面通常是：</p>
+<ul>
+<li>建立廠商資料</li>
+<li>維護人員與車輛</li>
+<li>管理證照與複訓資料</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>一家工廠要先確認廠商資料完整，後續流程才不會卡住。</p>
+</blockquote>
+<hr>
+<h3 id="5-核簽與確認流程">5. 核簽與確認流程</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-v3/src/api/f/fab2.js"><code>src/api/f/fab2.js</code></a></li>
+<li><a href="fpg-v3/src/api/f/fab3.js"><code>src/api/f/fab3.js</code></a></li>
+<li><a href="fpg-v3/src/api/f/fab4.js"><code>src/api/f/fab4.js</code></a></li>
+</ul>
+<p>這些 API 跟流程動作有關，例如：</p>
+<ul>
+<li>經辦確認</li>
+<li>課長呈核</li>
+<li>廠長核准</li>
+<li>退回</li>
+<li>查核簽歷程</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>文件要一關一關蓋章，不能直接跳到最後一步。</p>
+</blockquote>
+<hr>
+<h2 id="十二前端按鈕按下去後為什麼會呼叫到某個後端功能">十二、前端按鈕按下去後，為什麼會呼叫到某個後端功能？</h2>
+<p>這是很多新手最想知道的問題。</p>
+<p>我們用最簡單的方式拆解：</p>
+<ol>
+<li>畫面上有一個按鈕</li>
+<li>按鈕綁定一個方法</li>
+<li>方法裡呼叫某個 API</li>
+<li>API URL 對應到後端控制器</li>
+<li>控制器再呼叫服務層處理資料</li>
+</ol>
+<p>可以用這張圖理解：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant U as 使用者
+    participant P as 前端頁面
+    participant A as API函式
+    participant B as 後端控制器
+    participant S as 後端服務
+
+    U->>P: 點下按鈕
+    P->>A: 呼叫對應 API
+    A->>B: 送出 HTTP 請求
+    B->>S: 執行業務處理
+    S-->>B: 回傳結果
+    B-->>P: 回傳資料
+</div></code></pre>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>你按的是「畫面上的按鈕」，<br>
+真正動作是「前端方法 → API → 後端控制器」。</p>
+</blockquote>
+<hr>
+<h2 id="十三來看一個很小的完整例子">十三、來看一個很小的完整例子</h2>
+<p>假設你要做「查詢假日列表」。</p>
+<h3 id="第一步前端先引用-api">第一步：前端先引用 API</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">import</span> { listFaa3 } <span class="hljs-keyword">from</span> <span class="hljs-string">&#x27;@/api/f/faa3&#x27;</span>
+</div></code></pre>
+<p>這表示你先把「查詢假日」這支 API 拿進來。</p>
+<hr>
+<h3 id="第二步按查詢時呼叫它">第二步：按查詢時呼叫它</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">function</span> <span class="hljs-title function_">handleQuery</span>(<span class="hljs-params"></span>) {
+  <span class="hljs-title function_">listFaa3</span>(searchForm).<span class="hljs-title function_">then</span>(<span class="hljs-function"><span class="hljs-params">res</span> =&gt;</span> {
+    tableData.<span class="hljs-property">value</span> = res.<span class="hljs-property">rows</span>
+  })
+}
+</div></code></pre>
+<p>這表示：</p>
+<ul>
+<li>使用搜尋表單作為查詢條件</li>
+<li>把回來的資料放進表格</li>
+</ul>
+<hr>
+<h3 id="第三步畫面更新">第三步：畫面更新</h3>
+<p>這時候使用者就會看到新的查詢結果。<br>
+整個過程像是：</p>
+<blockquote>
+<p>你把問題交給櫃台，櫃台幫你去查，<br>
+查完再把結果端回來。</p>
+</blockquote>
+<hr>
+<h2 id="十四這一章最常見的幾個名詞你要先知道">十四、這一章最常見的幾個名詞，你要先知道</h2>
+<h3 id="1-路由">1. 路由</h3>
+<p>網址與畫面的對應關係。<br>
+簡單說，就是「這個網址要開哪一頁」。</p>
+<hr>
+<h3 id="2-權限控制">2. 權限控制</h3>
+<p>不是每個人都能看每個功能。<br>
+要看你的登入身分、角色、權限。</p>
+<hr>
+<h3 id="3-api">3. API</h3>
+<p>前端和後端溝通的接口。<br>
+前端把需求送出去，後端把結果回來。</p>
+<hr>
+<h3 id="4-請求">4. 請求</h3>
+<p>前端送出的動作。<br>
+例如查詢、新增、修改、刪除。</p>
+<hr>
+<h3 id="5-回應">5. 回應</h3>
+<p>後端回來的結果。<br>
+通常會包含成功失敗、訊息、資料。</p>
+<hr>
+<h2 id="十五如果你是新手最該先記住什麼">十五、如果你是新手，最該先記住什麼？</h2>
+<p>你不需要一開始就背完所有檔案。<br>
+先記住這三件事就很好：</p>
+<ol>
+<li><strong>畫面上的每個操作，通常都對應一支 API</strong></li>
+<li><strong><code>src/api</code> 是前端呼叫後端的集中地方</strong></li>
+<li><strong>登入後還要看路由與權限，才能決定能看到哪些功能</strong></li>
+</ol>
+<p>只要你有這三個概念，後面看任何模組都會容易很多。</p>
+<hr>
+<h2 id="十六本章的小地圖前端是怎麼組織的">十六、本章的小地圖：前端是怎麼組織的？</h2>
+<p>你可以把整個前端想成下面這樣：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[main.js 啟動] --> B[router 路由]
+    A --> C[store 狀態]
+    A --> D[permission 權限]
+    A --> E[api 呼叫]
+    E --> F[後端 API]
+    B --> G[頁面切換]
+    D --> G
+</div></code></pre>
+<p>這張圖要表達的是：</p>
+<ul>
+<li><code>main.js</code> 是入口</li>
+<li><code>router</code> 負責頁面</li>
+<li><code>permission</code> 負責能不能看</li>
+<li><code>api</code> 負責資料溝通</li>
+</ul>
+<hr>
+<h2 id="十七和下一章的銜接">十七、和下一章的銜接</h2>
+<p>現在你已經知道：</p>
+<ul>
+<li>前端畫面如何啟動</li>
+<li>路由與權限怎麼控制頁面</li>
+<li><code>src/api</code> 裡的函式怎麼對應後端</li>
+<li>按鈕、查詢、表單如何把資料送出去</li>
+</ul>
+<p>接下來，你就可以進一步理解「資料與欄位是怎麼被管理的」，也就是下一章的主題：<br>
+<a href="03_%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E6%AC%84%E4%BD%8D%E5%B0%8D%E7%85%A7%E5%B9%B3%E5%8F%B0_.md">參考資料與欄位對照平台</a></p>
+<hr>
+<h2 id="本章總結">本章總結</h2>
+<p>這一章我們用最簡單的方式認識了前端介面與 API 對接：</p>
+<ul>
+<li><code>main.js</code> 負責啟動前端</li>
+<li><code>vite.config.js</code> 負責開發環境與代理設定</li>
+<li><code>permission.js</code> 負責登入與權限控制</li>
+<li><code>src/api</code> 底下的檔案負責定義每個功能的 API</li>
+<li>畫面上的查詢、新增、修改、刪除，其實都是呼叫對應的 API</li>
+</ul>
+<p>如果你現在還沒有完全記住所有細節，沒關係。<br>
+新手最重要的是先建立一個清楚的流程感：</p>
+<blockquote>
+<p><strong>使用者操作畫面 → 前端呼叫 API → 後端處理資料 → 前端更新結果</strong></p>
+</blockquote>
+<p>只要這條路徑懂了，後面很多章節都會越看越順。</p>
+<h1 id="chapter-3參考資料與欄位對照平台">Chapter 3：參考資料與欄位對照平台</h1>
+<p>接續上一章的 <a href="02_%E5%89%8D%E7%AB%AF%E4%BB%8B%E9%9D%A2%E8%88%87_api_%E5%B0%8D%E6%8E%A5_.md">前端介面與 API 對接</a>，你已經知道「畫面怎麼把資料送到後端」。<br>
+這一章我們要往更深入一層，看一個很重要、但常被新手忽略的主題：</p>
+<blockquote>
+<p><strong>系統裡的欄位名稱、顯示名稱、資料型態、顯示格式，應該由誰來管理？</strong></p>
+</blockquote>
+<p>如果沒有這一層，畫面就很容易出現：</p>
+<ul>
+<li>同一個欄位，在不同頁面叫法不一樣</li>
+<li>英文欄位名和中文顯示名對不起來</li>
+<li>報表欄位寫死，改版時每個地方都要重改</li>
+<li>不同角色、不同頁籤的欄位顯示邏輯分散在各處</li>
+</ul>
+<p>所以這一章的核心，就是學會理解：</p>
+<blockquote>
+<p><strong>參考資料與欄位對照平台，就像系統的字典館與索引卡。</strong></p>
+</blockquote>
+<p>你不用直接背每個欄位是什麼，<br>
+而是先查字典、查對照表，讓系統知道「這個欄位是誰、要怎麼顯示、屬於哪一類」。</p>
+<hr>
+<h2 id="本章要解決的中心情境">本章要解決的中心情境</h2>
+<p>先想像一個很實際的例子：</p>
+<blockquote>
+<p>你要在畫面上顯示「使用者資料列表」，但這個列表有些欄位來自資料庫原始欄位，有些欄位要顯示中文名稱，有些欄位還要根據角色、頁籤、顯示區域來決定要不要出現。</p>
+</blockquote>
+<p>如果你把這些規則都寫死在畫面裡，之後只要欄位一變，前端、後端、報表、匯出都要一起改。<br>
+這會很痛苦。</p>
+<p>所以這個平台的作用，就是把這些資訊集中起來：</p>
+<ul>
+<li>系統欄位代碼</li>
+<li>原始欄位名稱</li>
+<li>中文顯示名稱</li>
+<li>英文顯示名稱</li>
+<li>資料型態</li>
+<li>顯示格式</li>
+<li>欄位分類</li>
+<li>角色 / 頁籤 / 顯示區域 / 顯示順序</li>
+<li>生效註記</li>
+</ul>
+<p>簡單說：</p>
+<blockquote>
+<p><strong>它不是在存真正的業務資料，而是在存「資料怎麼被理解與顯示」的規則。</strong></p>
+</blockquote>
+<hr>
+<h2 id="先用白話認識這個平台">先用白話認識這個平台</h2>
+<p>你可以把它想像成圖書館的索引卡：</p>
+<ul>
+<li>你不一定一開始就去翻整本書</li>
+<li>你先查索引卡</li>
+<li>看書名、分類、位置、標籤</li>
+<li>再去找真正的內容</li>
+</ul>
+<p>這個平台也是一樣：</p>
+<ul>
+<li>不直接處理業務內容</li>
+<li>而是先整理欄位資訊</li>
+<li>讓別的模組查得到正確欄位名稱與顯示方式</li>
+</ul>
+<hr>
+<h2 id="這一章會看到哪些資料表概念">這一章會看到哪些資料表概念？</h2>
+<p>從程式碼來看，這一章主要有兩種資料：</p>
+<h3 id="1-vgetcol欄位視圖">1. <code>VGetcol</code>：欄位視圖</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/system/domain/VGetcol.java"><code>fpg-vcpseos/src/main/java/com/fpg/system/domain/VGetcol.java</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/system/controller/VGetcolController.java"><code>fpg-vcpseos/src/main/java/com/fpg/system/controller/VGetcolController.java</code></a></li>
+</ul>
+<p>它看起來像一個「欄位字典視圖」，主要整理：</p>
+<ul>
+<li>欄位代號</li>
+<li>欄位名稱</li>
+<li>類型</li>
+<li>長度</li>
+<li>精度</li>
+<li>小數位數</li>
+</ul>
+<p>這很像是資料庫欄位的說明卡。</p>
+<hr>
+<h3 id="2-txdqaa11資料欄位對照建檔">2. <code>Txdqaa11</code>：資料欄位對照建檔</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/q/domain/Txdqaa11.java"><code>fpg-vcpseos/src/main/java/com/fpg/q/domain/Txdqaa11.java</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/q/controller/Txdqaa11Controller.java"><code>fpg-vcpseos/src/main/java/com/fpg/q/controller/Txdqaa11Controller.java</code></a></li>
+</ul>
+<p>它是更進一步的對照建檔，會記錄：</p>
+<ul>
+<li>系統欄位代碼</li>
+<li>來源系統</li>
+<li>原始欄位名稱</li>
+<li>中文顯示名稱</li>
+<li>英文顯示名稱</li>
+<li>資料型態</li>
+<li>顯示格式化</li>
+<li>欄位分類</li>
+</ul>
+<p>這表示它不只是「知道欄位叫什麼」，還知道「欄位要怎麼被解釋」。</p>
+<hr>
+<h3 id="3-txdqaa21盤體欄位顯示建檔">3. <code>Txdqaa21</code>：盤體欄位顯示建檔</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/q/domain/Txdqaa21.java"><code>fpg-vcpseos/src/main/java/com/fpg/q/domain/Txdqaa21.java</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/q/controller/Txdqaa21Controller.java"><code>fpg-vcpseos/src/main/java/com/fpg/q/controller/Txdqaa21Controller.java</code></a></li>
+</ul>
+<p>這一份更偏向「畫面顯示規則」，會記錄：</p>
+<ul>
+<li>角色類型</li>
+<li>頁籤類型</li>
+<li>顯示區域</li>
+<li>顯示順序</li>
+<li>系統欄位代碼</li>
+<li>生效註記</li>
+</ul>
+<p>它很像「這個人、在這個頁籤、這個區塊，應該看到哪些欄位，順序怎麼排」。</p>
+<hr>
+<h2 id="先抓住最重要的一句話">先抓住最重要的一句話</h2>
+<p>如果你今天只想記一句話，那就是：</p>
+<blockquote>
+<p><strong><code>VGetcol</code> 管欄位字典，<code>Txdqaa11</code> 管欄位對照，<code>Txdqaa21</code> 管畫面顯示規則。</strong></p>
+</blockquote>
+<p>這三個一起組成一個「參考資料與欄位對照平台」。</p>
+<hr>
+<h2 id="一先看整體架構它像一套字典系統">一、先看整體架構：它像一套字典系統</h2>
+<p>下面這張圖可以幫助你先建立整體感覺：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A[資料庫欄位] --> B[欄位字典視圖 VGetcol]
+    B --> C[資料欄位對照建檔 Txdqaa11]
+    C --> D[盤體欄位顯示建檔 Txdqaa21]
+    D --> E[前端畫面 / 報表 / 匯出]
+</div></code></pre>
+<p>你可以這樣理解：</p>
+<ul>
+<li><code>VGetcol</code>：先知道欄位原始資訊</li>
+<li><code>Txdqaa11</code>：再把欄位對應成系統想要的名字</li>
+<li><code>Txdqaa21</code>：最後決定畫面怎麼顯示</li>
+</ul>
+<p>這很像：</p>
+<ul>
+<li>第一層：書的索引</li>
+<li>第二層：書的標題翻譯</li>
+<li>第三層：書架擺放方式</li>
+</ul>
+<hr>
+<h2 id="二vgetcol-是什麼">二、<code>VGetcol</code> 是什麼？</h2>
+<p>先看 <a href="fpg-vcpseos/src/main/java/com/fpg/system/domain/VGetcol.java"><code>VGetcol</code></a>。</p>
+<p>它的欄位很簡單：</p>
+<ul>
+<li><code>columnName</code>：欄位代號</li>
+<li><code>comments</code>：欄位名稱</li>
+<li><code>dataType</code>：類型</li>
+<li><code>dataLength</code>：長度</li>
+<li><code>dataPrecision</code>：精度</li>
+<li><code>dataScale</code>：小數位數</li>
+</ul>
+<p>你可以把它想成「資料庫欄位的說明卡」。</p>
+<hr>
+<h3 id="1-vgetcol-的用途">1. <code>VGetcol</code> 的用途</h3>
+<p>當你要查某個欄位的基本資訊時，它可以告訴你：</p>
+<ul>
+<li>這欄叫什麼</li>
+<li>是字串還是數字</li>
+<li>長度多少</li>
+<li>小數點有幾位</li>
+</ul>
+<p>這些資訊對於：</p>
+<ul>
+<li>報表</li>
+<li>匯出</li>
+<li>欄位驗證</li>
+<li>動態畫面</li>
+</ul>
+<p>都很有幫助。</p>
+<hr>
+<h3 id="2-簡單看欄位長相">2. 簡單看欄位長相</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> String columnName;
+<span class="hljs-keyword">private</span> String comments;
+<span class="hljs-keyword">private</span> String dataType;
+</div></code></pre>
+<p>這三個欄位代表：</p>
+<ul>
+<li>欄位代號</li>
+<li>欄位名稱</li>
+<li>資料型態</li>
+</ul>
+<p>很像你在查字典時，先看到：</p>
+<ul>
+<li>單字本身</li>
+<li>中文解釋</li>
+<li>詞性</li>
+</ul>
+<hr>
+<h2 id="三vgetcol-的資料怎麼被查出來">三、<code>VGetcol</code> 的資料怎麼被查出來？</h2>
+<p>它有對應的 Mapper、Service、Controller：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/system/mapper/VGetcolMapper.java"><code>VGetcolMapper</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/system/service/IVGetcolService.java"><code>IVGetcolService</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/system/service/impl/VGetcolServiceImpl.java"><code>VGetcolServiceImpl</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/system/controller/VGetcolController.java"><code>VGetcolController</code></a></li>
+</ul>
+<p>這就是標準的「控制器 → 服務 → 資料存取」三層結構。</p>
+<hr>
+<h3 id="vgetcolcontroller-在做什麼"><code>VGetcolController</code> 在做什麼？</h3>
+<p>它提供這些常見功能：</p>
+<ul>
+<li>查詢列表</li>
+<li>匯出 Excel</li>
+<li>查單筆詳細</li>
+<li>新增</li>
+<li>修改</li>
+<li>刪除</li>
+</ul>
+<p>你可以把它想成一個「欄位字典管理櫃台」。</p>
+<hr>
+<h3 id="查詢列表的概念">查詢列表的概念</h3>
+<pre class="hljs"><code><div><span class="hljs-meta">@PreAuthorize(&quot;@ss.hasPermi(&#x27;system:getcol:list&#x27;)&quot;)</span>
+<span class="hljs-meta">@GetMapping(&quot;/list&quot;)</span>
+<span class="hljs-keyword">public</span> TableDataInfo <span class="hljs-title function_">list</span><span class="hljs-params">(VGetcol vGetcol)</span>
+</div></code></pre>
+<p>這段表示：</p>
+<ul>
+<li>只有有權限的人能查</li>
+<li>送出 <code>GET /system/getcol/list</code></li>
+<li>系統根據條件回傳列表</li>
+</ul>
+<p>如果你輸入查詢條件，後端就會回傳符合條件的欄位資料。</p>
+<hr>
+<h3 id="匯出-excel-的概念">匯出 Excel 的概念</h3>
+<pre class="hljs"><code><div>ExcelUtil&lt;VGetcol&gt; util = <span class="hljs-keyword">new</span> <span class="hljs-title class_">ExcelUtil</span>&lt;VGetcol&gt;(VGetcol.class);
+util.exportExcel(response, list, <span class="hljs-string">&quot;欄位視圖数据&quot;</span>);
+</div></code></pre>
+<p>這表示：</p>
+<ul>
+<li>把查到的欄位資料匯出成 Excel</li>
+<li>每一列就是一筆欄位資訊</li>
+</ul>
+<p>這對管理者很實用，因為可以直接把欄位清單帶走檢查。</p>
+<hr>
+<h2 id="四txdqaa11資料欄位對照建檔">四、<code>Txdqaa11</code>：資料欄位對照建檔</h2>
+<p>接下來看更重要的 <a href="fpg-vcpseos/src/main/java/com/fpg/q/domain/Txdqaa11.java"><code>Txdqaa11</code></a>。</p>
+<p>它比 <code>VGetcol</code> 更像「正式建檔資料」，因為它不只看欄位本身，還看：</p>
+<ul>
+<li>哪個系統來的</li>
+<li>原始欄位怎麼叫</li>
+<li>中文與英文顯示怎麼設</li>
+<li>欄位分類是什麼</li>
+<li>顯示格式要怎麼轉</li>
+</ul>
+<hr>
+<h3 id="1-這個資料物件在記錄什麼">1. 這個資料物件在記錄什麼？</h3>
+<p>你可以把它想成一張「欄位翻譯卡」。</p>
+<p>例如，某個欄位在來源系統裡叫：</p>
+<ul>
+<li><code>AMT</code></li>
+</ul>
+<p>但在前端要顯示成：</p>
+<ul>
+<li>中文：金額</li>
+<li>英文：Amount</li>
+</ul>
+<p>而且它還可能是：</p>
+<ul>
+<li>數字型態</li>
+<li>顯示時要加千分位</li>
+<li>屬於金額分類</li>
+</ul>
+<p>這些資訊就很適合放在 <code>Txdqaa11</code>。</p>
+<hr>
+<h3 id="2-重要欄位看一眼就懂">2. 重要欄位看一眼就懂</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> String sysfldcode;
+<span class="hljs-keyword">private</span> String srcsys;
+<span class="hljs-keyword">private</span> String orifldname;
+</div></code></pre>
+<p>這三個欄位分別是：</p>
+<ul>
+<li>系統欄位代碼</li>
+<li>來源系統</li>
+<li>原始欄位名稱</li>
+</ul>
+<p>意思就是：</p>
+<blockquote>
+<p>「這個欄位從哪裡來、原本叫什麼、在系統中怎麼識別。」</p>
+</blockquote>
+<hr>
+<h3 id="3-顯示名稱與格式">3. 顯示名稱與格式</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> String chndispname;
+<span class="hljs-keyword">private</span> String engdispname;
+<span class="hljs-keyword">private</span> String dispformat;
+</div></code></pre>
+<p>這三個欄位分別是：</p>
+<ul>
+<li>中文顯示名稱</li>
+<li>英文顯示名稱</li>
+<li>顯示格式化</li>
+</ul>
+<p>這非常重要，因為同一個欄位可以在不同畫面有不同的呈現方式。</p>
+<p>例如：</p>
+<ul>
+<li>日期欄位可以顯示成 <code>2026-04-21</code></li>
+<li>金額欄位可以顯示成 <code>1,000,000</code></li>
+<li>狀態欄位可以顯示成 <code>啟用</code> 或 <code>停用</code></li>
+</ul>
+<hr>
+<h2 id="五txdqaa11-的服務層在保護什麼">五、<code>Txdqaa11</code> 的服務層在保護什麼？</h2>
+<p>看 <a href="fpg-vcpseos/src/main/java/com/fpg/q/service/impl/Txdqaa11ServiceImpl.java"><code>Txdqaa11ServiceImpl</code></a>。</p>
+<p>這一層不只是單純轉呼叫 Mapper，<br>
+它還會做資料檢查。</p>
+<hr>
+<h3 id="1-為什麼新增前要檢查欄位代碼">1. 為什麼新增前要檢查欄位代碼？</h3>
+<p>這段很重要：</p>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">normalizedSysfldcode</span> <span class="hljs-operator">=</span> normalizeSysfldcode(txdqaa11.getSysfldcode());
+<span class="hljs-keyword">if</span> (!isValidSysfldcode(normalizedSysfldcode))
+{
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServiceException</span>(<span class="hljs-string">&quot;系統欄位代碼需為20碼內英數字&quot;</span>);
+}
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>先把欄位代碼整理成標準格式</li>
+<li>再檢查是不是合法</li>
+<li>不合法就丟出錯誤</li>
+</ul>
+<p>這就像你在建檔前先檢查身分證號格式，不對就不能送出。</p>
+<hr>
+<h3 id="2-為什麼還要檢查重複">2. 為什麼還要檢查重複？</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (txdqaa11Mapper.selectTxdqaa11ByUk(txdqaa11) != <span class="hljs-literal">null</span>)
+{
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServiceException</span>(<span class="hljs-string">&quot;新增失敗，系統欄位代碼「&quot;</span> + normalizedSysfldcode + <span class="hljs-string">&quot;」已存在&quot;</span>);
+}
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>同一個系統欄位代碼不能重複建檔</li>
+<li>避免資料混亂</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>書架上不能有兩本一模一樣索引碼的書，否則找書會亂掉。</p>
+</blockquote>
+<hr>
+<h3 id="3-為什麼修改時不能改鍵值欄位">3. 為什麼修改時不能改鍵值欄位？</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (StringUtils.isEmpty(dbData.getSysfldcode()) || !dbData.getSysfldcode().equalsIgnoreCase(normalizedSysfldcode))
+{
+    <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServiceException</span>(<span class="hljs-string">&quot;系統欄位代碼為鍵值欄位，建檔後不可修改&quot;</span>);
+}
+</div></code></pre>
+<p>這表示：</p>
+<ul>
+<li>系統欄位代碼是關鍵識別碼</li>
+<li>建檔後不能亂改</li>
+<li>否則對照關係會壞掉</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>你的身分證號不能改，因為很多資料都靠它認人。</p>
+</blockquote>
+<hr>
+<h2 id="六txdqaa11-的流程長什麼樣子">六、<code>Txdqaa11</code> 的流程長什麼樣子？</h2>
+<p>下面用一張很簡單的流程圖看新增時發生什麼事：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant U as 使用者
+    participant C as 控制器
+    participant S as 服務層
+    participant M as 對照資料表
+
+    U->>C: 送出新增欄位對照
+    C->>S: 呼叫新增方法
+    S->>S: 檢查格式與重複
+    S->>M: 寫入資料
+    M-->>S: 回傳成功
+    S-->>C: 回傳結果
+</div></code></pre>
+<p>你可以這樣理解：</p>
+<ul>
+<li>使用者送出資料</li>
+<li>控制器收資料</li>
+<li>服務層先做規則檢查</li>
+<li>通過後才寫資料庫</li>
+</ul>
+<p>這樣比較安全。</p>
+<hr>
+<h2 id="七txdqaa21盤體欄位顯示建檔">七、<code>Txdqaa21</code>：盤體欄位顯示建檔</h2>
+<p>接下來看 <a href="fpg-vcpseos/src/main/java/com/fpg/q/domain/Txdqaa21.java"><code>Txdqaa21</code></a>。</p>
+<p>這一份資料更偏向「畫面怎麼顯示」。</p>
+<p>它主要記錄：</p>
+<ul>
+<li>角色類型</li>
+<li>頁籤類型</li>
+<li>顯示區域</li>
+<li>顯示順序</li>
+<li>系統欄位代碼</li>
+<li>生效註記</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>同一套資料，給不同角色看到的欄位排列順序不一樣。</p>
+</blockquote>
+<hr>
+<h3 id="1-角色與頁籤的重要性">1. 角色與頁籤的重要性</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> String roletype;
+<span class="hljs-keyword">private</span> String tabtype;
+<span class="hljs-keyword">private</span> String disparea;
+</div></code></pre>
+<p>這三個欄位代表：</p>
+<ul>
+<li>哪一種角色</li>
+<li>哪一個頁籤</li>
+<li>顯示在哪個區域</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>經辦看到一套欄位</li>
+<li>審核者看到另一套欄位</li>
+<li>同一欄位在不同頁籤也可能顯示位置不同</li>
+</ul>
+<hr>
+<h3 id="2-顯示順序很重要">2. 顯示順序很重要</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">private</span> Long dispseq;
+<span class="hljs-keyword">private</span> String sysfldcode;
+<span class="hljs-keyword">private</span> String activeflg;
+</div></code></pre>
+<p>這些欄位代表：</p>
+<ul>
+<li>第幾個顯示</li>
+<li>要顯示哪個欄位</li>
+<li>是否生效</li>
+</ul>
+<p>就像排隊一樣，<br>
+就算都是同一批資料，順序不同，使用者感受就不同。</p>
+<hr>
+<h2 id="八txdqaa21serviceimpl-在幫你做哪些檢查">八、<code>Txdqaa21ServiceImpl</code> 在幫你做哪些檢查？</h2>
+<p>看 <a href="fpg-vcpseos/src/main/java/com/fpg/q/service/impl/Txdqaa21ServiceImpl.java"><code>Txdqaa21ServiceImpl</code></a>。</p>
+<p>它的重點不只是存資料，還會檢查「顯示區域」是否合理。</p>
+<hr>
+<h3 id="1-當頁籤類型是特定值時顯示區域不能空白">1. 當頁籤類型是特定值時，顯示區域不能空白</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;MAINT&quot;</span>.equals(txdqaa21.getTabtype()) || <span class="hljs-string">&quot;CHECK&quot;</span>.equals(txdqaa21.getTabtype()))
+{
+    <span class="hljs-keyword">if</span> (StringUtils.isBlank(txdqaa21.getDisparea()))
+    {
+        <span class="hljs-keyword">throw</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">ServiceException</span>(<span class="hljs-string">&quot;MAINT/CHECK tab type requires disparea&quot;</span>);
+    }
+}
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>如果頁籤類型是 <code>MAINT</code> 或 <code>CHECK</code></li>
+<li>就必須填顯示區域</li>
+<li>不然就丟錯</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>某些房間一定要填樓層與位置，不然找不到。</p>
+</blockquote>
+<hr>
+<h3 id="2-其他頁籤時顯示區域會被清空">2. 其他頁籤時，顯示區域會被清空</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">else</span>
+{
+    txdqaa21.setDisparea(<span class="hljs-literal">null</span>);
+}
+</div></code></pre>
+<p>這表示：</p>
+<ul>
+<li>不是特定頁籤時</li>
+<li>顯示區域不需要保留</li>
+<li>系統自動幫你清掉</li>
+</ul>
+<p>這種做法可以避免資料混亂。</p>
+<hr>
+<h2 id="九txdqaa21controller-如何避免重複資料">九、<code>Txdqaa21Controller</code> 如何避免重複資料？</h2>
+<p>看 <a href="fpg-vcpseos/src/main/java/com/fpg/q/controller/Txdqaa21Controller.java"><code>Txdqaa21Controller</code></a>。</p>
+<p>它在新增前會先查一次是否已存在同樣的組合：</p>
+<ul>
+<li>角色類型</li>
+<li>頁籤類型</li>
+<li>顯示區域</li>
+<li>系統欄位代碼</li>
+</ul>
+<p>如果重複，就直接回傳錯誤：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (dbTxdqaa21 != <span class="hljs-literal">null</span>)
+{
+    <span class="hljs-keyword">return</span> error(<span class="hljs-string">&quot;重複資料，請確認角色/頁籤/顯示區域/系統欄位代碼組合&quot;</span>);
+}
+</div></code></pre>
+<p>這很重要，因為欄位顯示規則不能重複，不然畫面會不知道要套哪一筆。</p>
+<hr>
+<h2 id="十三個資料物件怎麼分工">十、三個資料物件怎麼分工？</h2>
+<p>你可以這樣記：</p>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>作用</th>
+<th>類比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>VGetcol</code></td>
+<td>看欄位基本資訊</td>
+<td>字典索引卡</td>
+</tr>
+<tr>
+<td><code>Txdqaa11</code></td>
+<td>管欄位對照與顯示名稱</td>
+<td>翻譯字典</td>
+</tr>
+<tr>
+<td><code>Txdqaa21</code></td>
+<td>管角色與頁籤的顯示規則</td>
+<td>座位表</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="十一實際使用時怎麼幫助前端">十一、實際使用時，怎麼幫助前端？</h2>
+<p>前端常常會遇到這些問題：</p>
+<ul>
+<li>欄位名稱從哪裡來？</li>
+<li>表格標題要顯示中文還是英文？</li>
+<li>某個角色看到哪些欄位？</li>
+<li>某些欄位要不要顯示？</li>
+<li>顯示順序如何調整？</li>
+</ul>
+<p>這些問題如果都硬寫在前端，會很難維護。<br>
+但如果資料都先放在這個平台，前端就可以先查對照表再畫畫面。</p>
+<hr>
+<h3 id="一個很簡單的想像">一個很簡單的想像</h3>
+<p>假設前端要顯示一個表格：</p>
+<ul>
+<li>欄位 1：系統欄位代碼</li>
+<li>欄位 2：中文顯示名稱</li>
+<li>欄位 3：英文顯示名稱</li>
+<li>欄位 4：顯示格式</li>
+</ul>
+<p>如果管理者把某個欄位名稱改了，<br>
+前端不用重新寫死，只要重新查這個平台的資料就行。</p>
+<p>這就像：</p>
+<blockquote>
+<p>不是每張地圖都重畫道路，而是更新路名資料。</p>
+</blockquote>
+<hr>
+<h2 id="十二這個平台和上一章有什麼關係">十二、這個平台和上一章有什麼關係？</h2>
+<p>上一章我們講的是前端怎麼呼叫 API。<br>
+這一章則是告訴你：</p>
+<blockquote>
+<p><strong>API 之後拿到的欄位資訊，常常不是直接寫死，而是來自這些對照資料。</strong></p>
+</blockquote>
+<p>所以它們是上下相扣的：</p>
+<ul>
+<li>前端負責發出請求</li>
+<li>參考資料與欄位對照平台負責提供正確欄位規則</li>
+<li>後端業務模組負責依規則運作</li>
+</ul>
+<hr>
+<h2 id="十三你可以先記住的使用步驟">十三、你可以先記住的使用步驟</h2>
+<p>如果今天你要理解這個平台，可以用下面這個順序：</p>
+<ol>
+<li>先看 <code>VGetcol</code>，知道欄位基本資訊</li>
+<li>再看 <code>Txdqaa11</code>，知道欄位怎麼對照與命名</li>
+<li>再看 <code>Txdqaa21</code>，知道欄位在畫面怎麼顯示</li>
+<li>最後看 Controller、Service、Mapper，了解資料怎麼被管理</li>
+</ol>
+<hr>
+<h2 id="十四三層式結構怎麼串起來">十四、三層式結構怎麼串起來？</h2>
+<p>這一章的程式碼很適合用「三層式」理解：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[控制器 Controller] --> B[服務層 Service]
+    B --> C[資料存取 Mapper]
+</div></code></pre>
+<h3 id="你可以這樣想">你可以這樣想：</h3>
+<ul>
+<li><code>Controller</code>：接收前端請求</li>
+<li><code>Service</code>：檢查規則、處理邏輯</li>
+<li><code>Mapper</code>：真正跟資料庫溝通</li>
+</ul>
+<p>例如：</p>
+<ul>
+<li>使用者按「新增」</li>
+<li><code>Controller</code> 收到表單</li>
+<li><code>Service</code> 檢查欄位是否合法、是否重複</li>
+<li><code>Mapper</code> 寫入資料庫</li>
+</ul>
+<hr>
+<h2 id="十五看一個最小的新增概念">十五、看一個最小的新增概念</h2>
+<p>下面是一個非常簡化的概念示意：</p>
+<pre class="hljs"><code><div><span class="hljs-type">Txdqaa11</span> <span class="hljs-variable">data</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Txdqaa11</span>();
+data.setSysfldcode(<span class="hljs-string">&quot;AMT&quot;</span>);
+data.setChndispname(<span class="hljs-string">&quot;金額&quot;</span>);
+service.insertTxdqaa11(data);
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>建立一筆欄位對照資料</li>
+<li>設定系統欄位代碼</li>
+<li>設定中文顯示名稱</li>
+<li>送進服務層新增</li>
+</ul>
+<p>如果資料正確，系統就會把它存起來。<br>
+如果格式錯誤或重複，就會回傳錯誤。</p>
+<hr>
+<h2 id="十六再看一個很小的查詢概念">十六、再看一個很小的查詢概念</h2>
+<pre class="hljs"><code><div><span class="hljs-type">Txdqaa21</span> <span class="hljs-variable">query</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Txdqaa21</span>();
+query.setRoletype(<span class="hljs-string">&quot;A&quot;</span>);
+query.setTabtype(<span class="hljs-string">&quot;MAINT&quot;</span>);
+service.selectTxdqaa21List(query);
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>查某個角色、某個頁籤的欄位顯示規則</li>
+<li>後端會回傳符合條件的顯示設定</li>
+</ul>
+<p>這很像在問系統：</p>
+<blockquote>
+<p>「這位使用者在這個頁籤裡，應該看到什麼？」</p>
+</blockquote>
+<hr>
+<h2 id="十七初學者最容易搞混的地方">十七、初學者最容易搞混的地方</h2>
+<h3 id="1-vgetcol-不是業務資料">1. <code>VGetcol</code> 不是業務資料</h3>
+<p>它只是欄位資訊，不是某個功能的內容資料。</p>
+<hr>
+<h3 id="2-txdqaa11-與-txdqaa21-分工不同">2. <code>Txdqaa11</code> 與 <code>Txdqaa21</code> 分工不同</h3>
+<ul>
+<li><code>Txdqaa11</code> 偏向欄位本身的對照與命名</li>
+<li><code>Txdqaa21</code> 偏向不同角色與頁籤的顯示規則</li>
+</ul>
+<hr>
+<h3 id="3-service-不只是轉呼叫">3. <code>Service</code> 不只是轉呼叫</h3>
+<p>它還會做格式檢查、重複檢查、鍵值保護，這些都很重要。</p>
+<hr>
+<h3 id="4-excelutil-只是輸出工具不是資料來源">4. <code>ExcelUtil</code> 只是輸出工具，不是資料來源</h3>
+<p>它負責把資料匯出成 Excel，資料還是來自這些對照表。</p>
+<hr>
+<h2 id="十八本章小結">十八、本章小結</h2>
+<p>這一章我們認識了「參考資料與欄位對照平台」的核心概念：</p>
+<ul>
+<li><code>VGetcol</code>：管理欄位字典資訊</li>
+<li><code>Txdqaa11</code>：管理資料欄位對照與顯示名稱</li>
+<li><code>Txdqaa21</code>：管理角色、頁籤與顯示區域的欄位規則</li>
+<li><code>Controller</code>、<code>Service</code>、<code>Mapper</code> 三層結構如何合作</li>
+<li>服務層如何做格式檢查、重複檢查、欄位保護</li>
+</ul>
+<p>你可以把這一章記成一句話：</p>
+<blockquote>
+<p><strong>這個平台負責先把欄位的名字、型態、顯示方式、對照關係整理好，讓別的模組能安心查詢與顯示。</strong></p>
+</blockquote>
+<hr>
+<p>下一章我們會接著看更貼近顯示層的內容：<br>
+<a href="04_%E5%A4%9A%E8%AA%9E%E4%BF%82%E8%88%87%E9%97%9C%E9%8D%B5%E5%AD%97%E5%AD%97%E5%85%B8%E7%AE%A1%E7%90%86_.md">多語係與關鍵字字典管理</a></p>
+<h1 id="chapter-4多語係與關鍵字字典管理">Chapter 4：多語係與關鍵字字典管理</h1>
+<p>接續上一章的 <a href="03_%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E6%AC%84%E4%BD%8D%E5%B0%8D%E7%85%A7%E5%B9%B3%E5%8F%B0_.md">參考資料與欄位對照平台</a>，我們已經知道系統如何管理「欄位名稱」與「顯示規則」。<br>
+這一章要再往前走一步，來看一個更貼近畫面與文案的主題：</p>
+<blockquote>
+<p><strong>同一個功能，在不同語言、不同專案、不同畫面裡，怎麼維持一致又好管理？</strong></p>
+</blockquote>
+<p>你可以先把這一章想成：</p>
+<blockquote>
+<p><strong>系統的「翻譯字典」加上「詞彙管理中心」。</strong></p>
+</blockquote>
+<p>它不是只有翻譯，還包含：</p>
+<ul>
+<li>關鍵字唯一性</li>
+<li>中文關鍵字對照</li>
+<li>專案代碼</li>
+<li>多語係內容</li>
+<li>菜單名稱轉換</li>
+<li>匯出成前端與 Java 可用的語言檔</li>
+</ul>
+<hr>
+<h2 id="這一章要先解決的中心情境">這一章要先解決的中心情境</h2>
+<p>先想像一個最常見的情況：</p>
+<p>你正在做一個系統畫面，上面有很多按鈕與標籤，例如：</p>
+<ul>
+<li>新增</li>
+<li>修改</li>
+<li>刪除</li>
+<li>查詢</li>
+<li>送出</li>
+<li>核准</li>
+</ul>
+<p>如果這些文字都直接寫死在畫面裡，之後只要要改成：</p>
+<ul>
+<li>簡體中文</li>
+<li>繁體中文</li>
+<li>英文</li>
+</ul>
+<p>或是要讓不同專案共用同一組詞彙，事情就會變得很麻煩。</p>
+<p>所以這一章的重點，就是學會理解：</p>
+<blockquote>
+<p><strong>關鍵字先建檔，中文名稱再對照，多語係再統一管理。</strong></p>
+</blockquote>
+<p>這樣就能讓畫面文字、系統訊息、按鈕名稱、選單名稱都可以被集中管理。</p>
+<hr>
+<h2 id="先用最白話的方式理解">先用最白話的方式理解</h2>
+<p>你可以把它想成一本大型詞典：</p>
+<ul>
+<li><code>關鍵字</code>：像是詞條編號</li>
+<li><code>關鍵字中文</code>：像是中文解釋</li>
+<li><code>多語係</code>：像是同一詞條在不同語言下的版本</li>
+<li><code>專案編號</code>：像是哪一套字典</li>
+<li><code>類型</code>：像是這個詞是按鈕、標籤、訊息，還是選單</li>
+</ul>
+<p>如果沒有這個平台，大家就會各寫各的：</p>
+<ul>
+<li>前端一份</li>
+<li>後端一份</li>
+<li>報表一份</li>
+<li>匯出檔一份</li>
+</ul>
+<p>最後一定會亂掉。</p>
+<hr>
+<h2 id="這一章你會看到的核心角色">這一章你會看到的核心角色</h2>
+<p>本章主要有四個資料主體：</p>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>作用</th>
+<th>類比</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Txdsdaa1</code></td>
+<td>關鍵字建檔</td>
+<td>詞條主檔</td>
+</tr>
+<tr>
+<td><code>Txdsdab1</code></td>
+<td>關鍵詞建檔</td>
+<td>中文詞彙對照本</td>
+</tr>
+<tr>
+<td><code>Txdsdac1</code></td>
+<td>專案模組建檔</td>
+<td>詞彙屬於哪個模組</td>
+</tr>
+<tr>
+<td><code>Txdsdad1</code></td>
+<td>多語係建檔</td>
+<td>多語版本字典</td>
+</tr>
+</tbody>
+</table>
+<p>其中最重要的是：</p>
+<ul>
+<li><code>Txdsdaa1</code>：管理關鍵字與中文名稱</li>
+<li><code>Txdsdab1</code>：管理關鍵詞與欄位型態、長度等資訊</li>
+<li><code>Txdsdac1</code>：管理專案模組</li>
+<li><code>Txdsdad1</code>：真正放多語內容</li>
+</ul>
+<hr>
+<h2 id="一先看整體流程">一、先看整體流程</h2>
+<p>如果把整個功能想成一間翻譯中心，流程大概是這樣：</p>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart TD
+    A[使用者輸入詞條] --> B[關鍵字建檔]
+    B --> C[檢查是否重複]
+    C --> D[寫入多語係資料]
+    D --> E[前端或 Java 匯出語言檔]
+</div></code></pre>
+<p>你可以先記住一句話：</p>
+<blockquote>
+<p><strong>先建關鍵字，再產生多語內容，最後再匯出給前端使用。</strong></p>
+</blockquote>
+<hr>
+<h2 id="二先從最簡單的資料結構開始">二、先從最簡單的資料結構開始</h2>
+<h3 id="1-txdsdaa1關鍵字建檔">1. <code>Txdsdaa1</code>：關鍵字建檔</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdaa1.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdaa1.java</code></a></li>
+</ul>
+<p>這個類別很像最基本的詞條主檔。<br>
+它主要欄位有：</p>
+<ul>
+<li><code>keywd</code>：關鍵字</li>
+<li><code>keywdc</code>：關鍵字中文</li>
+<li><code>xrem</code>：備註</li>
+<li><code>txemp</code>：異動人員</li>
+<li><code>txdat</code>：異動日期</li>
+</ul>
+<p>你可以把它想像成：</p>
+<ul>
+<li><code>keywd</code>：英文代碼</li>
+<li><code>keywdc</code>：中文名字</li>
+<li><code>xrem</code>：補充說明</li>
+</ul>
+<hr>
+<h3 id="2-txdsdab1關鍵詞建檔">2. <code>Txdsdab1</code>：關鍵詞建檔</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdab1.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdab1.java</code></a></li>
+</ul>
+<p>這個類別比上一個多一點點資訊，除了詞彙外，還包含：</p>
+<ul>
+<li><code>kywrdc</code>：關鍵詞中文</li>
+<li><code>kywrd</code>：關鍵詞</li>
+<li><code>fldplty</code>：欄位型態</li>
+<li><code>fldpll</code>：欄位長度</li>
+<li><code>fldpldeci</code>：欄位小數</li>
+<li><code>comt</code>：說明</li>
+<li><code>pjno</code>：專案編號</li>
+</ul>
+<p>你可以把它理解成：</p>
+<blockquote>
+<p>這不只是詞彙本身，還帶有「這個詞要怎麼用」的規則。</p>
+</blockquote>
+<hr>
+<h3 id="3-txdsdac1專案模組建檔">3. <code>Txdsdac1</code>：專案模組建檔</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdac1.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdac1.java</code></a></li>
+</ul>
+<p>這個類別是用來記錄專案模組資訊，例如：</p>
+<ul>
+<li><code>ulaymodid</code>：上層模組代號</li>
+<li><code>modid</code>：模組代號</li>
+<li><code>modnm</code>：模組名稱</li>
+<li><code>modclass</code>：模組類別</li>
+<li><code>prgid</code>：程式代號</li>
+</ul>
+<p>它像什麼？</p>
+<blockquote>
+<p>像一本字典的章節分類表，告訴你這些詞屬於哪個區塊。</p>
+</blockquote>
+<hr>
+<h3 id="4-txdsdad1多語係建檔">4. <code>Txdsdad1</code>：多語係建檔</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdad1.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/domain/Txdsdad1.java</code></a></li>
+</ul>
+<p>這個類別是真正的多語內容主體。<br>
+它的欄位很多，但新手先抓重點就好：</p>
+<ul>
+<li><code>pjno</code>：專案編號</li>
+<li><code>lngid</code>：訊息代號</li>
+<li><code>type</code>：類型</li>
+<li><code>strghtbdymsg</code>：正體訊息</li>
+<li><code>cnmsg</code>：簡體訊息</li>
+<li><code>emsg</code>：英文訊息</li>
+<li><code>lngmsgone</code>、<code>lngmsgtwo</code>、<code>lngmsgthree</code>：其他語係欄位</li>
+<li><code>comt</code>：說明</li>
+</ul>
+<p>它像一個「多版本翻譯卡」。</p>
+<hr>
+<h2 id="三先用最簡單的例子理解它怎麼用">三、先用最簡單的例子理解它怎麼用</h2>
+<p>假設你想建立一個按鈕文字：</p>
+<ul>
+<li>關鍵字：<code>save</code></li>
+<li>中文：<code>儲存</code></li>
+<li>英文：<code>Save</code></li>
+<li>專案：<code>XD</code></li>
+<li>類型：<code>button</code></li>
+</ul>
+<p>你可以先理解成三步：</p>
+<ol>
+<li>先建詞條</li>
+<li>再建多語內容</li>
+<li>最後匯出給前端</li>
+</ol>
+<hr>
+<h3 id="1-先建立關鍵字資料">1. 先建立關鍵字資料</h3>
+<pre class="hljs"><code><div><span class="hljs-type">Txdsdaa1</span> <span class="hljs-variable">data</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Txdsdaa1</span>();
+data.setKeywd(<span class="hljs-string">&quot;save&quot;</span>);
+data.setKeywdc(<span class="hljs-string">&quot;儲存&quot;</span>);
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>建立一筆關鍵字資料</li>
+<li>關鍵字是 <code>save</code></li>
+<li>中文是 <code>儲存</code></li>
+</ul>
+<p>這就像詞典裡先放一筆詞條主記錄。</p>
+<hr>
+<h3 id="2-再建立多語係資料">2. 再建立多語係資料</h3>
+<pre class="hljs"><code><div><span class="hljs-type">Txdsdad1</span> <span class="hljs-variable">lang</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Txdsdad1</span>();
+lang.setLngid(<span class="hljs-string">&quot;SAVE&quot;</span>);
+lang.setCnmsg(<span class="hljs-string">&quot;儲存&quot;</span>);
+lang.setEmsg(<span class="hljs-string">&quot;Save&quot;</span>);
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>建立一筆多語內容</li>
+<li>中文是 <code>儲存</code></li>
+<li>英文是 <code>Save</code></li>
+</ul>
+<p>這樣前端切換語言時，就能顯示對應文字。</p>
+<hr>
+<h3 id="3-最後存進系統">3. 最後存進系統</h3>
+<p>實際上會交給服務層與控制器處理。<br>
+你不需要自己手動一筆一筆寫資料庫。</p>
+<p>你只要先知道概念：</p>
+<blockquote>
+<p><strong>資料先建檔，系統再幫你轉成不同語言版本。</strong></p>
+</blockquote>
+<hr>
+<h2 id="四這些模組各自負責什麼">四、這些模組各自負責什麼？</h2>
+<hr>
+<h3 id="txdsdaa1關鍵字建檔"><code>Txdsdaa1</code>：關鍵字建檔</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/mapper/Txdsdaa1Mapper.java"><code>Txdsdaa1Mapper</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/ITxdsdaa1Service.java"><code>ITxdsdaa1Service</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdaa1ServiceImpl.java"><code>Txdsdaa1ServiceImpl</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdaa1Controller.java"><code>Txdsdaa1Controller</code></a></li>
+</ul>
+<p>這組主要負責：</p>
+<ul>
+<li>關鍵字查詢</li>
+<li>新增</li>
+<li>修改</li>
+<li>刪除</li>
+<li>檢查唯一性</li>
+<li>翻譯查詢</li>
+</ul>
+<hr>
+<h3 id="txdsdab1關鍵詞建檔"><code>Txdsdab1</code>：關鍵詞建檔</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/mapper/Txdsdab1Mapper.java"><code>Txdsdab1Mapper</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/ITxdsdab1Service.java"><code>ITxdsdab1Service</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdab1ServiceImpl.java"><code>Txdsdab1ServiceImpl</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdab1Controller.java"><code>Txdsdab1Controller</code></a></li>
+</ul>
+<p>這組主要負責：</p>
+<ul>
+<li>關鍵詞查詢</li>
+<li>新增</li>
+<li>修改</li>
+<li>刪除</li>
+<li>中文唯一性檢查</li>
+</ul>
+<p>而且它還會同步寫入多語係資料。</p>
+<hr>
+<h3 id="txdsdac1專案模組建檔"><code>Txdsdac1</code>：專案模組建檔</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/mapper/Txdsdac1Mapper.java"><code>Txdsdac1Mapper</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/ITxdsdac1Service.java"><code>ITxdsdac1Service</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdac1ServiceImpl.java"><code>Txdsdac1ServiceImpl</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdac1Controller.java"><code>Txdsdac1Controller</code></a></li>
+</ul>
+<p>這組主要負責：</p>
+<ul>
+<li>專案模組資料維護</li>
+<li>讓關鍵字或多語資料知道自己屬於哪個模組</li>
+</ul>
+<hr>
+<h3 id="txdsdad1多語係建檔"><code>Txdsdad1</code>：多語係建檔</h3>
+<p>相關檔案：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/mapper/Txdsdad1Mapper.java"><code>Txdsdad1Mapper</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/ITxdsdad1Service.java"><code>ITxdsdad1Service</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdad1ServiceImpl.java"><code>Txdsdad1ServiceImpl</code></a></li>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdad1Controller.java"><code>Txdsdad1Controller</code></a></li>
+</ul>
+<p>這組主要負責：</p>
+<ul>
+<li>多語資料管理</li>
+<li>生成前端語言檔</li>
+<li>生成 Java properties 檔</li>
+<li>匯出壓縮檔</li>
+</ul>
+<hr>
+<h2 id="五先看最重要的關鍵字唯一性">五、先看最重要的：關鍵字唯一性</h2>
+<p>系統最怕什麼？<br>
+最怕同一個關鍵字重複出現。</p>
+<p>例如：</p>
+<ul>
+<li><code>save</code> 已經存在</li>
+<li>你又新增一筆 <code>save</code></li>
+<li>那系統就不知道該用哪個版本</li>
+</ul>
+<p>所以這些模組會先做唯一性檢查。</p>
+<hr>
+<h3 id="txdsdaa1serviceimpl-的唯一性檢查"><code>Txdsdaa1ServiceImpl</code> 的唯一性檢查</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdaa1ServiceImpl.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdaa1ServiceImpl.java</code></a></li>
+</ul>
+<p>它有兩個常見檢查：</p>
+<ul>
+<li>關鍵字是否重複</li>
+<li>關鍵字中文是否重複</li>
+</ul>
+<p>簡化後可以看成這樣：</p>
+<pre class="hljs"><code><div><span class="hljs-type">Txdsdaa1</span> <span class="hljs-variable">info</span> <span class="hljs-operator">=</span> txdsdaa1Mapper.checkKeywdUnique(txdsdaa1);
+<span class="hljs-keyword">if</span> (info != <span class="hljs-literal">null</span>) {
+    <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;
+}
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>先去資料庫查</li>
+<li>如果查得到資料，表示重複</li>
+<li>如果查不到，才可以新增</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>書架上已經有一本叫「儲存」的字典條目，就不能再放第二本同名條目。</p>
+</blockquote>
+<hr>
+<h3 id="txdsdab1controller-新增時也會先檢查"><code>Txdsdab1Controller</code> 新增時也會先檢查</h3>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdab1Controller.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdab1Controller.java</code></a></li>
+</ul>
+<p>它在新增前先檢查中文是否唯一。<br>
+如果已存在，就直接回錯誤。</p>
+<p>簡化概念如下：</p>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (!txdsdab1Service.checkKywrdcUnique(txdsdab1)) {
+    <span class="hljs-keyword">return</span> error(<span class="hljs-string">&quot;關鍵詞中文已存在&quot;</span>);
+}
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>不能讓相同中文詞彙重複建檔</li>
+<li>避免前端顯示與翻譯混亂</li>
+</ul>
+<hr>
+<h2 id="六建立資料時系統還會幫你做什麼">六、建立資料時，系統還會幫你做什麼？</h2>
+<p>這裡很重要，因為它不是只有「存資料」而已。</p>
+<hr>
+<h3 id="txdsdaa1serviceimpl-會自動補欄位"><code>Txdsdaa1ServiceImpl</code> 會自動補欄位</h3>
+<pre class="hljs"><code><div>txdsdaa1.setId(IdUtils.randomUUID());
+txdsdaa1.setTxdat(DateUtils.getNowDate());
+</div></code></pre>
+<p>這段代表：</p>
+<ul>
+<li>系統自動產生主鍵</li>
+<li>系統自動填入異動日期</li>
+</ul>
+<p>你不用自己手動填這些欄位。<br>
+這就像銀行櫃台幫你自動蓋章，不用每個人自己帶印章。</p>
+<hr>
+<h3 id="txdsdab1serviceimpl-會順便寫入多語係資料"><code>Txdsdab1ServiceImpl</code> 會順便寫入多語係資料</h3>
+<p>這是本章非常關鍵的一段。</p>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdab1ServiceImpl.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/service/impl/Txdsdab1ServiceImpl.java</code></a></li>
+</ul>
+<p>它在新增關鍵詞時，會先建立 <code>Txdsdad1</code>：</p>
+<pre class="hljs"><code><div><span class="hljs-type">Txdsdad1</span> <span class="hljs-variable">aTxdsdad1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Txdsdad1</span>();
+aTxdsdad1.setLngid(txdsdab1.getKywrd().toUpperCase());
+aTxdsdad1.setCnmsg(txdsdab1.getKywrdc());
+aTxdsdad1.setEmsg(txdsdab1.getKywrd());
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>把關鍵詞轉成多語主檔</li>
+<li>讓中文、英文與代號一起存進去</li>
+</ul>
+<p>它就像：</p>
+<blockquote>
+<p>你在字典裡新增一個詞條，系統同時幫你建立翻譯卡。</p>
+</blockquote>
+<hr>
+<h3 id="txdsdab1serviceimpl-還會更新多語資料"><code>Txdsdab1ServiceImpl</code> 還會更新多語資料</h3>
+<p>修改時也一樣，會先找到對應的多語係資料，再更新內容。</p>
+<p>這表示：</p>
+<ul>
+<li>關鍵詞改了</li>
+<li>多語內容也要跟著改</li>
+<li>不然前端顯示會不一致</li>
+</ul>
+<p>這種同步更新的設計非常重要。</p>
+<hr>
+<h2 id="七看看它們怎麼串在一起">七、看看它們怎麼串在一起</h2>
+<p>下面用一張簡單的圖理解新增流程：</p>
+<pre><code class="language-mermaid"><div class="mermaid">sequenceDiagram
+    participant U as 使用者
+    participant C as 控制器
+    participant S as 服務層
+    participant M as 多語資料表
+
+    U->>C: 新增關鍵詞
+    C->>S: 先檢查唯一性
+    S->>M: 寫入多語係資料
+    S-->>C: 回傳結果
+</div></code></pre>
+<p>你可以把它理解成：</p>
+<ol>
+<li>使用者在畫面上輸入詞彙</li>
+<li>控制器接收資料</li>
+<li>服務層先檢查有沒有重複</li>
+<li>通過後寫入主檔與多語資料</li>
+<li>最後回傳結果</li>
+</ol>
+<hr>
+<h2 id="八txdsdad1真正存多語內容的地方">八、<code>Txdsdad1</code>：真正存多語內容的地方</h2>
+<p>現在來看最核心的多語資料。</p>
+<hr>
+<h3 id="多語資料長什麼樣">多語資料長什麼樣？</h3>
+<p><code>Txdsdad1</code> 的欄位很多，但新手先只要記住幾個：</p>
+<ul>
+<li><code>pjno</code>：專案編號</li>
+<li><code>lngid</code>：語言識別代號</li>
+<li><code>type</code>：類型</li>
+<li><code>strghtbdymsg</code>：正體訊息</li>
+<li><code>cnmsg</code>：簡體訊息</li>
+<li><code>emsg</code>：英文訊息</li>
+</ul>
+<p>你可以把它想像成一筆字典的三語版本：</p>
+<table>
+<thead>
+<tr>
+<th>語言</th>
+<th>內容</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>正體</td>
+<td>儲存</td>
+</tr>
+<tr>
+<td>簡體</td>
+<td>保存</td>
+</tr>
+<tr>
+<td>英文</td>
+<td>Save</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h3 id="為什麼要有-type">為什麼要有 <code>type</code>？</h3>
+<p><code>type</code> 很像分類標籤。</p>
+<p>例如：</p>
+<ul>
+<li><code>label</code>：畫面標籤</li>
+<li><code>button</code>：按鈕</li>
+<li><code>message</code>：提示訊息</li>
+<li><code>menu</code>：選單</li>
+</ul>
+<p>這樣同一個詞彙就可以依照用途分類。<br>
+就像書店會把書分成：</p>
+<ul>
+<li>語言學</li>
+<li>工具書</li>
+<li>小說</li>
+<li>教材</li>
+</ul>
+<hr>
+<h2 id="九txdsdad1controller-做了什麼特別的事">九、<code>Txdsdad1Controller</code> 做了什麼特別的事？</h2>
+<p>檔案位置：</p>
+<ul>
+<li><a href="fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdad1Controller.java"><code>fpg-vcpseos/src/main/java/com/fpg/sd/controller/Txdsdad1Controller.java</code></a></li>
+</ul>
+<p>它除了基本的查詢、匯出、新增、修改、刪除外，還有兩個很重要的功能：</p>
+<ul>
+<li><code>updateByMenu</code>：更新菜單名稱多語係</li>
+<li><code>downloadForAll</code>：生成整包多語檔</li>
+</ul>
+<hr>
+<h3 id="1-updatebymenu">1. <code>updateByMenu</code></h3>
+<p>這支功能可以想成：</p>
+<blockquote>
+<p>把系統菜單名稱重新套用多語資料。</p>
+</blockquote>
+<p>簡單講就是，當菜單文字有調整時，系統可以批次更新。</p>
+<hr>
+<h3 id="2-downloadforall">2. <code>downloadForAll</code></h3>
+<p>這支功能非常重要，因為它會把資料整理成前端和 Java 兩邊都能用的檔案。</p>
+<p>它會產生：</p>
+<ul>
+<li><code>zh-CN.js</code></li>
+<li><code>zh-TW.js</code></li>
+<li><code>en-US.js</code></li>
+<li><code>messages_zh_CN.properties</code></li>
+<li><code>messages_zh_TW.properties</code></li>
+<li><code>messages_en_US.properties</code></li>
+</ul>
+<p>這表示：</p>
+<ul>
+<li>前端可以直接拿語言檔使用</li>
+<li>Java 端也可以拿 properties 使用</li>
+</ul>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>系統把詞典整理成不同格式的複製本，方便不同程式直接拿去用。</p>
+</blockquote>
+<hr>
+<h2 id="十downloadforall-的運作方式">十、<code>downloadForAll</code> 的運作方式</h2>
+<p>這個流程可以簡化成四步：</p>
+<ol>
+<li>從資料庫查出所有多語資料</li>
+<li>整理成前端要用的語言物件</li>
+<li>整理成 Java 要用的字串檔</li>
+<li>壓縮成 zip 讓使用者下載</li>
+</ol>
+<hr>
+<h3 id="convertmap先把資料轉成三種語言的-json"><code>convertMap</code>：先把資料轉成三種語言的 JSON</h3>
+<pre class="hljs"><code><div>Map&lt;String, String&gt; str = convertMap(list);
+</div></code></pre>
+<p>這段的意思是：</p>
+<ul>
+<li>把資料清單轉成三份內容</li>
+<li>分別對應簡體、繁體、英文</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>同一份菜單，印三種語言版本。</p>
+</blockquote>
+<hr>
+<h3 id="createchildnodezh把中文資料塞進-json"><code>createChildNodeZh</code>：把中文資料塞進 JSON</h3>
+<pre class="hljs"><code><div><span class="hljs-type">String</span> <span class="hljs-variable">category</span> <span class="hljs-operator">=</span> txdsdad1.getType();
+<span class="hljs-type">String</span> <span class="hljs-variable">key</span> <span class="hljs-operator">=</span> txdsdad1.getLngid().toLowerCase();
+<span class="hljs-type">String</span> <span class="hljs-variable">value</span> <span class="hljs-operator">=</span> txdsdad1.getCnmsg();
+</div></code></pre>
+<p>意思是：</p>
+<ul>
+<li>依照 <code>type</code> 分類</li>
+<li>用 <code>lngid</code> 當 key</li>
+<li>用中文訊息當 value</li>
+</ul>
+<p>這樣前端就能直接讀取。</p>
+<hr>
+<h3 id="string2unicode轉成-unicode-字串"><code>string2Unicode</code>：轉成 Unicode 字串</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> String <span class="hljs-title function_">string2Unicode</span><span class="hljs-params">(String string)</span>
+</div></code></pre>
+<p>這個方法會把中文字轉成 Unicode 格式。<br>
+它的用途是讓 <code>.properties</code> 檔更安全地保存中文。</p>
+<p>你可以把它想成：</p>
+<blockquote>
+<p>把中文翻成系統比較容易保存的格式。</p>
+</blockquote>
+<hr>
+<h2 id="十一txdsdad1controller-為什麼要先建立臨時檔案">十一、<code>Txdsdad1Controller</code> 為什麼要先建立臨時檔案？</h2>
+<p>在下載前，它會先把語言檔寫到暫存資料夾，再打包成 zip。</p>
+<p>這樣做的原因很簡單：</p>
+<ul>
+<li>方便先整理內容</li>
+<li>方便打包</li>
+<li>方便最後一次性下載</li>
+</ul>
+<p>你可以把它想像成：</p>
+<blockquote>
+<p>先把所有書整理到箱子裡，再整箱搬走。</p>
+</blockquote>
+<hr>
+<h2 id="十二用一個超簡單的例子理解整體流程">十二、用一個超簡單的例子理解整體流程</h2>
+<p>假設你想讓系統支援「登入」這個詞：</p>
+<h3 id="第一步建關鍵字">第一步：建關鍵字</h3>
+<pre class="hljs"><code><div>data.setKeywd(<span class="hljs-string">&quot;login&quot;</span>);
+data.setKeywdc(<span class="hljs-string">&quot;登入&quot;</span>);
+</div></code></pre>
+<p>這代表詞條主檔先建立。</p>
+<hr>
+<h3 id="第二步建多語係資料">第二步：建多語係資料</h3>
+<pre class="hljs"><code><div>lang.setLngid(<span class="hljs-string">&quot;LOGIN&quot;</span>);
+lang.setCnmsg(<span class="hljs-string">&quot;登入&quot;</span>);
+lang.setEmsg(<span class="hljs-string">&quot;Login&quot;</span>);
+</div></code></pre>
+<p>這代表這個詞有三種語言版本。</p>
+<hr>
+<h3 id="第三步前端下載語言檔">第三步：前端下載語言檔</h3>
+<p>系統會把資料整理成：</p>
+<ul>
+<li><code>zh-CN.js</code></li>
+<li><code>zh-TW.js</code></li>
+<li><code>en-US.js</code></li>
+</ul>
+<p>這樣前端畫面就可以直接顯示：</p>
+<ul>
+<li>簡體：登录</li>
+<li>繁體：登入</li>
+<li>英文：Login</li>
+</ul>
+<hr>
+<h2 id="十三為什麼這個設計很實用">十三、為什麼這個設計很實用？</h2>
+<p>因為它把「文字」跟「畫面」分開了。</p>
+<p>如果文字都直接寫在前端，會有這些問題：</p>
+<ul>
+<li>改一個字，要改很多頁</li>
+<li>多語系很難管理</li>
+<li>報表與訊息容易不一致</li>
+</ul>
+<p>但如果統一放在字典系統裡，就變成：</p>
+<ul>
+<li>一處修改</li>
+<li>多處同步</li>
+<li>維護成本降低</li>
+</ul>
+<p>這就像：</p>
+<blockquote>
+<p>不是每個人都自己背整本詞典，而是共用一本標準詞典。</p>
+</blockquote>
+<hr>
+<h2 id="十四這一章和上一章的關係">十四、這一章和上一章的關係</h2>
+<p>上一章的 <a href="03_%E5%8F%83%E8%80%83%E8%B3%87%E6%96%99%E8%88%87%E6%AC%84%E4%BD%8D%E5%B0%8D%E7%85%A7%E5%B9%B3%E5%8F%B0_.md">參考資料與欄位對照平台</a> 主要在管：</p>
+<ul>
+<li>欄位叫什麼</li>
+<li>欄位怎麼顯示</li>
+<li>欄位順序如何安排</li>
+</ul>
+<p>這一章的多語係管理則更進一步：</p>
+<ul>
+<li>文字內容如何翻譯</li>
+<li>不同語言如何共用</li>
+<li>如何輸出給前端與後端</li>
+</ul>
+<p>你可以這樣記：</p>
+<blockquote>
+<p><strong>上一章管欄位，這一章管文字。</strong></p>
+</blockquote>
+<hr>
+<h2 id="十五從程式碼看內部實作">十五、從程式碼看內部實作</h2>
+<p>下面我們用很簡單的方式看幾個重點實作。</p>
+<hr>
+<h3 id="1-txdsdaa1controller-如何做新增與唯一檢查">1. <code>Txdsdaa1Controller</code> 如何做新增與唯一檢查？</h3>
+<pre class="hljs"><code><div><span class="hljs-keyword">if</span> (!txdsdaa1Service.checkKeywdUnique(txdsdaa1)) {
+    <span class="hljs-keyword">return</span> error(<span class="hljs-string">&quot;關鍵字已存在&quot;</span>);
+}
+txdsdaa1.setTxemp(getUsername());
+</div></code></pre>
+<p>這段意思是：</p>
+<ul>
+<li>先檢查是否重複</li>
+<li>不重複才繼續</li>
+<li>再把操作人員記錄進去</li>
+</ul>
+<p>這樣就不會出現兩筆一樣的資料。</p>
+<hr>
+<h3 id="2-txdsdab1serviceimpl-如何同步寫入多語資料">2. <code>Txdsdab1ServiceImpl</code> 如何同步寫入多語資料？</h3>
+<pre class="hljs"><code><div><span class="hljs-type">Txdsdad1</span> <span class="hljs-variable">aTxdsdad1</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">Txdsdad1</span>();
+aTxdsdad1.setLngid(txdsdab1.getKywrd().toUpperCase());
+aTxdsdad1.setCnmsg(txdsdab1.getKywrdc());
+</div></code></pre>
+<p>這段意思是：</p>
+<ul>
+<li>建立對應的多語主檔</li>
+<li>用關鍵詞當識別代號</li>
+<li>存入中文內容</li>
+</ul>
+<p>這樣主檔與翻譯資料就能連在一起。</p>
+<hr>
+<h3 id="3-txdsdad1controller-如何產出下載檔">3. <code>Txdsdad1Controller</code> 如何產出下載檔？</h3>
+<pre class="hljs"><code><div>Map&lt;String,String&gt; str = convertMap(list);
+<span class="hljs-type">Writer</span> <span class="hljs-variable">writer_cn_json</span> <span class="hljs-operator">=</span> <span class="hljs-keyword">new</span> <span class="hljs-title class_">OutputStreamWriter</span>(<span class="hljs-keyword">new</span> <span class="hljs-title class_">FileOutputStream</span>(file_cn_json), <span class="hljs-string">&quot;UTF-8&quot;</span>);
+writer_cn_json.write(str.get(<span class="hljs-string">&quot;json_zh&quot;</span>));
+</div></code></pre>
+<p>這段意思是：</p>
+<ul>
+<li>先整理成 JSON 字串</li>
+<li>再寫入檔案</li>
+<li>最後打包給使用者下載</li>
+</ul>
+<p>這就像把整理好的詞典印成不同版本的小冊子。</p>
+<hr>
+<h2 id="十六這個平台背後的關鍵觀念">十六、這個平台背後的關鍵觀念</h2>
+<p>你只要先抓住這三件事就好：</p>
+<h3 id="1-關鍵字是主索引">1. 關鍵字是主索引</h3>
+<p><code>keywd</code>、<code>kywrd</code>、<code>lngid</code> 這些欄位都像索引號。<br>
+它們負責把詞條定位出來。</p>
+<hr>
+<h3 id="2-中文名稱是人類看得懂的內容">2. 中文名稱是人類看得懂的內容</h3>
+<p><code>keywdc</code>、<code>cnmsg</code>、<code>strghtbdymsg</code> 這些欄位，是給人看的。<br>
+系統真正用的，常常是代號；人真正看的，是中文或其他語言。</p>
+<hr>
+<h3 id="3-多語係是輸出成果">3. 多語係是輸出成果</h3>
+<p><code>Txdsdad1Controller</code> 最後匯出的語言檔，才是前端真正會用到的內容。<br>
+也就是說：</p>
+<blockquote>
+<p>先有資料主檔，再有多語資料，最後才有畫面顯示。</p>
+</blockquote>
+<hr>
+<h2 id="十七初學者最容易混淆的地方">十七、初學者最容易混淆的地方</h2>
+<h3 id="1-txdsdaa1-和-txdsdab1-都像關鍵字但用途不同">1. <code>Txdsdaa1</code> 和 <code>Txdsdab1</code> 都像關鍵字，但用途不同</h3>
+<ul>
+<li><code>Txdsdaa1</code> 偏向一般關鍵字建檔</li>
+<li><code>Txdsdab1</code> 偏向關鍵詞與欄位資訊，還會帶多語同步</li>
+</ul>
+<hr>
+<h3 id="2-txdsdac1-不是翻譯資料">2. <code>Txdsdac1</code> 不是翻譯資料</h3>
+<p>它是專案模組資料，主要在說「這個詞屬於哪個模組」。</p>
+<hr>
+<h3 id="3-txdsdad1-才是真正的多語內容主表">3. <code>Txdsdad1</code> 才是真正的多語內容主表</h3>
+<p>如果你要找簡體、繁體、英文對照，主要看它。</p>
+<hr>
+<h3 id="4-匯出的-js-檔和-properties-檔用途不同">4. 匯出的 <code>js</code> 檔和 <code>properties</code> 檔用途不同</h3>
+<ul>
+<li><code>js</code>：給前端用</li>
+<li><code>properties</code>：給 Java 用</li>
+</ul>
+<hr>
+<h2 id="十八你可以怎麼記住整個流程">十八、你可以怎麼記住整個流程？</h2>
+<p>最簡單的記法是：</p>
+<ol>
+<li><strong>先建關鍵字</strong></li>
+<li><strong>再建多語係</strong></li>
+<li><strong>再匯出語言檔</strong></li>
+<li><strong>前端依語系顯示文字</strong></li>
+</ol>
+<p>如果你只記住這句話，就已經掌握本章大半內容了。</p>
+<hr>
+<h2 id="十九整個流程的小地圖">十九、整個流程的小地圖</h2>
+<pre><code class="language-mermaid"><div class="mermaid">flowchart LR
+    A[關鍵字建檔] --> B[關鍵詞建檔]
+    B --> C[多語係建檔]
+    C --> D[匯出前端語言檔]
+    C --> E[匯出 Java 資源檔]
+</div></code></pre>
+<p>這張圖想表達的是：</p>
+<ul>
+<li>主檔與對照資料先建立</li>
+<li>再轉成可供不同系統使用的檔案</li>
+</ul>
+<hr>
+<h2 id="二十本章小結">二十、本章小結</h2>
+<p>這一章我們學到了「多語係與關鍵字字典管理」的基本概念：</p>
+<ul>
+<li><code>Txdsdaa1</code>：關鍵字建檔，管理詞條主資料</li>
+<li><code>Txdsdab1</code>：關鍵詞建檔，並同步建立多語資料</li>
+<li><code>Txdsdac1</code>：專案模組建檔，管理詞彙所屬模組</li>
+<li><code>Txdsdad1</code>：多語係建檔，真正存放不同語言內容</li>
+<li>控制器、服務層、資料存取層如何合作</li>
+<li>如何檢查唯一性、同步更新、匯出語言檔</li>
+</ul>
+<p>你可以把這一章記成一句很簡單的話：</p>
+<blockquote>
+<p><strong>先把詞條建好，再把不同語言版本整理好，最後讓前端與系統共用同一套字典。</strong></p>
+</blockquote>
+<p>下一章我們會開始進入更偏向業務主資料的內容：<br>
+<a href="05_%E5%96%AE%E6%93%9A%E5%8F%83%E6%95%B8%E5%BB%BA%E6%AA%94%E4%B8%BB%E8%B3%87%E6%96%99_.md">單據參數建檔主資料</a></p>
+<hr>
+<p>Generated by <a href="https://github.com/The-Pocket/Tutorial-Codebase-Knowledge">AI Codebase Knowledge Builder</a></p>
+
+</body>
+</html>

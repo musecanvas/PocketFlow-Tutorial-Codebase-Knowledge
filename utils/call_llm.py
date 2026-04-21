@@ -182,8 +182,8 @@ if __name__ == "__main__":
     import  dotenv
     dotenv.load_dotenv()
 
-    # test_prompt = "Hello, how are you?"
-    test_prompt = "Who are you?"
+    test_prompt = "Hello, how are you?"
+    # test_prompt = "Who are you?"
 
     # First call - should hit the API
     print("Making call...")
